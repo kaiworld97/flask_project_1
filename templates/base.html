@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+    <div id="desk-head-container">
+        <div id="desk-head-wrapper">
+            <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
+            <div id="desk-search">
+                <input placeholder="검색">
+            </div>
+            <div id="head-icons">
+                <img class="icon" src="/static/img/home@3x.png"/>
+                <img class="icon" src="/static/img/dm@3x.png"/>
+                <img class="icon" src="/static/img/trending@3x.png"/>
+                <img class="icon" src="/static/img/like@3x.png"/>
+                <img class="icon" style="padding-bottom: 4%" src="/static/img/more@3x.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div id="all-container">
+        <div id="head-container">
+                <img class="left-head-icon side-head-icon" id="camera" src="/static/img/camera@3x.png"/>
+                <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
+                <img class="right-head-icon side-head-icon" src="/static/img/dm@3x.png"/>
+        </div>
+        <div id="foot-container">
+                <img class="foot-icon" src="/static/img/home@3x.png"/>
+                <img class="foot-icon" src="/static/img/search@3x.png"/>
+                <img class="foot-icon" src="/static/img/trending@3x.png"/>
+                <img class="foot-icon" src="/static/img/like@3x.png"/>
+                <img class="foot-icon" src="/static/img/home@3x.png"/>
+        </div>
+
+        <div id="main-container">
+            {% block content %}{% endblock %}
+        </div>
+        <div id="camera-container" class="hidden">
+            <video id="video"></video>
+            <button id="camerabtn"></button>
+            <button id="backhome" onclick="load()"> < </button>
+        </div>
+    </div>
+    <script src="/static/main.js"></script>
+    <script></script>
+
+</body>
+</html>

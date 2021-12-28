@@ -1,0 +1,36 @@
+{% extends "base.html"  %}
+{% block content %}
+    <div id="main-container">
+        <div class="max-width">
+            <div id="story-container"></div>
+            <div id="feed-container"></div>
+        </div>
+        <div id="follow-container">
+            <div id="follow-wrapper">
+                <p><strong>회원님을 위한 추천</strong></p>
+                <p style="font-size: 1rem; color: #000000"><strong>모두 보기</strong></p>
+            </div>
+            <div id="follow-people">
+
+            </div>
+        </div>
+    </div>
+    <dialog id="dialog">
+        <form method="dialog">
+            <p style="color: red"><strong>신고</strong></p>
+            <hr>
+            <p style="color: red"><strong>팔로우 취소</strong></p>
+            <hr>
+            <p>게시물로 이동</p>
+            <hr>
+            <p>공유 대상...</p>
+            <hr>
+            <p>링크 복사</p>
+            <hr>
+            <p>퍼가기</p>
+            <hr>
+            <button value="cancel">취소</button>
+
+        </form>
+    </dialog>
+{% endblock %}
