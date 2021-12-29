@@ -221,7 +221,24 @@ video{
 #dialog button:focus-visible{
     outline: 0;
 }
-
+#waiting {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: flex;
+  background: white;
+  z-index: 2;
+  opacity: 0.9;
+}
+#waiting img{
+width: 5%;
+height: 10%;
+position: fixed;
+top: 45%;
+left: 47%;
+}
 @media (max-width: 1000px) {
     #desk-head-container, #follow-container{
         display: none;
@@ -239,7 +256,13 @@ video{
         max-width: 720px;
         max-height: 80px;
     }
-
+    #waiting img{
+    width: 10%;
+    height: 10%;
+    position: fixed;
+    top: 45%;
+    left: 45%;
+    }
     .logo-icon {
         width: 20%;
         margin: 2%;
@@ -250,11 +273,11 @@ video{
     }
 
     .right-head-icon {
-        padding-right: 5%;
+        padding-right: 7%;
     }
 
     .left-head-icon {
-        padding-left: 5%;
+        padding-left: 50%;
     }
 
     #foot-container {
@@ -307,7 +330,7 @@ video{
     #desk-head-container .logo-icon{
         width: 145px;
         position: relative;
-        left: -250px;
+        left: -210px;
         height: 50px;
     }
     #desk-head-container .icon{
@@ -335,11 +358,13 @@ video{
     #desk-search input:focus-visible{
         outline: none;
     }
+
     #head-icons{
         width: 250px;
         position: relative;
         right: -250px;
     }
+
     #story-container{
         padding: 3% 0% 1% 0%;
         border: 1px solid #8d8c8c45;

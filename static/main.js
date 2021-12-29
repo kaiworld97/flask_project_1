@@ -112,6 +112,7 @@ function followme(data){
 }
 function load(){
     window.location.reload()
+    window.scrollTo(0,0)
 }
 
 let front = false;
@@ -133,18 +134,7 @@ document.getElementById('camera').onclick = function() {
 };
 })};
 
-let dialog = document.getElementById('dialog');
 
-function opendia() {
-  if (typeof dialog.showModal === "function") {
-    dialog.showModal();
-  } else {
-    alert("The <dialog> API is not supported by this browser");
-  }
-}
-dialog.addEventListener('cancel', function onClose() {
-    window.location.reload()
-});
 function go_main(){
     location.href = '/'
 }
@@ -160,3 +150,9 @@ function go_auction(){
 function go_mypage(){
     location.href = '/mypage'
 }
+
+$(window).on('load', function() {
+  setTimeout(function(){
+      $("#waiting").fadeOut();
+  }, 500);
+});
