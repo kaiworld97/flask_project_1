@@ -30,6 +30,27 @@ def home():
     #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
     return render_template('index.html')
 
+@app.route('/recipe')
+def recipe():
+
+    return render_template('recipe.html')
+
+@app.route('/write_feed')
+def write_feed():
+
+    return render_template('write_feed.html')
+
+@app.route('/auction')
+def auction():
+
+    return render_template('auction.html')
+
+@app.route('/mypage')
+def mypage():
+
+    return render_template('mypage.html')
+
+
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
