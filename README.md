@@ -18,11 +18,11 @@
 
 ## 와이어프레임
 
-![as](https://user-images.githubusercontent.com/85826122/147547646-2d0dfe0e-183e-4707-8976-dbb94e89f34e.jpg)
+![as2](https://user-images.githubusercontent.com/85826122/147620551-0c9c6acd-855b-4343-8983-837576645226.jpg)
 
 ## db 구조
 
-![db](https://user-images.githubusercontent.com/85826122/147547666-a2ef6486-2293-4f87-8223-8df8e308186a.jpg)
+![db2](https://user-images.githubusercontent.com/85826122/147620563-406dc9ef-750f-4c53-9337-c8fe03f8c6ea.jpg)
 
 ## 필수 기능
 
