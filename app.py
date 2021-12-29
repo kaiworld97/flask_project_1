@@ -16,8 +16,8 @@ app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
 
-client = MongoClient('내AWS아이피', 27017, username="아이디", password="비밀번호")
-db = client.dbsparta_plus_week4
+# client = MongoClient('내AWS아이피', 27017, username="아이디", password="비밀번호")
+# db = client.dbsparta_plus_week4
 
 
 @app.route('/')

@@ -18,11 +18,12 @@
 
 ## 와이어프레임
 
-![as2](https://user-images.githubusercontent.com/85826122/147620551-0c9c6acd-855b-4343-8983-837576645226.jpg)
+![as3](https://user-images.githubusercontent.com/85826122/147664606-19ddb737-5b11-4499-bd04-ce61ad4d17ec.jpg)
+
 
 ## db 구조
 
-![db2](https://user-images.githubusercontent.com/85826122/147620563-406dc9ef-750f-4c53-9337-c8fe03f8c6ea.jpg)
+![db3](https://user-images.githubusercontent.com/85826122/147664657-8d67bc17-560f-4133-a3dc-3a6f44bb8263.jpg)
 
 ## 필수 기능
 
@@ -34,6 +35,7 @@
 
 
 마이페이지에 내가 쓴글 보기
+
 
 로그인 기능
 
