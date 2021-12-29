@@ -5,7 +5,10 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+import certifi
 
+client = MongoClient('mongodb+srv://test:sparta@cluster0.mr6mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=certifi.where())
+db = client.dbsparta
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -33,28 +36,28 @@ def home():
 @app.route('/recipe')
 def recipe():
 
-    return render_template('recipe.html')
+    return render_template('recipe.html', html='recipe')
 
 @app.route('/write_feed')
 def write_feed():
 
-    return render_template('write_feed.html')
+    return render_template('write_feed.html', html='write_feed')
 
 @app.route('/auction')
 def auction():
 
-    return render_template('auction.html')
+    return render_template('auction.html', html='auction')
 
 @app.route('/mypage')
 def mypage():
 
-    return render_template('mypage.html')
+    return render_template('mypage.html', html='mypage')
 
 
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
+    return render_template('login.khj.html', msg=msg)
 
 
 @app.route('/sign_in', methods=['POST'])
