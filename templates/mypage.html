@@ -1,20 +1,260 @@
-{% extends "base.html"  %}
+
+<!-- saved from url=(0092)http://localhost:63342/flask_project_1/templates/mypage.html?_ijt=gmgg6vcjao3320rjhbaufoj8ni -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>{% extends "base.html"  %}
 {% block content %}
+
+    
+    <title>Title</title>
+    <link rel="stylesheet" href="./Title_files/style.css">
+     <script src="./Title_files/jquery.min.js.다운로드"></script>
+
+<style>
+    #Mypage-container{
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        -webkit-box-ordinal-group: 5;
+        -webkit-order: 4;
+        -ms-flex-order: 4;
+        order: 4;
+
+    }
+
+    #Mypage-main {
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        margin: 0 auto 30px;
+        max-width: 935px;
+
+        width: 100%;
+        box-sizing: content-box;
+        padding: 60px 20px 0;
+        flex-direction: column;
+        display: flex;
+        align-items: stretch;
+        border-bottom: 1px solid gray;
+    }
+
+    #Mypage-header {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 44px;
+        -webkit-box-align: stretch;
+        align-items: stretch;
+        box-sizing: border-box;
+        display: flex;
+        flex-shrink: 0;
+        padding: 0;
+        position: relative;
+
+    }
+
+    #Mypage-profile-box {
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        padding-right: 100px;
+    }
+    #Mypage-profile{
+        display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .Mypage-profile-photo {
+        background-color: #fafafa;
+        border-radius: 50%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        width: 10rem;
+    height: 10rem;
+
+    }
+
+    #Mypage-section {
+
+        -webkit-flex-basis: 30px;
+        -ms-flex-preferred-size: 30px;
+        flex-basis: 30px;
+        -webkit-box-flex: 2;
+        -webkit-flex-grow: 2;
+        -ms-flex-positive: 2;
+        flex-grow: 2;
+    }
+
+    #Mypage-section-top {
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-shrink: 1;
+        -ms-flex-negative: 1;
+        flex-shrink: 1;
+        min-width: 0;
+        display: flex;
+    }
+    #Mypage-text{
+        display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+          font-weight: 300;
+        font-size: 28px;
+    line-height: 32px;
+    margin: -5px 0 -6px;
+}
+
+    #Mypage-section-middle {
+        vertical-align: baseline;
+        list-style: none;
+        padding: 20px;
+        margin-left: -20px;
+
+
+    }
+
+    .Mypage-section-middle-text {
+        font-size: 16px;
+        margin-right: 40px;
+        display: list-item;
+        text-align: -webkit-match-parent;
+        list-style: none;
+        float:left;
+    }
+    #Mypage-section-bottom {
+        font-size: 16px;
+        line-height: 24px;
+        word-wrap: break-word;
+    }
+    #Mypage-state-bar{
+        -webkit-box-align: center;
+        align-items: center;
+        display: flex;
+        border-top: 1px solid rgba(var(--b38, 219, 219, 219), 1);
+        color: #8e8e8e;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        font-size: 12px;
+        font-weight: 600;
+        -webkit-box-pack: center;
+        justify-content: center;
+        letter-spacing: 1px;
+        text-align: center;
+        border: 0 solid #000;
+        box-sizing: border-box;
+        flex-shrink: 0;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        vertical-align: baseline;
+
+    }
+   [role='tab']{
+       margin-right: 60px;
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        height: 52px;
+        -webkit-box-pack: center;
+        justify-content: center;
+        text-transform: uppercase;
+        text-decoration: none;
+   }
+   [role='tab'].Mypage-grid-box-active{
+        margin-right: 60px;
+        align-items: center;
+        border-top: 1px solid rgba(var(--i1d, 38, 38, 38), 1);
+        cursor: pointer;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        height: 52px;
+        -webkit-box-pack: center;
+        justify-content: center;
+        text-transform: uppercase;
+        text-decoration: none;
+   }
+  [role='panel']{
+       display: none;
+   }
+   [role='panel'].panel{
+       height: 500px;
+   }
+
+    .Mypage-grid-box-active {
+        margin-right: 60px;
+        align-items: center;
+        border-top: 1px solid rgba(var(--i1d, 38, 38, 38), 1);
+        cursor: pointer;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        height: 52px;
+        -webkit-box-pack: center;
+        justify-content: center;
+        text-transform: uppercase;
+        text-decoration: none;
+
+    }
+    .Mypage-grid-box-box{
+            cursor: pointer;
+            -webkit-box-direction: normal;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+    text-align: center;
+
+    }
+    .Mypage-aria-label{
+        height: 12px;
+        width: 12px;
+    }
+    .panel {
+        min-height: 500px;
+        text-align: center;
+        align-items: center;
+    }
+
+
+
+</style>
+
 <div id="Mypage-container">
-    <div id=Mypage-main>
-        <header id = Mypage-header>
+    <div id="Mypage-main">
+        <header id="Mypage-header">
             <div id="Mypage-profile-box">
-                <div id ="Mypage-profile">
+                <div id="Mypage-profile">
 <!--                    프로필 이미지 불러올것-->
-                    <img class = "Mypage-profile-photo" src="../static/img/12344.gif">
+                    <img class="Mypage-profile-photo" src="../static/img/12344.gif">
                 </div>
             </div>
-            <section id = Mypage-section>
-                <div id =Mypage-section-top>
-                    <h2 id = Mypage-text>bbb6045</h2>
-                    <div id = "Mypage-profile-edit-box " style=" margin-left: 20px;">
-                        <div > 프로필 편집</div>
+            <section id="Mypage-section">
+                <div id="Mypage-section-top">
+                    <h2 id="Mypage-text">bbb6045</h2>
+                    <div id="Mypage-profile-edit-box " style=" margin-left: 20px;">
+                        <div> 프로필 편집</div>
                     </div>
+                    <img style=" width: 24px;height: 24px; margin-left: 10px; " src="../static/img/setting.png">
                 </div>
                     <ul id="Mypage-section-middle">
                         <li class="Mypage-section-middle-text">
@@ -30,17 +270,78 @@
                             <span style="font-weight: 600;">24</span>
                         </li>
                     </ul>
-                <div id ="Mypage-section-bottom">
-                    <span style ="font-weight: 600;">이름</span><br>
+                <div id="Mypage-section-bottom">
+                    <span style="font-weight: 600;">이름</span><br>
                     <span>별명</span>
-
                 </div>
             </section>
-
         </header>
+        <div id="Mypage-state-bar" role="tablist">
+            <a id="tab1" aria-selected="true" aria-controls="Mypage-panel1" class="Mypage-grid-box-active" role="tab" tabindex="0">
+                <span class="Mypage-grid-box-box">
+                        <img class="Mypage-aria-label" src="../static/img/grid.png">
+                    <span style="margin-left: 6px; cursor: pointer; letter-spacing: 1px;
+    text-align: center;">게시물</span>
+
+                </span>
+            </a>
+            <a id="tab2" aria-selected="false" aria-controls="Mypage-panel2" role="tab" tabindex="0" class="">
+                <span class="Mypage-grid-box-box">
+                        <img class="Mypage-aria-label" src="../static/img/grid.png">
+                    <span style="margin-left: 6px; cursor: pointer; letter-spacing: 1px;
+    text-align: center;">게시물</span>
+
+                </span>
+            </a>
+            <a id="tab3" aria-selected="false" aria-controls="Mypage-panel3" role="tab" tabindex="0" class="">
+                <span class="Mypage-grid-box-box">
+                        <img class="Mypage-aria-label" src="../static/img/grid.png">
+                    <span style="margin-left: 6px; cursor: pointer; letter-spacing: 1px;
+    text-align: center;">게시물</span>
+
+                </span>
+            </a>
+        </div>
+        <div class="panel_main">
+            <div class="panel" id="Mypage-panel1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
+                <p>1번탭입니다.</p><img src="../static/img/12344.gif">
+
+            </div>
+            <div id="Mypage-panel2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" class="">
+                2번텝입니다
+
+            </div>
+            <div id="Mypage-panel3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" class="">
+                3번탭입니다
+
+            </div>
+
+        </div>
 
     </div>
 </div>
+<script>
+    function eventHandler(e) {
+        var $eTarget = $(e.currentTarget);
+        var $targetPanel = $('[aria-labelledby="' + $eTarget.attr('id') + '"]');
+        $eTarget
+            .attr('aria-selected', true)
+            .addClass('Mypage-grid-box-active') // 구버전 IE
+            .siblings('[role="tab"]')
+            .attr('aria-selected', false)
+            .removeClass('Mypage-grid-box-active'); // 구버전 IE
 
+        $targetPanel
+            .attr('aria-hidden', false)
+            .addClass('panel') // 구버전 IE
+            .siblings('[role="tabpanel"]')
+            .attr('aria-hidden', true)
+            .removeClass('panel'); // 구버전 IE
+    }
 
-{% endblock %}
+    // 이벤트 바인딩 - 이벤트와, 실행될 함수를 연결해줌
+    $('[role="tab"]').on('click', eventHandler);
+
+</script>
+
+{% endblock %}</body></html>
