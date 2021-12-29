@@ -7,6 +7,7 @@
     -webkit-order: 4;
     -ms-flex-order: 4;
     order: 4;
+
 }
 
 #Mypage-main {
@@ -16,12 +17,14 @@
     flex-grow: 1;
     margin: 0 auto 30px;
     max-width: 935px;
+
     width: 100%;
     box-sizing: content-box;
     padding: 60px 20px 0;
     flex-direction: column;
     display: flex;
     align-items: stretch;
+    border-bottom: 1px solid gray;
 }
 
 #Mypage-header {
@@ -129,4 +132,106 @@
     font-size: 16px;
     line-height: 24px;
     word-wrap: break-word;
+}
+
+#Mypage-state-bar {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    border-top: 1px solid rgba(var(--b38, 219, 219, 219), 1);
+    color: #8e8e8e;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    font-size: 12px;
+    font-weight: 600;
+    -webkit-box-pack: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    text-align: center;
+    border: 0 solid #000;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    vertical-align: baseline;
+
+}
+
+[role='tab'] {
+    margin-right: 60px;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 52px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+[role='tab'].Mypage-grid-box-active {
+    margin-right: 60px;
+    align-items: center;
+    border-top: 1px solid rgba(var(--i1d, 38, 38, 38), 1);
+    cursor: pointer;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 52px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(var(--i1d,38,38,38),1);
+}
+
+[role='panel'] {
+    display: none;
+}
+
+[role='panel'].panel {
+    height: 500px;
+}
+
+.Mypage-grid-box-active {
+    margin-right: 60px;
+    align-items: center;
+    border-top: 1px solid rgba(var(--i1d, 38, 38, 38), 1);
+    cursor: pointer;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 52px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+
+}
+
+.Mypage-grid-box-box {
+    cursor: pointer;
+    -webkit-box-direction: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+
+}
+
+.Mypage-aria-label {
+    height: 12px;
+    width: 12px;
+}
+
+.panel {
+    min-height: 500px;
+    text-align: center;
+    align-items: center;
 }
