@@ -114,7 +114,9 @@ function load(){
     window.location.reload()
     window.scrollTo(0,0)
 }
-
+function back(){
+    history.back()
+}
 
 
 function go_main(){

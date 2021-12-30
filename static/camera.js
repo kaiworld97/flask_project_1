@@ -1,5 +1,5 @@
 (function() {
-  var width = 600;
+
   var height = 0;
   var streaming = false;
 
@@ -28,6 +28,7 @@
     });
 
     video.addEventListener('canplay', function(ev){
+      var width = document.getElementById("all-container").offsetWidth;
       if (!streaming) {
         height = video.videoHeight / (video.videoWidth/width);
 
@@ -70,6 +71,12 @@
   }
 
   function takepicture() {
+    var width = document.getElementById("all-container").offsetWidth;
+    document.getElementById('video').classList.add('hidden')
+    document.getElementById('startbutton').classList.add('hidden')
+    document.getElementById('restart').classList.remove('hidden')
+    document.getElementById('output').classList.remove('hidden')
+    document.getElementById('camerafeed').classList.remove('hidden')
     var context = canvas.getContext('2d');
     if (width && height) {
       canvas.width = width;
@@ -83,22 +90,27 @@
     }
   }
 
-  document.getElementById('cameraon').addEventListener('click', startup, false);
+  window.addEventListener('load', startup, false);
 })();
 
-function copyimg(){
-  html2canvas($("#photo")[0]).then(function(canvas){
-  canvas.toBlob(function(blob) {
-      const item = new ClipboardItem({ "image/png": blob });
-      navigator.clipboard.write([item]);
-      });
-  });
-}
-  $("#copyimg").on('click', function(e) {
-  html2canvas($("#canvas")[0]).then(function(canvas) {
-  document.body.appendChild(canvas)
-  });
-  html2canvas($("#canvas")[0]).then(function(canvas) {
-  $('body').append('<img src="' + canvas.toDataURL("image/jpeg") + '"/>');
-  });
-});
+function posting() {
+    let camerafeed = $('#camerafeed').val()
+    let file = $('#photo')[0]
+    let form_data = new FormData()
+
+    form_data.append("camerafeed_give", camerafeed)
+    form_data.append("file_give", file)
+
+    $.ajax({
+        type: "POST",
+        url: "/camerafeedupload",
+        data: form_data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            alert(response["result"])
+            window.location.reload()
+        }
+    });
+  }
