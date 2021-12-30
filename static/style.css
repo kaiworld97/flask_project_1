@@ -12,7 +12,14 @@ html{
     font-size: 8px;
 }
 }
-
+html::-webkit-scrollbar {
+    width: 1rem;
+    height: 1rem;
+}
+html::-webkit-scrollbar-thumb {
+background-color: #8d8c8c45;
+border-radius: 10px;
+}
 
 
 body{
@@ -240,6 +247,10 @@ top: 45%;
 left: 47%;
 }
 @media (max-width: 1000px) {
+    html::-webkit-scrollbar {
+    width: 0.8rem;
+    height: 0.8rem;
+}
     #desk-head-container, #follow-container{
         display: none;
     }

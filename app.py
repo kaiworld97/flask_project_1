@@ -43,6 +43,11 @@ def write_feed():
 
     return render_template('write_feed.html', html='write_feed')
 
+@app.route('/write_recipe')
+def write_recipe():
+
+    return render_template('write_recipe.html', html='write_recipe')
+
 @app.route('/auction')
 def auction():
 
@@ -52,6 +57,11 @@ def auction():
 def mypage():
 
     return render_template('mypage.html', html='mypage')
+
+@app.route('/camera')
+def camera():
+
+    return render_template('camera.html', html='camera')
 
 
 @app.route('/login')

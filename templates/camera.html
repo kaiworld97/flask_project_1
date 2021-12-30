@@ -1,0 +1,21 @@
+{% extends "base.html"  %}
+{% block content %}
+
+    <div class="camera">
+        <video id="video"></video>
+        <button id="startbutton">Take photo</button>
+      </div>
+      <canvas id="canvas" >
+    </canvas>
+    <div class="output">
+      <img id="photo">
+    </div>
+<div>
+    <button id="cameraon" >키기</button>
+<button id="copyimg" onclick="copyimg()">복사</button>
+<button id="cameraoff">끄기</button>
+</div>
+
+
+
+{% endblock %}

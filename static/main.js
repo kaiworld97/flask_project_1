@@ -115,24 +115,6 @@ function load(){
     window.scrollTo(0,0)
 }
 
-let front = false;
-let video = document.querySelector('video');
-document.getElementById('camera').onclick = function() {
-    $('#head-container').hide()
-    $('#foot-container').hide()
-    document.getElementById('main-container').classList.add('hidden')
-    document.getElementById('camera-container').classList.remove('hidden')
-    $('html').css({
-        'backgroundColor': 'black'
-    })
-    let constraints = { video: { facingMode: (front? "user" : "environment"), width: 600, height: 450 } };
-    navigator.mediaDevices.getUserMedia(constraints)
-    .then(function(mediaStream) {
-    video.srcObject = mediaStream;
-    video.onloadedmetadata = function(e) {
-    video.play();
-};
-})};
 
 
 function go_main(){
@@ -149,6 +131,9 @@ function go_auction(){
 }
 function go_mypage(){
     location.href = '/mypage'
+}
+function go_camera(){
+    location.href = '/camera'
 }
 
 $(window).on('load', function() {

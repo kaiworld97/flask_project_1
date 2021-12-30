@@ -33,7 +33,7 @@
         <div id="head-container">
                 <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
 
-                <img class="left-head-icon side-head-icon" id="camera" src="/static/img/camera@3x.png"/>
+                <img class="left-head-icon side-head-icon" src="/static/img/camera@3x.png" onclick="go_camera()"/>
                 <img class="right-head-icon side-head-icon" src="/static/img/dm@3x.png"/>
 
 
@@ -49,11 +49,7 @@
         <div id="main-container">
             {% block content %}{% endblock %}
         </div>
-        <div id="camera-container" class="hidden">
-            <video id="video"></video>
-            <button id="camerabtn"></button>
-            <button id="backhome" onclick="load()"> < </button>
-        </div>
+
     </div>
     <script src="/static/main.js"></script>
     <script src="/static/{{ html }}.js"></script>
