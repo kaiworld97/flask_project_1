@@ -80,15 +80,6 @@ fieldset, img {
     -webkit-appearance: none;
     background-color: transparent;
 }
-.btn_login {
-    margin: 20px 0 0;
-    width: 100%;
-    height: 48px;
-    border-radius: 3px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #000;
-}
 .login_append {
     overflow: hidden;
     padding: 15px 0 0;
@@ -132,4 +123,24 @@ fieldset, img {
 .login_append .txt_find {
     float: right;
     color: #777;
+}
+
+.btn_login {
+    margin: 20px 0 0;
+    width: 45%;
+    height: 48px;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #000;
+}
+.btn_join {
+    float: right;
+    margin: 20px 0 0;
+    width: 45%;
+    height: 48px;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #000;
 }

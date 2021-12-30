@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <link rel="stylesheet" href="/static/login.css">
+    <link rel="stylesheet" href="../static/login.css?after">
 </head>
 <body>
 <div class="inner_login">
@@ -33,7 +33,9 @@
                         <input type="password" id="loginPw" name="password" placeholder="Password">
                     </div>
                 </div>
+
                 <button type="submit" class="btn_login" disabled>로그인</button>
+                <button type="onclick" class="btn_join" disabled> 회원가입 </button>
                 <div class="login_append">
                     <div class="inp_chk"> <!-- 체크시 checked 추가 -->
                         <input type="checkbox" id="keepLogin" class="inp_radio" name="keepLogin">
