@@ -113,58 +113,219 @@ user(user_table)
 
 function feed(data) {
     let b = 1
+    let c = 1
+    let feed_wrapper = `<div id="img-wrapper1" class="img-wrapper"></div>`
+    $('#Mypage-panel1').append(feed_wrapper)
     for (a of data) {
         let feed_img = a['feed_img']
-        let feed_contain = `<li class ="myp_li_list">
-                        <div class = "rasipi_img_box">
-                            <a class ="rasipi_img">
-                                  <img class ="myp-imgs" src = ../static/img/${feed_img} >
-                            </a>                          
-                        </div>                                                   
-                </li>`
 
-
-        $('#feed-img-contain').append(feed_contain)
+        if (b % 3 == 0 && b != 0){
+            let feed_div = `
+            <div>
+                <a href="#">
+                    <div>
+                        <img src="/static/img/${feed_img}" class="mypageimg">
+                    </div>
+                </a>
+            </div>
+            `
+            $(`#img-wrapper${c}`).append(feed_div)
+        }else {
+            let feed_div = `
+                <div class="margin-right-div">
+                    <a href="#">
+                        <div>
+                            <img src="/static/img/${feed_img}" class="mypageimg">
+                        </div>
+                    </a>
+                </div>
+                `
+            $(`#img-wrapper${c}`).append(feed_div)
+        }
+        if (b % 3 == 0 && b != 0) {
+            c++
+            let feed_wrapper1 = `<div id="img-wrapper${c}" class="img-wrapper"></div>`
+            $('#Mypage-panel1').append(feed_wrapper1)
+        }
         b++
+    }
+    if ((b-1) % 3 != 0){
+        let d = 3 - ((b-1) % 3)
+
+        if (d == 1){
+            let feed_div = `
+                <div>
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}`).append(feed_div)
+        }else {
+            let feed_div = `
+                <div class="margin-right-div">
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}`).append(feed_div)
+
+            let feed_div1 = `
+                <div>
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}`).append(feed_div1)
+        }
     }
 }
 
 function rasipi(data) {
     let b = 1
+    let c = 1
+    let feed_wrapper = `<div id="img-wrapper12" class="img-wrapper"></div>`
+    $('#Mypage-panel2').append(feed_wrapper)
     for (a of data) {
-        let rasipi_img = a['rasipi_img']
+        let feed_img = a['rasipi_img']
 
-        let rasipi_contain = `<li class ="myp_li_list">
-                        <div class = "myp_img_box">
-                            <a class ="rasipi_img">
-                                  <img class ="myp-imgs" src = ../static/img/${rasipi_img} >
-                            </a>                          
-                        </div>                                                   
-                </li>`
-
-        $('#rasipi-img-contain').append(rasipi_contain)
+        if (b % 3 == 0 && b != 0){
+            let feed_div = `
+            <div>
+                <a href="#">
+                    <div>
+                        <img src="/static/img/${feed_img}" class="mypageimg">
+                    </div>
+                </a>
+            </div>
+            `
+            $(`#img-wrapper${c}2`).append(feed_div)
+        }else {
+            let feed_div = `
+                <div class="margin-right-div">
+                    <a href="#">
+                        <div>
+                            <img src="/static/img/${feed_img}" class="mypageimg">
+                        </div>
+                    </a>
+                </div>
+                `
+            $(`#img-wrapper${c}2`).append(feed_div)
+        }
+        if (b % 3 == 0 && b != 0) {
+            c++
+            let feed_wrapper1 = `<div id="img-wrapper${c}2" class="img-wrapper"></div>`
+            $('#Mypage-panel2').append(feed_wrapper1)
+        }
         b++
+    }
+    if ((b-1) % 3 != 0){
+        let d = 3 - ((b-1) % 3)
+
+        if (d == 1){
+            let feed_div = `
+                <div>
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}2`).append(feed_div)
+        }else {
+            let feed_div = `
+                <div class="margin-right-div">
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}2`).append(feed_div)
+
+            let feed_div1 = `
+                <div>
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}2`).append(feed_div1)
+        }
     }
 }
 
 function user(data) {
     let b = 1
+    let c = 1
+    let feed_wrapper = `<div id="img-wrapper13" class="img-wrapper"></div>`
+    $('#Mypage-panel3').append(feed_wrapper)
     for (a of data) {
-        let user_img = a['user_img']
-        let user_contain = `<li class ="myp_li_list">
-                        <div class = "rasipi_img_box">
-                            <a class ="rasipi_img">
-                                  <img class ="myp-imgs" src = ../static/img/${user_img} >
-                            </a>                         
-                      
-                        </div>                                                
-                </li>`
-        $('#user-img-contain').append(user_contain)
+        let feed_img = a['user_img']
 
+        if (b % 3 == 0 && b != 0){
+            let feed_div = `
+            <div>
+                <a href="#">
+                    <div>
+                        <img src="/static/img/${feed_img}" class="mypageimg">
+                    </div>
+                </a>
+            </div>
+            `
+            $(`#img-wrapper${c}3`).append(feed_div)
+        }else {
+            let feed_div = `
+                <div class="margin-right-div">
+                    <a href="#">
+                        <div>
+                            <img src="/static/img/${feed_img}" class="mypageimg">
+                        </div>
+                    </a>
+                </div>
+                `
+            $(`#img-wrapper${c}3`).append(feed_div)
+        }
+        if (b % 3 == 0 && b != 0) {
+            c++
+            let feed_wrapper1 = `<div id="img-wrapper${c}3" class="img-wrapper"></div>`
+            $('#Mypage-panel3').append(feed_wrapper1)
+        }
         b++
     }
-}
+    if ((b-1) % 3 != 0){
+        let d = 3 - ((b-1) % 3)
 
+        if (d == 1){
+            let feed_div = `
+                <div>
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}3`).append(feed_div)
+        }else {
+            let feed_div = `
+                <div class="margin-right-div">
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}3`).append(feed_div)
+
+            let feed_div1 = `
+                <div>
+                    <div>
+                        <div class="mypagediv"> <div>
+                    </div>
+                </div>
+            `
+            $(`#img-wrapper${c}3`).append(feed_div1)
+        }
+    }
+}
 
 function eventHandler(e) {
     var $eTarget = $(e.currentTarget);
@@ -187,5 +348,30 @@ function eventHandler(e) {
 // 이벤트 바인딩 - 이벤트와, 실행될 함수를 연결해줌
 $('[role="tab"]').on('click', eventHandler);
 
+// 이벤트 바인딩 - 이벤트와, 실행될 함수를 연결해줌
+$('[role="tab"]').on('click', eventHandler);
 
 
+// function tab1(){
+//     document.getElementById('tab1').classList.remove('hidden')
+//     document.getElementById('tab2').classList.add('hidden')
+//     document.getElementById('tab3').classList.add('hidden')
+// }
+// function tab2(){
+//     document.getElementById('tab2').classList.remove('hidden')
+//     document.getElementById('tab1').classList.add('hidden')
+//     document.getElementById('tab3').classList.add('hidden')
+// }
+//
+// function tab3(){
+//     document.getElementById('tab3').classList.remove('hidden')
+//     document.getElementById('tab2').classList.add('hidden')
+//     document.getElementById('tab1').classList.add('hidden')
+// }
+
+
+
+
+document.getElementById('tab1').addEventListener('click', tab1)
+document.getElementById('tab2').addEventListener('click', tab2)
+document.getElementById('tab3').addEventListener('click', tab3)

@@ -322,3 +322,21 @@
     cursor: pointer;
     list-style: none;
 }
+
+.img-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+}
+.margin-right-div{
+    margin-right: 3%;
+}
+.mypageimg{
+    width: 18rem;
+    height: 18rem;
+    object-fit: fill;
+}
+.mypagediv{
+    width: 18rem;
+    height: 18rem;
+}
