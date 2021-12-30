@@ -1,6 +1,6 @@
 function back_home(){
     // console.log('홈으로 돌아가기')
-    location.href="http://192.168.0.4:5000/"
+    history.back()
 }
 // 2200자 넘으면 글자수제한하는부분 추가하기
 function contentLength(){
