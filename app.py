@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import certifi
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.mr6mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=certifi.where())
+client = MongoClient('mongodb+srv://test:sparta@cluster0.kk0pl.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db = client.dbsparta
 
 app = Flask(__name__)
@@ -15,6 +15,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
+
 
 # client = MongoClient('내AWS아이피', 27017, username="아이디", password="비밀번호")
 # db = client.dbsparta_plus_week4
@@ -33,34 +34,34 @@ def home():
     #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
     return render_template('index.html', html='index')
 
+
 @app.route('/recipe')
 def recipe():
-
     return render_template('recipe.html', html='recipe')
+
 
 @app.route('/write_feed')
 def write_feed():
-
     return render_template('write_feed.html', html='write_feed')
+
 
 @app.route('/write_recipe')
 def write_recipe():
-
     return render_template('write_recipe.html', html='write_recipe')
+
 
 @app.route('/auction')
 def auction():
-
     return render_template('auction.html', html='auction')
+
 
 @app.route('/mypage')
 def mypage():
-
     return render_template('mypage.html', html='mypage')
+
 
 @app.route('/camera')
 def camera():
-
     return render_template('camera.html', html='camera')
 
 
@@ -98,12 +99,12 @@ def sign_up():
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "username": username_receive,                               # 아이디
-        "password": password_hash,                                  # 비밀번호
-        "profile_name": username_receive,                           # 프로필 이름 기본값은 아이디
-        "profile_pic": "",                                          # 프로필 사진 파일 이름
-        "profile_pic_real": "profile_pics/profile_placeholder.png", # 프로필 사진 기본 이미지
-        "profile_info": ""                                          # 프로필 한 마디
+        "username": username_receive,  # 아이디
+        "password": password_hash,  # 비밀번호
+        "profile_name": username_receive,  # 프로필 이름 기본값은 아이디
+        "profile_pic": "",  # 프로필 사진 파일 이름
+        "profile_pic_real": "profile_pics/profile_placeholder.png",  # 프로필 사진 기본 이미지
+        "profile_info": ""  # 프로필 한 마디
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
@@ -116,6 +117,30 @@ def check_dup():
     exists = bool(db.users.find_one({"username": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
     # return jsonify({'result': 'success'})
+
+
+@app.route("/comments", methods=["POST"])
+def comment_post():
+    comment_receive = request.form['comment_give']
+    comment_list = list(db.comment.find({}, {'_id': False}))
+    count = len(comment_list) + 1
+    doc = {'comment': comment_receive,
+           'num': count}
+    db.comment.insert_one(doc)
+    return jsonify({'msg': '댓글 작성!'})
+
+
+@app.route("/comments", methods=["GET"])
+def comment_get():
+    comment_list = list(db.comment.find({}, {'_id': False}))
+    return jsonify({'comments': comment_list})
+
+
+@app.route("/comments/delete", methods=["POST"])
+def comment_delete_post():
+    num_receive = request.form['num_give']
+    db.comment.delete_one({'num': int(num_receive)})
+    return jsonify({'msg': '댓글 삭제!'})
 
 
 if __name__ == '__main__':

@@ -79,6 +79,18 @@ function makefeed(data){
                                         <div class="feed-msg flex">
                                             <div class="strong">${name}${b}</div> ${msg}
                                         </div>
+                                        <div class="feed-comment-wrapper">
+                                            <div class="comment-write-wrapper">
+                                                <b style="font-weight: bold">user-id(?)</b>
+                                                <input type="text" class="comment">
+                                                <button onclick="comment_write()">작성</button>
+                                            </div>
+                                            <div class="comment-box">
+<!--                                            여기에 댓글 추가-->
+                                            </div>
+                                        
+                                           
+                                        </div>
                                         <div class="feed-time">12시간 전</div>
                                     </div>
 
