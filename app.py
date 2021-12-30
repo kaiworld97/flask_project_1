@@ -6,6 +6,7 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import certifi
+import gridfs
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.mr6mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=certifi.where())
 db = client.dbsparta
@@ -24,7 +25,7 @@ SECRET_KEY = 'SPARTA'
 def home():
     # token_receive = request.cookies.get('mytoken')
     # try:
-    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    #     payload = jwt.decode(token_receive, ECRET_KEY, algorithms=['HS256'])
     #
     #     return render_template('index.html')
     # except jwt.ExpiredSignatureError:
@@ -67,7 +68,7 @@ def camera():
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    return render_template('login.khj.html', msg=msg)
+    return render_template('login.html', html='login', msg=msg)
 
 
 @app.route('/sign_in', methods=['POST'])
@@ -116,6 +117,7 @@ def check_dup():
     exists = bool(db.users.find_one({"username": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
     # return jsonify({'result': 'success'})
+
 
 
 if __name__ == '__main__':

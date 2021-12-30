@@ -1,64 +1,39 @@
 
 /*write_feed 여기서부터 보현작성*/
-body{
-    height: 100vh;
-}
+
 /*구글폰트적용*/
 span, label, textarea, #feed_select {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-@media (min-width: 1000px){
-    #main-container {
-}}
+/*@media (min-width: 1000px){*/
+/*    #main-container {*/
+/*}}*/
 
-#main-container{
-    width: 720px;
-    padding: 30px 0 0 0;
-    max-width: 720px;
-    margin:auto;
-    display: flex;
-    position: relative;
-
-    height: 80vh;
-}
-
-@media(min-width:860px){
-    .write_feed_container{
-      margin-left: 10%;
-    }
-  }
+/*@media(min-width:860px){*/
+/*    .write_feed_container{*/
+/*      margin-left: 10%;*/
+/*    }*/
+/*  }*/
 
 .write_feed_container{
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
     padding-top: 7%;
-    /*background-color: yellow;*/
+    width: 100%;
 }
 
 #write_feed_wrap{
     padding-top: 5%;
     padding-bottom: 5%;
-    margin: 0 ;
-    /*background-color: skyblue;*/
     border: #adadad 1px solid;
     border-radius: 3%;
-    height: 60vh;
-    width: 720px;
+
 }
 
 .write_header{
     display: flex;
-    width: 720px;
-    flex-direction: row;
     align-items: center;
     text-align: center;
-    vertical-align: center;
     justify-content: space-around;
-    /*background-color: aquamarine;*/
 }
 
 .wf_item:nth-child(1){flex-grow: 1;}
@@ -94,8 +69,6 @@ span, label, textarea, #feed_select {
 
 .area_wrap{
     display: flex;
-    height: 60vh;
-    flex-direction: row;
     justify-content: space-around;
     padding-top: 10%;
 }
@@ -105,7 +78,6 @@ span, label, textarea, #feed_select {
 
 
 .photo_area{
-    /*background-color: beige;*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -158,10 +130,8 @@ span, label, textarea, #feed_select {
 
 
 .write_textarea{
-    /*background-color: lightpink;*/
     display: flex;
     flex-direction: column;
-    justify-items: flex-start;
 }
 
 .wf_user_info{
