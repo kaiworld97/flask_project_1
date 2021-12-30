@@ -312,7 +312,7 @@ left: 47%;
 @media (min-width: 1000px){
     #all-container{
         position: relative;
-        left: -100px;
+        left: 0px;
     }
     #head-container{
         display: none;
