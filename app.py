@@ -6,11 +6,15 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import certifi
+import gridfs
+import codecs
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.kk0pl.mongodb.net/Cluster0?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://test:sparta@cluster0.mr6mv.mongodb.net/Cluster0?retryWrites=true&w=majority',
+                     tlsCAFile=certifi.where())
 db = client.dbsparta
 
 app = Flask(__name__)
+fs = gridfs.GridFS(db)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
@@ -25,7 +29,7 @@ SECRET_KEY = 'SPARTA'
 def home():
     # token_receive = request.cookies.get('mytoken')
     # try:
-    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    #     payload = jwt.decode(token_receive, ECRET_KEY, algorithms=['HS256'])
     #
     #     return render_template('index.html')
     # except jwt.ExpiredSignatureError:
@@ -64,11 +68,15 @@ def mypage():
 def camera():
     return render_template('camera.html', html='camera')
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
 
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    return render_template('login.khj.html', msg=msg)
+    return render_template('login.html', html='login', msg=msg)
 
 
 @app.route('/sign_in', methods=['POST'])
@@ -119,6 +127,7 @@ def check_dup():
     # return jsonify({'result': 'success'})
 
 
+
 @app.route("/comments", methods=["POST"])
 def comment_post():
     comment_receive = request.form['comment_give']
@@ -141,6 +150,49 @@ def comment_delete_post():
     num_receive = request.form['num_give']
     db.comment.delete_one({'num': int(num_receive)})
     return jsonify({'msg': '댓글 삭제!'})
+
+@app.route('/fileupload', methods=['POST'])
+def file_upload():
+    title_receive = request.form['title_give']
+    file = request.files['file_give']
+
+    fs_image_id = fs.put(file)
+
+    doc = {
+        'title': title_receive,
+        'img': fs_image_id
+    }
+    db.camp2.insert_one(doc)
+
+    return jsonify({'result': 'success'})
+
+@app.route('/camerafeedupload', methods=['POST'])
+def camerafeedupload():
+    camerafeed_receive = request.form['camerafeed_give']
+    file = request.files['file_give']
+
+    fs_image_id = fs.put(file)
+
+    doc = {
+        'camerafeed': camerafeed_receive,
+        'img': fs_image_id
+    }
+    db.camp2.insert_one(doc)
+
+    return jsonify({'result': 'success'})
+
+
+@app.route('/fileshow/<title>')
+def file_show(title):
+
+    img_info = db.camp2.find_one({'title': title})
+    img_binary = fs.get(img_info['img'])
+
+    base64_data = codecs.encode(img_binary.read(), 'base64')
+    image = base64_data.decode('utf-8')
+
+    return render_template('showimg.html', img=image)
+
 
 
 if __name__ == '__main__':
