@@ -1,29 +1,5 @@
 {% extends "base.html"  %}
 {% block content %}
-
-
-
-<head>
-    <link rel="stylesheet" href="../static/camera.css?after">
-</head>
-    <div class="camera">
-        <button type="button"><img src="..\static\img\1298736.png" alt=""></button>
-        <video id="video"></video>
-        <button id="start.button">Take photo</button>
-    </div>
-      <canvas id="canvas" >
-    </canvas>
-    <div class="output">
-      <img id="photo">
-    </div>
-<div>
-<button id="cameraon" >켜기</button>
-<button id="copyimg" onclick="copyimg()">복사</button>
-<button id="cameraoff">끄기</button>
-</div>
-
-{% endblock %}
-
 <div class="camera">
     <video id="video"></video>
 </div>
