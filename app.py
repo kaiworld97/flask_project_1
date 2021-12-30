@@ -127,6 +127,30 @@ def check_dup():
     # return jsonify({'result': 'success'})
 
 
+
+@app.route("/comments", methods=["POST"])
+def comment_post():
+    comment_receive = request.form['comment_give']
+    comment_list = list(db.comment.find({}, {'_id': False}))
+    count = len(comment_list) + 1
+    doc = {'comment': comment_receive,
+           'num': count}
+    db.comment.insert_one(doc)
+    return jsonify({'msg': '댓글 작성!'})
+
+
+@app.route("/comments", methods=["GET"])
+def comment_get():
+    comment_list = list(db.comment.find({}, {'_id': False}))
+    return jsonify({'comments': comment_list})
+
+
+@app.route("/comments/delete", methods=["POST"])
+def comment_delete_post():
+    num_receive = request.form['num_give']
+    db.comment.delete_one({'num': int(num_receive)})
+    return jsonify({'msg': '댓글 삭제!'})
+
 @app.route('/fileupload', methods=['POST'])
 def file_upload():
     title_receive = request.form['title_give']
@@ -168,6 +192,7 @@ def file_show(title):
     image = base64_data.decode('utf-8')
 
     return render_template('showimg.html', img=image)
+
 
 
 if __name__ == '__main__':

@@ -10,3 +10,4 @@ function opendia() {
 dialog.addEventListener('cancel', function onClose() {
     window.location.reload()
 });
+
