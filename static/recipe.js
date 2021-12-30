@@ -22,44 +22,6 @@ function rasipi(data) {
         let name = a['recipe_id']
         let comment = a['content']
         let like = a['like_count']
-        // let temp = `
-        //                <div class ="rasipi-item">
-        //                 <div class ="rasipi_main">
-        //                         <div class="rasipi-head-container">
-        //                             <div class="rasipi-head-wrapper">
-        //                                 <img class="rasipi-head-img" src=../static/img/${imgsrc} alt="">
-        //                                 <div>${name}${b}</div>
-        //                             </div>
-        //                             <img class="more-icon"  src=../static/img/more@3x.png alt=""onclick="opendia()">
-        //                         </div>
-        //                         <img class="rasipi-img" src=../static/img/${imgsrc} alt="">
-        //                         <div style="margin-top: -2%;">
-        //                             <div class="rasipi-icons-container">
-        //                                 <div class="rasipi-icons-wrapper">
-        //                                     <img class="feed-icon" style="" onclick="like(this)" src=../static/img/like@3x.png alt=${name}${b}>
-        //                                     <img class="feed-icon" src=../static/img/comment@3x.png>
-        //                                     <img class="feed-icon" src=../static/img/dm@3x.png>
-        //                                 </div>
-        //
-        //                                 <img class="feed-icon feed-right-icon" style="" onclick="favorite(this)"src=../static/img/favorite@3x.png>
-        //
-        //                             </div>
-        //                             <div class="feed-feed-container">
-        //                                 <div class="rasipi-like-wrapper">
-        //                                     <img class="rasipi-like-img" src=../static/img/${imgsrc} alt="">
-        //                                     <div id="${name}${b}"><strong>${name}${b}</strong>님 외에 <strong id="홍채영likey">${like}명</strong>이 좋아합니다</div>
-        //                                 </div>
-        //                                 <div class="rasipi-rasipi-wrapper">
-        //                                     <div class="feed-msg">
-        //                                         <strong>${name}${b}</strong> ${comment}
-        //                                     </div>
-        //                                     <div class="feed-time">2일 전</div>
-        //                                 </div>
-        //                             </div>
-        //
-        //                             </div>
-        //                         </div>
-        //                     </div>`
         let temp = `<li class ="rasipi_li_list">
                         <div class = "rasipi_img_box">
                             <a class ="rasipi_img">

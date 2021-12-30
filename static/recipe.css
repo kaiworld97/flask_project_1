@@ -9,6 +9,7 @@
     justify-content: center;
     border-bottom: 1px solid lightgray;
     padding-top: 80px;
+    z-index: 3;
 }
 
 #rasipi_search_box {
@@ -34,7 +35,6 @@
 }
 
 #rasipi_container {
-
     margin: 0;
     vertical-align: top;
     box-sizing: border-box;

@@ -47,7 +47,6 @@
     display: flex;
     flex-shrink: 0;
     padding-top: 30px;
-
     position: relative;
     vertical-align: baseline;
 
@@ -246,4 +245,80 @@
     min-height: 500px;
     text-align: center;
     align-items: center;
+}
+
+.contain {
+    margin: 0;
+    vertical-align: top;
+    box-sizing: border-box;
+    list-style-type: circle;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    line-height: 1.42857143;
+    display: block;
+    text-align: left;
+
+
+}
+
+
+.myp_img_box {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: block;
+    list-style: none;
+    text-align: -webkit-match-parent;
+}
+
+/*-----------------------텝 스타일----------------------------*/
+.myp_li_list {
+    width: 200px;
+    list-style: none;
+    padding: 0;
+    margin: 0 12px 40px 0;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    box-sizing: border-box;
+    text-align: -webkit-match-parent;
+}
+
+.rasipi_img_box {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: block;
+    list-style: none;
+    text-align: -webkit-match-parent;
+}
+
+.rasipi_img {
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.myp-imgs {
+    max-width: 100%;
+    height: 250px;
+    vertical-align: middle;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    list-style: none;
+}
+
+.temp_div {
+    max-width: 100%;
+    height: 250px;
+    vertical-align: middle;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    list-style: none;
 }
