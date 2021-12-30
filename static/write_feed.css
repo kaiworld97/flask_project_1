@@ -1,0 +1,215 @@
+
+/*write_feed 여기서부터 보현작성*/
+body{
+    height: 100vh;
+}
+/*구글폰트적용*/
+span, label, textarea, #feed_select {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+@media (min-width: 1000px){
+    #main-container {
+}}
+
+#main-container{
+    width: 720px;
+    padding: 30px 0 0 0;
+    max-width: 720px;
+    margin:auto;
+    display: flex;
+    position: relative;
+
+    height: 80vh;
+}
+
+@media(min-width:860px){
+    .write_feed_container{
+      margin-left: 10%;
+    }
+  }
+
+.write_feed_container{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 7%;
+    /*background-color: yellow;*/
+}
+
+#write_feed_wrap{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin: 0 ;
+    /*background-color: skyblue;*/
+    border: #adadad 1px solid;
+    border-radius: 3%;
+    height: 60vh;
+    width: 720px;
+}
+
+.write_header{
+    display: flex;
+    width: 720px;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+    justify-content: space-around;
+    /*background-color: aquamarine;*/
+}
+
+.wf_item:nth-child(1){flex-grow: 1;}
+.wf_item:nth-child(2){flex-grow: 1;}
+.wf_item:nth-child(3){flex-grow: 1;}
+
+
+#feed_select {
+    height: auto;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 0;
+    padding: 1%;
+    width: 55%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+#feed_select:focus {
+    outline: none;
+}
+
+.arrow_back{
+    width: 50px;
+    height: 50px;
+}
+.upload_title{
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.area_wrap{
+    display: flex;
+    height: 60vh;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 10%;
+}
+
+.area_item:nth-child(1){flex-grow: 1;}
+.area_item:nth-child(2){flex-grow: 2;}
+
+
+.photo_area{
+    /*background-color: beige;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pa_item:nth-child(1){flex-grow: 0;}
+.pa_item:nth-child(2){flex-grow: 0;}
+.pa_item:nth-child(3){flex-grow: 2;}
+
+.photo-ex{
+    align-items: baseline;
+    margin-top: 10%;
+}
+
+
+.select_file{
+    align-content: center;
+}
+.button{
+    display: flex;
+    justify-content: center;
+
+}
+#chooseFile{
+    visibility: hidden;
+}
+.button label{
+    width: 130px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    background-color: #0094f5;
+    border-radius: 5px;
+    padding: 5px 0 5px 0;
+}
+
+.photo_msg{
+    font-size: 25px;
+}
+
+.pa_item{
+    padding-top: 10%;
+}
+
+
+/*레시피박스css*/
+/*.my_recipe{*/
+
+/*}*/
+
+
+.write_textarea{
+    /*background-color: lightpink;*/
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+}
+
+.wf_user_info{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    padding: 5% 2% 3% 2%;
+}
+
+.wf_user_profile img{
+
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: darkgray 1px solid;
+}
+.user_id{
+    padding-left: 3%;
+    font-size: 15px;
+    font-weight: bolder;
+}
+.textarea_box{
+    height: 45%;
+    width: 90%;
+}
+#textarea{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#textarea:focus {
+    outline: none;
+}
+
+.etc_info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5% 10% 0 2%;
+}
+
+/*마우스포인터변경*/
+svg, .button label{
+    cursor: pointer;
+}
+
+textarea{
+    cursor: text;
+}
