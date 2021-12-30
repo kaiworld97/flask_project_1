@@ -95,22 +95,27 @@
 
 function posting() {
     let camerafeed = $('#camerafeed').val()
-    let file = $('#photo')[0]
-    let form_data = new FormData()
+    let img = $('#photo').attr('src')
+    fetch(img)
+    .then(res => res.blob())
+    .then(blob => {
+        const file = new File([blob], 'photo.png', blob)
+        let form_data = new FormData()
 
-    form_data.append("camerafeed_give", camerafeed)
-    form_data.append("file_give", file)
+        form_data.append("camerafeed_give", camerafeed)
+        form_data.append("file_give", file)
 
-    $.ajax({
-        type: "POST",
-        url: "/camerafeedupload",
-        data: form_data,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            alert(response["result"])
-            window.location.reload()
-        }
-    });
-  }
+        $.ajax({
+            type: "POST",
+            url: "/camerafeedupload",
+            data: form_data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert(response["result"])
+                window.location.reload()
+            }
+        });
+    })
+}
