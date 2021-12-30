@@ -2,6 +2,7 @@
 {% block content %}
 
 
+
 <head>
     <link rel="stylesheet" href="../static/camera.css?after">
 </head>
@@ -22,3 +23,23 @@
 </div>
 
 {% endblock %}
+
+<div class="camera">
+    <video id="video"></video>
+</div>
+<canvas id="canvas" class="hidden">
+</canvas>
+<div id="output-wrapper">
+    <div id="output" class="hidden">
+        <img id="photo">
+    </div>
+    <textarea id="camerafeed" class="hidden"></textarea>
+    <div id="btns">
+        <button id="startbutton">사진찍기</button>
+        <button id="restart" class="hidden" onclick="load()">다시찍기</button>
+        <button onclick="posting()">업로드</button>
+        <button onclick="back()">뒤로가기</button>
+    </div>
+</div>
+{% endblock %}
+
