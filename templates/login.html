@@ -1,63 +1,231 @@
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+
+<!--    &lt;!&ndash; Webpage Title &ndash;&gt;-->
+<!--    <title>Log In</title>-->
+
+<!--    &lt;!&ndash; Required meta tags &ndash;&gt;-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+<!--    &lt;!&ndash; JS &ndash;&gt;-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>-->
+<!--    <link rel="stylesheet" href="../static/login.css?after">-->
+
+<!--    <script>-->
+<!--        {% if msg %}-->
+<!--            alert("{{ msg }}")-->
+<!--        {% endif %}-->
+<!--        function login() {-->
+<!--                $.ajax({-->
+<!--                    type: "POST",-->
+<!--                    url: "/api/login",-->
+<!--                    data: {id_give: $('#userid').val(), pw_give: $('#userpw').val()},-->
+<!--                    success: function (response) {-->
+<!--                        if (response['result'] == 'success') {-->
+<!--                            // 로그인이 정상적으로 되면, 토큰을 받아옵니다.-->
+<!--                            // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.-->
+<!--                            $.cookie('mytoken', response['token']);-->
+
+<!--                            alert('로그인 완료!')-->
+<!--                            window.location.href = '/'-->
+<!--                        } else {-->
+<!--                            // 로그인이 안되면 에러메시지를 띄웁니다.-->
+<!--                            alert(response['msg'])-->
+<!--                        }-->
+<!--                    }-->
+<!--                })-->
+<!--            }-->
+<!--    </script>-->
+
+<!--    <script>-->
+<!--       function toggle_sign_up() {-->
+<!--    $("#sign-up-box").toggleClass("is-hidden")-->
+<!--        }-->
+<!--    </script>-->
+<!--    <script>-->
+<!--        function toggle_sign_up() {-->
+<!--    $("#sign-up-box").toggleClass("is-hidden")-->
+<!--    $("#div-sign-in-or-up").toggleClass("is-hidden")-->
+<!--    $("#btn-check-dup").toggleClass("is-hidden")-->
+<!--    $("#help-id").toggleClass("is-hidden")-->
+<!--    $("#help-password").toggleClass("is-hidden")-->
+<!--    $("#help-password2").toggleClass("is-hidden")-->
+<!--}-->
+<!--        function sign_in() {-->
+<!--    let userid = $("#input-userid").val()-->
+<!--    let password = $("#input-password").val()-->
+
+<!--    if (userid == "") {-->
+<!--        $("#help-id-login").text("아이디를 입력해주세요.")-->
+<!--        $("#input-userid").focus()-->
+<!--        return;-->
+<!--    } else {-->
+<!--        $("#help-id-login").text("")-->
+<!--    }-->
+
+<!--    if (password == "") {-->
+<!--        $("#help-password-login").text("비밀번호를 입력해주세요.")-->
+<!--        $("#input-password").focus()-->
+<!--        return;-->
+<!--    } else {-->
+<!--        $("#help-password-login").text("")-->
+<!--    }-->
+<!--    $.ajax({-->
+<!--        type: "POST",-->
+<!--        url: "/sign_in",-->
+<!--        data: {-->
+<!--            userid_give: userid,-->
+<!--            password_give: password-->
+<!--        },-->
+<!--        success: function (response) {-->
+<!--            if (response['result'] == 'success') {-->
+<!--                $.cookie('mytoken', response['token'], {path: '/'});-->
+<!--                window.location.replace("/")-->
+<!--            } else {-->
+<!--                alert(response['msg'])-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--}-->
+
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="inner_login">-->
+<!--    <div class="login_tistory">-->
+
+<!--        <form method="post" id="authForm" action="localhost:5000">-->
+<!--            <input type="hidden" name="redirectUrl" value="localhost:5000">-->
+<!--            <fieldset>-->
+<!--                <legend class="screen_out">로그인 정보 입력폼</legend>-->
+<!--                <div class="box_login">-->
+<!--                    <div class="inp_text">-->
+<!--                        <label for="userid" class="screen_out">아이디</label>-->
+<!--                        <input type="email" id="userid" name="userid" placeholder="ID">-->
+<!--                    </div>-->
+<!--                    <div class="inp_text">-->
+<!--                        <label for="loginPw" class="screen_out">비밀번호</label>-->
+<!--                        <input type="password" id="loginPw" name="password" placeholder="Password">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <button onclick class="btn_login"="sign_in()">-->
+<!--                    로그인-->
+<!--                </button>-->
+
+<!--                <button onclick class="btn_join"="toggle_sign_up()">-->
+<!--                    회원가입-->
+<!--                </button>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;로그인 전 회원가입 창 display; none 창 추가&ndash;&gt;-->
+
+<!--</div>-->
+<!--            <div class="login_append">-->
+<!--                    <div class="inp_chk"> &lt;!&ndash; 체크시 checked 추가 &ndash;&gt;-->
+<!--                        <input type="checkbox" id="keepLogin" class="inp_radio" name="keepLogin">-->
+<!--                        <label for="keepLogin" class="lab_g">-->
+<!--                            <span class="img_top ico_check"></span>-->
+<!--                            <span class="txt_lab">로그인 상태 유지</span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <span class="txt_find">-->
+<!--                <a href="/member/find/userid" class="link_find">아이디</a>-->
+<!--                    /-->
+<!--                <a href="/member/find/password" class="link_find">비밀번호 찾기</a>-->
+<!--                </span>-->
+<!--                </div>-->
+
+<!--            </fieldset>-->
+<!--        </form>-->
+
+<!--    </div>-->
+<!--</div>-->
+<!--<script>-->
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!doctype html>
 <html lang="en">
-<head>
+    <head>
 
-    <!-- Webpage Title -->
-    <title>Log In</title>
+        <!-- Webpage Title -->
+        <title>Hello, world!</title>
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+        <!-- Bulma CSS 링크 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
-    <link rel="stylesheet" href="../static/login.css?after">
-</head>
-<body>
-<div class="inner_login">
-    <div class="login_tistory">
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-        <form method="post" id="authForm" action="https://www.tistory.com/auth/login">
-            <input type="hidden" name="redirectUrl" value="https://blogpack.tistory.com/manage">
-            <fieldset>
-                <legend class="screen_out">로그인 정보 입력폼</legend>
-                <div class="box_login">
-                    <div class="inp_text">
-                        <label for="loginId" class="screen_out">아이디</label>
-                        <input type="email" id="loginId" name="loginId" placeholder="ID">
+
+        <script>
+            {% if msg %}
+                alert("{{ msg }}")
+            {% endif %}
+            function login() {
+                $.ajax({
+                    type: "POST",
+                    url: "/sign_in",
+                    data: {username_give: $('#userid').val(), password_give: $('#userpw').val()},
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
+                            // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
+                            $.cookie('mytoken', response['token']);
+
+                            alert('로그인 완료!')
+                            window.location.href = '/'
+                        } else {
+                            // 로그인이 안되면 에러메시지를 띄웁니다.
+                            alert(response['msg'])
+                        }
+                    }
+                })
+            }
+
+        </script>
+
+    </head>
+    <body>
+        <div class="section has-text-centered">
+            <h1 class="title">로그인 페이지</h1>
+            <div class="container" style="width:60%">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label" for="userid">ID</label>
                     </div>
-                    <div class="inp_text">
-                        <label for="loginPw" class="screen_out">비밀번호</label>
-                        <input type="password" id="loginPw" name="password" placeholder="Password">
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input type="text" class="input" id="userid" aria-describedby="emailHelp"
+                                       placeholder="My ID">
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <button type="submit" class="btn_login" disabled>로그인</button>
-                <button type="onclick" class="btn_join" disabled> 회원가입 </button>
-                <div class="login_append">
-                    <div class="inp_chk"> <!-- 체크시 checked 추가 -->
-                        <input type="checkbox" id="keepLogin" class="inp_radio" name="keepLogin">
-                        <label for="keepLogin" class="lab_g">
-                            <span class="img_top ico_check"></span>
-                            <span class="txt_lab">로그인 상태 유지</span>
-                        </label>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label" for="userpw">PW</label>
                     </div>
-                    <span class="txt_find">
-                <a href="/member/find/loginId" class="link_find">아이디</a>
-                    /
-                <a href="/member/find/password" class="link_find">비밀번호 찾기</a>
-                </span>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input type="password" class="input" id="userpw" placeholder="My Password">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            </fieldset>
-        </form>
-
-    </div>
-</div>
-<script>
-
-</script>
-</body>
+                <button class="button is-primary" onclick="login()">로그인</button>
+            </div>
+        </div>
+    </body>
 </html>
