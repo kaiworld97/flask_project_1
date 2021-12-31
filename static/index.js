@@ -39,7 +39,6 @@ function favorite(data){
 
     }
 }
-makefeed(story_list)
 makestory(story_list)
 makestory(story_list)
 followme(story_list)
@@ -58,64 +57,7 @@ function makestory(data){
         b++
     }
 }
-function makefeed(data){
-    let b = 1
-    for (a of data){
-        let imgsrc = a['src']
-        let name = a['name']
-        let msg = a['msg']
-        let feedtemp = `<div class="feed-wrapper">
-                            <div class="feed-head-container">
-                                <div class="feed-head-wrapper">
-                                    <img class="feed-head-img" src="${imgsrc}" alt="">
-                                    <div>${name}${b}</div>
-                                </div>
-                                <img class="more-icon" style="" src="/static/img/more@3x.png" alt="" onclick="opendia()">
-                            </div>
-                            <img class="feed-img" src="${imgsrc}" alt="">
-                            <div>
-                                <div class="feed-icons-container">
-                                    <div class="feed-icons-wrapper">
-                                        <img class="feed-icon" style=""  onclick="like(this)" src="/static/img/like@3x.png" alt="${name}${b}">
-                                        <img class="feed-icon" src="/static/img/comment@3x.png">
-                                        <img class="feed-icon" src="/static/img/dm@3x.png">
-                                    </div>
 
-                                    <img class="feed-icon feed-right-icon" style="" onclick="favorite(this)" src="/static/img/favorite@3x.png">
-
-                                </div>
-                                <div class="feed-feed-container">
-                                    <div class="feed-like-wrapper">
-                                        <img class="feed-like-img" src="${imgsrc}" alt="">
-                                        <div id="${name}${b}" class="flex"><div class="strong">${name}${b}</div>님 외에 <div id="${name}${b}likey" class="strong">9999명</div>이 좋아합니다</div>
-                                    </div>
-                                    <div class="feed-feed-wrapper">
-                                        <div class="feed-msg flex">
-                                            <div class="strong">${name}${b}</div> ${msg}
-                                        </div>
-                                        <div class="feed-comment-wrapper">
-                                            <div class="comment-write-wrapper">
-                                                <b style="font-weight: bold">user-id(?)</b>
-                                                <input type="text" class="comment">
-                                                
-                                            </div>
-                                            <div class="comment-box">
-<!--                                            여기에 댓글 추가-->
-                                            </div>
-                                            <button onclick="comment_write()">작성</button>
-                                           
-                                        </div>
-                                        <div class="feed-time">12시간 전</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>`
-
-        $('#feed-container').append(feedtemp)
-        b++
-    }
-}
 function followme(data){
     let b = 1
     for (a of data){

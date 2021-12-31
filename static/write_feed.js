@@ -49,7 +49,6 @@ function loadFile(input){
 
 
  function posting() {
-    console.log('올리기')
     let title = $('#chooseFile')[0].files[0].name
     let file = $('#chooseFile')[0].files[0]
     let content = $('#textarea').val()
@@ -74,7 +73,7 @@ function loadFile(input){
         processData: false,
         success: function (response) {
             alert(response["msg"])
-            history.back()
+            location.href = '/'
         }
     });
   }
@@ -86,7 +85,6 @@ function loadFile(input){
         url: "/feed_read",
         data: {},
         success: function (response) {
-            console.log(response)
         }
   })
 }
