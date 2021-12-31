@@ -218,7 +218,6 @@
     box-sizing: border-box;
     text-align: center;
     padding: 0 5%;
-    width: 6rem;
 
 
 }
@@ -228,21 +227,23 @@
     justify-content: flex-start;
     flex-direction: row;
     align-items: center;
+    width: 20%;
+
 
 }
 
 .gango-main-img-box {
     display: flex;
     flex-direction: row;
-    flex-grow: 8;
     justify-content: space-between;
     text-align: left;
+    width: 80%;
 
 
 }
 
 .gango-main-img {
-    width: 100%;
+    width: 32%;
     height: 12rem;
     padding: 2%;
 
@@ -250,12 +251,12 @@
 }
 
 .gango-click-info {
+    width: 68%;
     margin-left: 2rem;
     text-align: left;
     justify-content: center;
     align-items: center;
     padding-top: 3rem;
-    width: 100%;
 
 }
 
