@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 import jwt
-import datetime
 import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
@@ -87,12 +86,8 @@ def feed_load():
     feed_info = db.feed.find_one({'id': 'carrot_vely'})
     # for a in feed_info:
     #     print(a['img'])
-
     fs = gridfs.GridFS(db)
-
-
     data = feed_info['img']
-    print(data)
     data = fs.get(data)
     # print(data)
     data = data.read()
@@ -123,16 +118,22 @@ def auction():
 
 @app.route('/mypage')
 def mypage():
-    rows = []
-    # info = db.users
-    info = db.feed.find({'id': 'carrot_vely'})
+    feedrows = []
+    feedrow = []
+    info = db.feed
+    # info = db.feed.find({'id': 'carrot_vely'})
     for x in info.find():
         img_binary = fs.get(x['img'])
         base64_data = codecs.encode(img_binary.read(), 'base64')
         image = base64_data.decode('utf-8')
         x['img'] = image
-        rows.append(x)
-    return render_template('mypage.html', html='mypage', rows=rows)
+        feedrow.append(x)
+        if len(feedrow) == 3:
+            feedrows.append(feedrow)
+            feedrow = []
+    if len(feedrow) == 2 or len(feedrow) == 1:
+        feedrows.append(feedrow)
+    return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows)
 
 
 @app.route('/camera')
@@ -157,8 +158,8 @@ def sign_in():
     password_receive = request.form['password_give']
 
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
-    result = db.users.find_one({'username': username_receive, 'password': pw_hash})
-
+    result = db.user.find_one({'id': username_receive, 'pw': pw_hash})
+    print(result)
     if result is not None:
         payload = {
             'id': username_receive,
@@ -250,7 +251,9 @@ def file_show(title):
 
     return render_template('showimg.html', img=image)
 
-
+@app.route('/register')
+def register():
+    return render_template('register.html')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

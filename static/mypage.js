@@ -67,13 +67,13 @@ let rasipi_table = [{
 
 
 /*1번 텝에 넣을 내용*/
-make_mypagefeed(feed_table, 'Mypage-panel1', 1)
+// make_mypagefeed(feed_table, 'Mypage-panel1', 1)
 
 /*2번 텝에 넣을 내용*/
-make_mypagefeed(rasipi_table, 'Mypage-panel2', 2)
+// make_mypagefeed(rasipi_table, 'Mypage-panel2', 2)
 
 /*3번 텝에 넣을 내용*/
-make_mypagefeed(feed_table, 'Mypage-panel3', 3)
+// make_mypagefeed(feed_table, 'Mypage-panel3', 3)
 
 function make_mypagefeed(data, div_id, num) {
     let b = 1
