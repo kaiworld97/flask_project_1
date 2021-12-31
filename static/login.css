@@ -144,3 +144,6 @@ fieldset, img {
     color: #fff;
     background-color: #000;
 }
+.is-hidden {
+    display: none;
+}
