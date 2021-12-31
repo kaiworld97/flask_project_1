@@ -145,6 +145,19 @@ def test():
     return render_template('test.html')
 
 
+@app.route('/api/register', methods=['POST'])
+def api_register():
+    id_receive = request.form['id_give']
+    pw_receive = request.form['pw_give']
+    nickname_receive = request.form['nickname_give']
+
+    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+
+    db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
+
+    return jsonify({'result': 'success'})
+
+
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
@@ -198,6 +211,19 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
     # return jsonify({'result': 'success'})
 
+@app.route('/api/nick', methods=['GET'])
+def api_valid():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        print(payload)
+        userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+
+        return jsonify({'result': 'success', 'nickname': userinfo['nick']})
+    except jwt.ExpiredSignatureError:
+        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
+    except jwt.exceptions.DecodeError:
+        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
 
 @app.route("/comments", methods=["POST"])
