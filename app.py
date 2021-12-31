@@ -2,12 +2,13 @@ from pymongo import MongoClient
 import jwt
 import datetime
 import hashlib
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import certifi
 import gridfs
 import codecs
+import io
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.mr6mv.mongodb.net/Cluster0?retryWrites=true&w=majority',
                      tlsCAFile=certifi.where())
@@ -47,6 +48,52 @@ def recipe():
 @app.route('/write_feed')
 def write_feed():
     return render_template('write_feed.html', html='write_feed')
+
+
+@app.route('/feed_upload', methods=['POST'])
+def file_upload():
+    title_receive = request.form['title_give']
+    content_receive = request.form['content_give']
+    id_receive = request.form['id_give']
+
+    file = request.files['file_give']
+    # gridfs 활용해서 이미지 분할 저장
+    fs_image_id = fs.put(file)
+
+    # db 추가
+    doc = {
+        'id': id_receive,
+        'content': content_receive,
+        'title': title_receive,
+        'img': fs_image_id
+    }
+    db.users.insert_one(doc)
+
+    return jsonify({'msg': 'saved!!!!'})
+
+
+@app.route('/feed_read', methods=['GET'])
+def feed_load():
+    # 사진하나 불러오기
+    feed_info = db.users.find_one({'id': 'carrot_vely'})
+    fs = gridfs.GridFS(db)
+    data = feed_info['img']
+    data = fs.get(data)
+    print(data)
+    data = data.read()
+    print('carrot_vely', io.BytesIO(data).read())
+
+    return send_file(io.BytesIO(data), mimetype='image.png')
+
+    # feed_info = db.users.find({'title': '귀를의심.png'})
+    # fs = gridfs.GridFS(db)
+    # data = feed_info['img']
+    # data = fs.get(data)
+    # print(data)
+    # data = data.read()
+    # print('carrot_vely', io.BytesIO(data).read())
+    #
+    # return send_file(io.BytesIO(data), mimetype='image.png')
 
 
 @app.route('/write_recipe')
@@ -151,20 +198,6 @@ def comment_delete_post():
     db.comment.delete_one({'num': int(num_receive)})
     return jsonify({'msg': '댓글 삭제!'})
 
-@app.route('/fileupload', methods=['POST'])
-def file_upload():
-    title_receive = request.form['title_give']
-    file = request.files['file_give']
-
-    fs_image_id = fs.put(file)
-
-    doc = {
-        'title': title_receive,
-        'img': fs_image_id
-    }
-    db.camp2.insert_one(doc)
-
-    return jsonify({'result': 'success'})
 
 @app.route('/camerafeedupload', methods=['POST'])
 def camerafeedupload():

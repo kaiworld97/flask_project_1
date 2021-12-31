@@ -1,7 +1,7 @@
 {% extends "base.html"  %}
 {% block content %}
-<div class="write_feed_container">
-    <div id="write_feed_wrap">
+<div class="write_feed_container model__background">
+    <div id="write_feed_wrap" class="modal__box">
             <div class="write_header">
                 <div class="wf_item back_page">
                     <svg onclick="back_home();" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
@@ -18,32 +18,36 @@
 <!--                    </select>-->
                 </div>
                 <div class="wf_item share">
-                    <svg onclick="img_upload()" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                    <svg onclick="posting()" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                     <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
                   </svg>
                 </div>
             </div>
             <div class="write_feed_space">
-                <div class="area_wrap">
-                    <div class="area_item photo_area">
-                        <div class="pa_item photo-ex">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="svg_img bi bi-images" viewBox="0 0 16 16">
+                <div id="img_show" class="area_wrap">
+
+                    <div id="pharea" class="area_item photo_area">
+
+                        <div id="pharea_one" class="pa_item photo-ex">
+                            <svg id="svg_icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="svg_img bi bi-images" viewBox="0 0 16 16">
                               <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
                               <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
                             </svg>
+
                         </div>
-                        <div class="pa_item photo_msg">
-                            <span class="photo_msg">
+                        <div id="pharea_two" class="pa_item photo_msg image-show">
+                            <span id="up_msg" class="photo_msg">
                                 사진을 업로드 해 주세요
                             </span>
                         </div>
-                        <form class="pa_item select_file" method="post" enctype="multipart/form-data">
+                        <form id="pharea_three" class="pa_item select_file" method="post" enctype="multipart/form-data">
                             <div class="button">
                                 <label for="chooseFile">
                                 컴퓨터에서 선택
                                 </label>
                             </div>
+
                             <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
                         </form>
                     </div>
@@ -53,7 +57,7 @@
                                 <img src="static/img/carrot.jpg">
                             </div>
                             <div class="user_id">
-                                <span>carrot_vely</span>
+                                <span id="user_name">carrot_vely</span>
                             </div>
                         </div>
 <!--                        레시피이름추가할곳-->
