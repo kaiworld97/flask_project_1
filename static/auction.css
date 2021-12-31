@@ -143,8 +143,9 @@
 
 /*------------------------------------------------광고 포스트 박스--------------*/
 #Auction-page-ganggo-main {
-    width: 100%;
-    padding: 7% 0 0;
+    max-width: 720px;
+    padding: 7% 2%;
+
     flex-direction: column;
     display: flex;
     border-bottom: 1px solid gray;
@@ -166,6 +167,7 @@
     box-sizing: border-box;
     justify-content: flex-start;
     align-items: stretch;
+
 }
 
 
@@ -238,18 +240,29 @@
     justify-content: center;
     align-items: center;
     padding-top: 3rem;
-
-
 }
 
 .gango-click-info:hover {
-
     color: blue;
-
 }
 
-.gango-click-info > p {
+.gango-click-info > label {
     font-size: 2rem;
+}
+
+
+.gango-message {
+    padding: 3%;
+    height: calc(8.5rem + 2px);
+    line-height: 1.25;
+    appearance: none;
+    border-radius: 0.25rem;
+    border: 1px solid #000000;
+
+    background-clip: padding-box;
+    background-color: #fff;
+    font-weight: 400;
+    display: none;
 }
 
 
@@ -265,7 +278,7 @@
     display: none;
 }
 
-#check-btn:checked ~ .menubars {
+#check-btn:checked ~ .gango-message {
     display: block;
 }
 
