@@ -14,7 +14,7 @@ function show_comment() {
                 let num = rows[i]['num']
 
                 let temp_html = `<div class="comment_wrapper" >
-                                            <b>user_id(?)</b>
+                                            <b>carrot_vely</b>
                                             <b style="font-weight: lighter">${comment}</b>
                                             <button onclick="comment_delete(${num})">삭제</button>
                                         </div>`
@@ -32,7 +32,6 @@ function comment_write() {
         url: '/comments',
         data: {'comment_give': comment},
         success: function (response) {
-            alert(response['msg'])
             window.location.reload()
         }
     });

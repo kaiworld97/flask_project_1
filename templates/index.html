@@ -51,16 +51,16 @@
                                 {{ content }}
                             </div>
                             <div class="feed-comment-wrapper">
-                                <div class="comment-write-wrapper">
-                                    <b style="font-weight: bold">{{ nickname }}</b>
-                                    <input type="text" class="comment">
-
-                                </div>
                                 <div class="comment-box">
-                                    <!--                                            여기에 댓글 추가-->
+                                    <!--여기에 댓글 추가-->
                                 </div>
-                                <button onclick="comment_write()">작성</button>
-
+                                <div class="comment-write-wrapper">
+                                    <div class="wf_user_profile">
+                                        <img src="/static/img/carrot.jpg">
+                                    </div>
+                                    <input type="text" class="comment" placeholder="댓글 달기...">
+                                    <button onclick="comment_write()" id="comment-button">작성</button>
+                                </div>
                             </div>
                             <div class="feed-time">12시간 전</div>
                         </div>

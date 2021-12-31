@@ -1,0 +1,27 @@
+.comment-write-wrapper {
+    display: flex;
+    width: 100%;
+
+}
+
+.wf_user_profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: darkgray 1px solid;
+    margin-right: 5px;
+}
+
+.comment {
+    border: none;
+    width: 100%;
+    background-color: transparent;
+
+}
+#comment-button {
+    border: none;
+    background-color: transparent;
+    color: cornflowerblue;
+    width: 10vw;
+
+}
