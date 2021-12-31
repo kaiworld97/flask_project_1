@@ -1,86 +1,154 @@
 {% extends "base.html"  %}
 {% block content %}
-    <div id="main-container">
-        <div class="max-width">
-            <div id="story-container"></div>
-            <div id="feed-container"></div>
-        </div>
-        <div id="follow-container">
-            <div id="follow-wrapper">
-                <p><strong>회원님을 위한 추천</strong></p>
-                <p style="font-size: 1rem; color: #000000"><strong>모두 보기</strong></p>
-            </div>
-            <div id="follow-people">
-
-            </div>
-        </div>
-        <div id="Auction-container">
-            <div id="Auction-header">
-                <h1 id="fire">
-                    <span>A</span>
-                    <span>u</span>
-                    <span>t</span>
-                    <span>i</span>
-                    <span>o</span>
-                    <span>n</span>
-                    <span> </span>
-                    <span>s</span>
-                    <span>i</span>
-                    <span>t</span>
-                    <span>e</span>
-                    <span>!</span>
-                </h1>
-            </div>
-            <div id="Auction-body">
-                <div class="Auction-body-side">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
-                </div>
-                <div id="Auction-body-side_space" onclick="go_auction()">
-                    <div>
-                        <img src="../static/img/crop_aution.png">
+<div id="main-container">
+    <div class="max-width">
+        <div id="story-container"></div>
+        <div id="feed-container">
+            {% for row in rows %}
+            {% set feedimg = row.img %}
+            {% set profileimg = row.img %}
+            {% set id = row.id %}
+            {% set feedid = row.id %}
+            {% set nickname = row.id %}
+            {% set content = row.content %}
+            {% set likeid = row.id %}
+            {% set like = 9999 %}
+            <div class="feed-wrapper">
+                <div class="feed-head-container">
+                    <div class="feed-head-wrapper">
+                        <img class="feed-head-img" src="data:image/png;base64, {{ profileimg }}" alt="">
+                        <div>{{ nickname }}</div>
                     </div>
-                    <p style="font-weight: bold; font-size: 20px;">클릭하여 <br>이동하기</p>
-
+                    <img class="more-icon" style="" src="/static/img/more@3x.png" alt="" onclick="opendia()">
                 </div>
+                <img class="feed-img" src="data:image/png;base64, {{ feedimg }}" alt="">
+                <div>
+                    <div class="feed-icons-container">
+                        <div class="feed-icons-wrapper">
+                            <img class="feed-icon" style="" onclick="like(this)" src="/static/img/like@3x.png"
+                                 alt="{{ feedid }}">
+                            <img class="feed-icon" src="/static/img/comment@3x.png">
+                            <img class="feed-icon" src="/static/img/dm@3x.png">
+                        </div>
 
-                <div class="Auction-body-side">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
-                    <img src="../static/img/orange.png">
+                        <img class="feed-icon feed-right-icon" style="" onclick="favorite(this)"
+                             src="/static/img/favorite@3x.png">
+
+                    </div>
+                    <div class="feed-feed-container">
+                        <div class="feed-like-wrapper">
+                            <img class="feed-like-img" src="data:image/png;base64, {{ profileimg }}" alt="">
+                            <div id="{{ id }}{{ feedid }}" class="flex">
+                                <div class="strong">{{ likeid }}</div>
+                                님 외에
+                                <div id="{{ id }}{{ feedid }}likey" class="strong">{{ like }}명</div>
+                                이 좋아합니다
+                            </div>
+                        </div>
+                        <div class="feed-feed-wrapper">
+                            <div class="feed-msg flex">
+                                <div class="strong">{{ nickname }}</div>
+                                {{ content }}
+                            </div>
+                            <div class="feed-comment-wrapper">
+                                <div class="comment-write-wrapper">
+                                    <b style="font-weight: bold">{{ nickname }}</b>
+                                    <input type="text" class="comment">
+
+                                </div>
+                                <div class="comment-box">
+                                    <!--                                            여기에 댓글 추가-->
+                                </div>
+                                <button onclick="comment_write()">작성</button>
+
+                            </div>
+                            <div class="feed-time">12시간 전</div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div id="Auction-body-footer">
-                <img src="../static/img/orang_2.png">
-                <img src="../static/img/orang_2.png">
-                <img src="../static/img/orang_2.png">
-                <img src="../static/img/orang_2.png">
-                <img src="../static/img/orang_2.png">
+            {% endfor %}
 
-            </div>
         </div>
     </div>
-    <dialog id="dialog">
-        <form method="dialog">
-            <p style="color: red"><strong>신고</strong></p>
-            <hr>
-            <p style="color: red"><strong>팔로우 취소</strong></p>
-            <hr>
-            <p>게시물로 이동</p>
-            <hr>
-            <p>공유 대상...</p>
-            <hr>
-            <p>링크 복사</p>
-            <hr>
-            <p>퍼가기</p>
-            <hr>
-            <button value="cancel">취소</button>
+    <div id="follow-container">
+        <div id="follow-wrapper">
+            <p><strong>회원님을 위한 추천</strong></p>
+            <p style="font-size: 1rem; color: #000000"><strong>모두 보기</strong></p>
+        </div>
+        <div id="follow-people">
 
-        </form>
-    </dialog>
+
+        </div>
+    </div>
+    <div id="Auction-container">
+        <div id="Auction-header">
+            <h1 id="fire">
+                <span>A</span>
+                <span>u</span>
+                <span>t</span>
+                <span>i</span>
+                <span>o</span>
+                <span>n</span>
+                <span> </span>
+                <span>s</span>
+                <span>i</span>
+                <span>t</span>
+                <span>e</span>
+                <span>!</span>
+            </h1>
+        </div>
+        <div id="Auction-body">
+            <div class="Auction-body-side">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+            </div>
+            <div id="Auction-body-side_space" onclick="go_auction()">
+                <div>
+                    <img src="../static/img/crop_aution.png">
+                </div>
+                <p style="font-weight: bold; font-size: 20px;">클릭하여 <br>이동하기</p>
+
+            </div>
+
+            <div class="Auction-body-side">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+                <img src="../static/img/orange.png">
+            </div>
+        </div>
+        <div id="Auction-body-footer">
+            <img src="../static/img/orang_2.png">
+            <img src="../static/img/orang_2.png">
+            <img src="../static/img/orang_2.png">
+            <img src="../static/img/orang_2.png">
+            <img src="../static/img/orang_2.png">
+
+        </div>
+    </div>
+</div>
+<dialog id="dialog">
+    <form method="dialog">
+        <p style="color: red"><strong>신고</strong></p>
+        <hr>
+        <p style="color: red"><strong>팔로우 취소</strong></p>
+        <hr>
+        <p>게시물로 이동</p>
+        <hr>
+        <p>공유 대상...</p>
+        <hr>
+        <p>링크 복사</p>
+        <hr>
+        <p>퍼가기</p>
+        <hr>
+        <button value="cancel">취소</button>
+
+    </form>
+</dialog>
 {% endblock %}

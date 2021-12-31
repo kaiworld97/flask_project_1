@@ -1,3 +1,6 @@
+html{
+    background-color: #333333;
+}
 
 /*write_feed 여기서부터 보현작성*/
 
@@ -202,17 +205,14 @@ textarea{
 }
 
 body{
-    background-color: #333333;
-    height: 100vh;
-    height: 100vw;
+
 }
 #head-container{
-    background-color: #333333;
+    display: none;
 }
 #foot-container{
-    background-color: #333333;
+    display: none;
 }
 #desk-head-container{
-    background-color: #333333;
     display: none;
 }

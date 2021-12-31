@@ -37,7 +37,16 @@ def home():
     #     return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     # except jwt.exceptions.DecodeError:
     #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-    return render_template('index.html', html='index')
+    rows = []
+    info = db.feed
+    for x in info.find():
+        img_binary = fs.get(x['img'])
+        base64_data = codecs.encode(img_binary.read(), 'base64')
+        image = base64_data.decode('utf-8')
+        x['img'] = image
+        rows.append(x)
+
+    return render_template('index.html', html='index', rows=rows)
 
 
 @app.route('/recipe')
@@ -67,7 +76,7 @@ def file_upload():
         'title': title_receive,
         'img': fs_image_id
     }
-    db.users.insert_one(doc)
+    db.feed.insert_one(doc)
 
     return jsonify({'msg': 'saved!!!!'})
 
@@ -75,13 +84,19 @@ def file_upload():
 @app.route('/feed_read', methods=['GET'])
 def feed_load():
     # 사진하나 불러오기
-    feed_info = db.users.find_one({'id': 'carrot_vely'})
+    feed_info = db.feed.find_one({'id': 'carrot_vely'})
+    # for a in feed_info:
+    #     print(a['img'])
+
     fs = gridfs.GridFS(db)
+
+
     data = feed_info['img']
-    data = fs.get(data)
     print(data)
+    data = fs.get(data)
+    # print(data)
     data = data.read()
-    print('carrot_vely', io.BytesIO(data).read())
+    # print('carrot_vely', io.BytesIO(data).read())
 
     return send_file(io.BytesIO(data), mimetype='image.png')
 
@@ -108,7 +123,16 @@ def auction():
 
 @app.route('/mypage')
 def mypage():
-    return render_template('mypage.html', html='mypage')
+    rows = []
+    # info = db.users
+    info = db.feed.find({'id': 'carrot_vely'})
+    for x in info.find():
+        img_binary = fs.get(x['img'])
+        base64_data = codecs.encode(img_binary.read(), 'base64')
+        image = base64_data.decode('utf-8')
+        x['img'] = image
+        rows.append(x)
+    return render_template('mypage.html', html='mypage', rows=rows)
 
 
 @app.route('/camera')
@@ -218,7 +242,7 @@ def camerafeedupload():
 @app.route('/fileshow/<title>')
 def file_show(title):
 
-    img_info = db.camp2.find_one({'title': title})
+    img_info = db.users.find_one({'title': title})
     img_binary = fs.get(img_info['img'])
 
     base64_data = codecs.encode(img_binary.read(), 'base64')

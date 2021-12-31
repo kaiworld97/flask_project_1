@@ -74,7 +74,7 @@ function loadFile(input){
         processData: false,
         success: function (response) {
             alert(response["msg"])
-            history.back()
+            location.href = '/'
         }
     });
   }
