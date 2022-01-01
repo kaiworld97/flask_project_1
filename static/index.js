@@ -18,14 +18,14 @@ function storyclick(data){
     data.classList.replace('story-img', 'clicked-story-img')
 }
 function like(data){
-    let likey = Number(document.getElementById(`${data.alt}likey`).innerText.split('명')[0])
+    let likey = Number(document.getElementById(`${data.id}likey`).innerText.split('명')[0])
 
     if (data.attributes[3].value === '/static/img/like@3x.png'){
         data.setAttribute('src', '/static/img/like@4x.png')
-        document.getElementById(`${data.alt}likey`).innerText = `${String(likey + 1)}명`
+        document.getElementById(`${data.id}likey`).innerText = `${String(likey + 1)}명`
     }else {
         data.setAttribute('src', '/static/img/like@3x.png')
-        document.getElementById(`${data.alt}likey`).innerText = `${String(likey - 1)}명`
+        document.getElementById(`${data.id}likey`).innerText = `${String(likey - 1)}명`
     }
 }
 function favorite(data){

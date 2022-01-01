@@ -7,10 +7,11 @@
             {% for row in rows %}
             {% set feedimg = row.img %}
             {% set profileimg = row.img %}
-            {% set id = row.id %}
-            {% set feedid = row.id %}
+            {% set id = row.feed_id %}
+            {% set feedid = row.feed_id %}
             {% set nickname = row.id %}
             {% set content = row.content %}
+            {% set comments = row.comments %}
             {% set likeid = row.id %}
             {% set like = 9999 %}
             <div class="feed-wrapper">
@@ -25,8 +26,8 @@
                 <div>
                     <div class="feed-icons-container">
                         <div class="feed-icons-wrapper">
-                            <img class="feed-icon" style="" onclick="like(this)" src="/static/img/like@3x.png"
-                                 alt="{{ feedid }}">
+                            <img class="feed-icon" onclick="like(this)" src="/static/img/like@3x.png"
+                                 id="{{ feedid }}{{ id }}">
                             <img class="feed-icon" src="/static/img/comment@3x.png">
                             <img class="feed-icon" src="/static/img/dm@3x.png">
                         </div>
@@ -38,10 +39,10 @@
                     <div class="feed-feed-container">
                         <div class="feed-like-wrapper">
                             <img class="feed-like-img" src="data:image/png;base64, {{ profileimg }}" alt="">
-                            <div id="{{ id }}{{ feedid }}" class="flex">
+                            <div class="flex">
                                 <div class="strong">{{ likeid }}</div>
                                 님 외에
-                                <div id="{{ id }}{{ feedid }}likey" class="strong">{{ like }}명</div>
+                                <div id="{{ feedid }}{{ id }}likey" class="strong">{{ like }}명</div>
                                 이 좋아합니다
                             </div>
                         </div>
@@ -53,13 +54,20 @@
                             <div class="feed-comment-wrapper">
                                 <div class="comment-box">
                                     <!--여기에 댓글 추가-->
+                                    {% for comment in comments %}
+                                    <div class="comment_wrapper">
+                                        <b>{{ comment.id }}</b>
+                                        <b style="font-weight: lighter">{{ comment.comment }}</b>
+                                        <button onclick="comment_delete({{ comment.comment_id }})">삭제</button>
+                                    </div>
+                                    {% endfor %}
                                 </div>
                                 <div class="comment-write-wrapper">
                                     <div class="wf_user_profile">
                                         <img src="/static/img/carrot.jpg">
                                     </div>
-                                    <input type="text" class="comment" placeholder="댓글 달기...">
-                                    <button onclick="comment_write()" id="comment-button">작성</button>
+                                    <input type="text" id="{{ feedid }}comment" placeholder="댓글 달기...">
+                                    <button onclick="comment_write(`{{ feedid }}`)" id="comment-button">작성</button>
                                 </div>
                             </div>
                             <div class="feed-time">12시간 전</div>

@@ -43,6 +43,12 @@ def home():
         base64_data = codecs.encode(img_binary.read(), 'base64')
         image = base64_data.decode('utf-8')
         x['img'] = image
+        comments = list(db.comment.find({'feed_id': x['feed_id']}, {'_id': False}))
+        if comments != None:
+            x['comments'] = comments
+        else:
+            x['comments'] = []
+        
         rows.append(x)
 
     return render_template('index.html', html='index', rows=rows)
@@ -60,22 +66,37 @@ def write_feed():
 
 @app.route('/feed_upload', methods=['POST'])
 def file_upload():
-    title_receive = request.form['title_give']
+    date_receive = request.form['date_give']
     content_receive = request.form['content_give']
     id_receive = request.form['id_give']
 
     file = request.files['file_give']
     # gridfs 활용해서 이미지 분할 저장
     fs_image_id = fs.put(file)
-
+    feed_list = list(db.feed.find({}, {'_id': False}))
+    count = len(feed_list) + 1
     # db 추가
-    doc = {
+    feed_doc = {
+        'feed_id': count,
         'id': id_receive,
         'content': content_receive,
-        'title': title_receive,
+        'date': date_receive,
         'img': fs_image_id
     }
-    db.feed.insert_one(doc)
+    like_doc = {
+        'like_id': count,
+        'feed_id': count,
+        'like_list': [],
+        'like_count': 0
+    }
+    # comment_doc = {
+    #     'comment_id': count,
+    #     'feed_id': count,
+    #     'comment_list': []
+    # }
+    db.feed.insert_one(feed_doc)
+    db.like.insert_one(like_doc)
+    # db.comment.insert_one(comment_doc)
 
     return jsonify({'msg': 'saved!!!!'})
 
@@ -179,7 +200,7 @@ def sign_in():
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-
+        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
     else:
@@ -229,10 +250,18 @@ def api_valid():
 @app.route("/comments", methods=["POST"])
 def comment_post():
     comment_receive = request.form['comment_give']
+    feed_id_receive = int(request.form['feed_id_give'])
+    id_receive = request.form['id_give']
+    date_receive = request.form['date_give']
     comment_list = list(db.comment.find({}, {'_id': False}))
     count = len(comment_list) + 1
-    doc = {'comment': comment_receive,
-           'num': count}
+    doc = {
+           'comment': comment_receive,
+           'feed_id': feed_id_receive,
+           'id': id_receive,
+           'date': date_receive,
+           'comment_id': count
+           }
     db.comment.insert_one(doc)
     return jsonify({'msg': '댓글 작성!'})
 
@@ -245,8 +274,9 @@ def comment_get():
 
 @app.route("/comments/delete", methods=["POST"])
 def comment_delete_post():
-    num_receive = request.form['num_give']
-    db.comment.delete_one({'num': int(num_receive)})
+    comment_id_receive = request.form['comment_id']
+
+    db.comment.delete_one({'comment_id': comment_id_receive})
     return jsonify({'msg': '댓글 삭제!'})
 
 

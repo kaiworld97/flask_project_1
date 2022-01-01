@@ -49,20 +49,20 @@ function loadFile(input){
 
 
  function posting() {
-    let title = $('#chooseFile')[0].files[0].name
+    // let title = $('#chooseFile')[0].files[0].name
     let file = $('#chooseFile')[0].files[0]
     let content = $('#textarea').val()
     // 지금은 유저id 직접 타이핑한거라 .text로했지만 db에서 불러올경우 수정필요
     let user_id = document.querySelector("#user_name").textContent
+    const date = new Date();
+    let time = String(date.getTime())
+    let form_data = new FormData()
 
-     console.log('title:',title, '파일:',file, '내용:', content, 'id:' ,user_id)
-
-     let form_data = new FormData()
-
-    form_data.append("title_give", title)
+    // form_data.append("title_give", title)
     form_data.append("file_give", file)
     form_data.append("content_give", content)
     form_data.append("id_give", user_id)
+    form_data.append("date_give", time)
 
     $.ajax({
         type: "POST",
