@@ -51,3 +51,31 @@ function comment_delete(comment_id) {
         }
     });
 }
+
+$(document).ready(function () {
+    show_comment();
+});
+
+function comment_update_btn(comment_id){
+    document.getElementById(`${comment_id}comment`).classList.add('hidden')
+    document.getElementById(`${comment_id}update`).classList.add('hidden')
+    document.getElementById(`${comment_id}delete`).classList.add('hidden')
+    document.getElementById(`${comment_id}input`).classList.remove('hidden')
+    document.getElementById(`${comment_id}ok`).classList.remove('hidden')
+    document.getElementById(`${comment_id}cance`).classList.remove('hidden')
+}
+
+function comment_update(comment_id) {
+    let comment = $(`#${comment_id}input`).val()
+    $.ajax({
+        type: "POST",
+        url: "/comments/update",
+        data: {'comment_id': comment_id, 'update_comment': comment},
+        success: function (response) {
+            window.location.reload()
+        }
+    });
+}
+function comment_update_cance(){
+
+}

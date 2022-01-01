@@ -23,7 +23,7 @@
 
 ## db 구조
 
-![db4](https://user-images.githubusercontent.com/85826122/147753531-1d710c38-7f89-4854-9460-a4a0eb6fd1d9.jpg)
+![db5](https://user-images.githubusercontent.com/85826122/147847814-4e7687c4-32ea-4e48-8f7d-41b86d488a8a.jpg)
 
 ## 필수 기능
 

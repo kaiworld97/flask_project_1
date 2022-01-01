@@ -315,6 +315,13 @@ def comment_delete_post():
     db.comment.delete_one({'comment_id': comment_id_receive})
     return jsonify({'msg': '댓글 삭제!'})
 
+@app.route("/comments/update", methods=["POST"])
+def comment_update_post():
+    comment_id_receive = request.form['comment_id']
+    comment_receive = request.form['update_comment']
+    db.comment.update_one({'comment_id': comment_id_receive}, {"$set": {"comment": comment_receive}})
+    return jsonify({'msg': '댓글 삭제!'})
+
 
 @app.route('/camerafeedupload', methods=['POST'])
 def camerafeedupload():

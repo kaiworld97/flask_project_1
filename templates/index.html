@@ -84,13 +84,20 @@
                                         {% endif %}
                                         <div>
                                             <b>{{ comment.nick }}</b>
-                                            <b class="lighter">{{ comment.comment }}</b>
+                                            <b id="{{ comment.comment_id }}comment" class="lighter">{{ comment.comment }}</b>
                                         </div>
-                                            <button>수정</button>
-                                            <button onclick="comment_delete(`{{ comment.comment_id }}`)">
+                                            <button id="{{ comment.comment_id }}update" onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정</button>
+                                            <button id="{{ comment.comment_id }}delete" onclick="comment_delete(`{{ comment.comment_id }}`)">
                                                 삭제
                                             </button>
-
+                                            <input id="{{ comment.comment_id }}input" class="hidden">
+                                            <button id="{{ comment.comment_id }}ok"
+                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">확인
+                                            </button>
+                                            <button id="{{ comment.comment_id }}cance"
+                                                    onclick="comment_update_cance(`{{ comment.comment_id }}`)" class="hidden">
+                                                취소
+                                            </button>
                                     </div>
                                     {% endfor %}
                                 </div>
