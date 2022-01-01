@@ -16,6 +16,7 @@
             {% set comment_profile_img = row.comments.img %}
             {% set like_list = row.like_user.nick %}
             {% set like = row.like_count %}
+            {% set time = row.time %}
             <div class="feed-wrapper">
                 <div class="feed-head-container">
                     <div class="feed-head-wrapper">
@@ -61,11 +62,8 @@
                             {% else %}
                                 <div class="flex">
                                     <div class="strong"></div>
-
-
                                 </div>
                             {% endif %}
-
                         </div>
                         <div class="feed-feed-wrapper">
                             <div class="feed-msg flex">
@@ -86,6 +84,7 @@
                                             <b>{{ comment.nick }}</b>
                                             <b id="{{ comment.comment_id }}comment" class="lighter">{{ comment.comment }}</b>
                                         </div>
+                                        <div>
                                             <button id="{{ comment.comment_id }}update" onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정</button>
                                             <button id="{{ comment.comment_id }}delete" onclick="comment_delete(`{{ comment.comment_id }}`)">
                                                 삭제
@@ -98,6 +97,10 @@
                                                     onclick="comment_update_cance(`{{ comment.comment_id }}`)" class="hidden">
                                                 취소
                                             </button>
+                                        </div>
+                                        <div class="feed-time">
+                                            {{ comment.time }}
+                                        </div>
                                     </div>
                                     {% endfor %}
                                 </div>
@@ -109,9 +112,10 @@
                                     <button onclick="comment_write(`{{ feed_id }}`)" id="comment-button">작성</button>
                                 </div>
                             </div>
-                            <div class="feed-time">12시간 전</div>
+                            <div class="feed-time">
+                                {{ time }}
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>

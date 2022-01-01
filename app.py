@@ -61,8 +61,23 @@ def home():
                 comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
                 b['nick'] = comments_user['nick']
                 b['img'] = comments_user['img']
+                t = str(datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
+                        int(b['date']) / 1000.0))
+                if 'days' in t.split(','):
+                    time = t.split(' ')[0] + '일 전'
+                else:
+                    if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
+                        time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
+                    elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
+                        time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
+                    else:
+                        time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
+                    #
+                    # time = t.split(' ')[0]
+                b['time'] = time
                 comment.append(b)
             x['comments'] = comment
+
         else:
             x['comments'] = []
             comments_user = {'img': 'x'}
@@ -74,7 +89,25 @@ def home():
         else:
             like_user = {'img': 'x'}
             x['like_user'] = like_user
+
+        t = str(datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
+            int(x['date']) / 1000.0))
+
+        if 'days' in t.split(','):
+            time = t.split(' ')[0] + '일 전'
+        else:
+            if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
+                time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
+            elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
+                time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
+            else:
+                time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
+            #
+            # time = t.split(' ')[0]
+        x['time'] = time
+
         rows.append(x)
+
     return render_template('index.html', html='index', rows=rows, user=user)
 
 
@@ -315,12 +348,13 @@ def comment_delete_post():
     db.comment.delete_one({'comment_id': comment_id_receive})
     return jsonify({'msg': '댓글 삭제!'})
 
+
 @app.route("/comments/update", methods=["POST"])
 def comment_update_post():
     comment_id_receive = request.form['comment_id']
     comment_receive = request.form['update_comment']
     db.comment.update_one({'comment_id': comment_id_receive}, {"$set": {"comment": comment_receive}})
-    return jsonify({'msg': '댓글 삭제!'})
+    return jsonify({'msg': '댓글 수정!'})
 
 
 @app.route('/camerafeedupload', methods=['POST'])

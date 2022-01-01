@@ -52,10 +52,6 @@ function comment_delete(comment_id) {
     });
 }
 
-$(document).ready(function () {
-    show_comment();
-});
-
 function comment_update_btn(comment_id){
     document.getElementById(`${comment_id}comment`).classList.add('hidden')
     document.getElementById(`${comment_id}update`).classList.add('hidden')
@@ -76,6 +72,11 @@ function comment_update(comment_id) {
         }
     });
 }
-function comment_update_cance(){
-
+function comment_update_cance(comment_id){
+    document.getElementById(`${comment_id}comment`).classList.remove('hidden')
+    document.getElementById(`${comment_id}update`).classList.remove('hidden')
+    document.getElementById(`${comment_id}delete`).classList.remove('hidden')
+    document.getElementById(`${comment_id}input`).classList.add('hidden')
+    document.getElementById(`${comment_id}ok`).classList.add('hidden')
+    document.getElementById(`${comment_id}cance`).classList.add('hidden')
 }
