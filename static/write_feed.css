@@ -1,114 +1,71 @@
-html{
-    background-color: #333333;
+dialog::backdrop {
+    background: (
+      100deg,
+      rgba(10, 10, 10, 0.726),
+      rgba(10, 10, 10, 0.726) 1px,
+      rgba(10, 10, 10, 0.726) 1px,
+      rgba(10, 10, 10, 0.726) 20px
+    );
+    backdrop-filter: blur(1px)
 }
 
-/*write_feed 여기서부터 보현작성*/
+#this-dialog{
+    width: fit-content;
+    height: 80%;
+    border:none;
+    border-radius: 2%;
+    overflow: hidden;
+}
 
-/*구글폰트적용*/
-span, label, textarea, #feed_select {
+p, span, label, textarea{
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-/*@media (min-width: 1000px){*/
-/*    #main-container {*/
-/*}}*/
-
-/*@media(min-width:860px){*/
-/*    .write_feed_container{*/
-/*      margin-left: 10%;*/
-/*    }*/
-/*  }*/
-
-.write_feed_container{
-    padding-top: 7%;
-    width: 100%;
+#desk-head-container{
+    display: none;
 }
 
-#write_feed_wrap{
-    padding-top: 5%;
-    padding-bottom: 5%;
-    border: #adadad 1px solid;
-    border-radius: 3%;
-    background-color: white;
-
-}
-
-.write_header{
+.header_box{
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 2%;
+}
+
+.pic_icon {
     text-align: center;
-    justify-content: space-around;
 }
 
-.wf_item:nth-child(1){flex-grow: 1;}
-.wf_item:nth-child(2){flex-grow: 1;}
-.wf_item:nth-child(3){flex-grow: 1;}
-
-
-#feed_select {
-    height: auto;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    border-radius: 0;
-    padding: 1%;
-    width: 55%;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-}
-#feed_select:focus {
-    outline: none;
+img.upload_icon {
+    width: 70%;
 }
 
-.arrow_back{
-    width: 50px;
-    height: 50px;
-}
-.upload_title{
-    font-size: 150%;
-    font-weight: bold;
-}
 
-.area_wrap{
-    display: flex;
-    justify-content: space-around;
-    padding-top: 10%;
-    padding-bottom: 10%;
-}
-
-.area_item:nth-child(1){flex-grow: 1;}
-.area_item:nth-child(2){flex-grow: 2;}
-
-
-.photo_area{
+.upload_wrap{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.pa_item:nth-child(1){flex-grow: 0;}
-.pa_item:nth-child(2){flex-grow: 0;}
-.pa_item:nth-child(3){flex-grow: 2;}
-
-.photo-ex{
-    align-items: baseline;
-    margin-top: 10%;
-}
-
-
-.select_file{
-    align-content: center;
-}
-.button{
-    display: flex;
+    height: 90%;
+    width: 50vw;
     justify-content: center;
+    border:orange 1px solid;
+}
 
+.ex_text{
+    height: 10%;
+    font-size: 2rem;
 }
-#chooseFile{
-    visibility: visible;
+
+.pic_icon {
+    margin-bottom: 4%;
 }
-.button label{
+
+.upload_form {
+    height: 10%;
+    width: 22%;
+}
+
+.choice_btn{
     width: 130px;
     font-size: 15px;
     font-weight: bold;
@@ -119,100 +76,65 @@ span, label, textarea, #feed_select {
     padding: 5px 0 5px 0;
 }
 
-.photo_msg{
-    font-size: 25px;
+#uf_three input{
+    visibility: visible;
 }
 
-.pa_item{
-    padding-top: 10%;
+#select_file{
+    display: none;
 }
 
 
-/*레시피박스css*/
-/*.my_recipe{*/
-
-/*}*/
-
-
-.write_textarea{
-    display: flex;
-    flex-direction: column;
-}
-
-.wf_user_info{
+.conten_container{
     display: flex;
     flex-direction: row;
-    justify-items: center;
+    height: -webkit-fill-available;
+}
+
+.wf_user_info {
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
-    padding: 5% 2% 3% 2%;
 }
 
-.wf_user_profile img{
 
-    width: 35px;
-    height: 35px;
+img.user_img {
+    width: 2vw;
+    height: 2vw;
     border-radius: 50%;
-    border: darkgray 1px solid;
-}
-.user_id{
-    padding-left: 3%;
-    font-size: 15px;
-    font-weight: bolder;
-}
-.textarea_box{
-    height: 45%;
-    width: 90%;
-}
-#textarea{
-    width: 100%;
-    height: 100%;
-    border: none;
+    border: lightgray 1px solid;
 }
 
-#textarea:focus {
+.textarea_box {
+    width: 20vw;
+    height: 30vh;
+    padding-top: 5%;
+}
+
+.textarea_box:focus {
     outline: none;
 }
 
-.etc_info{
+.text_content {
+    width: 90%;
+    height: 90%;
+    border: none;
+}
+
+.etc_info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 5% 10% 0 2%;
 }
 
-/*마우스포인터변경*/
-svg, .button label{
+.side {
+    padding-left: 1%;
+}
+
+.arrow, .next, .share{
     cursor: pointer;
 }
 
-textarea{
-    cursor: text;
-}
-
-#pharea{
-    max-width: 350px;
-    padding-right: 0%;
-}
-
-#chooseFile{
-    visibility: hidden;
-}
-
-.modal__background{
-  position: fixed;
-  top:0; left: 0; bottom: 0; right: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-body{
-
-}
-#head-container{
-    display: none;
-}
-#foot-container{
-    display: none;
-}
-#desk-head-container{
-    display: none;
+.text_content:focus{
+    outline: none;
 }
