@@ -69,7 +69,7 @@
             <div id="Mypage-panel1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false" class="panel">
             {% for row in feedrows %}
                 <div class="img-wrapper">
-                    {% set b = 1 %}
+                    {% set b = 0 %}
                     {% for ro in row %}
                         {% set feedimg = ro.img %}
                         {% set id = ro.id %}
@@ -121,7 +121,7 @@
             <div id="Mypage-panel2"  role="tabpanel" aria-labelledby="tab2" aria-hidden="true" class="">
                 {% for row in reciperows %}
                 <div class="img-wrapper">
-                    {% set b = 1 %}
+                    {% set b = 0 %}
                     {% for ro in row %}
                     {% set feedimg = ro.img %}
                     {% set id = ro.id %}
@@ -173,7 +173,7 @@
             <div id="Mypage-panel3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" class="">
                 {% for row in likerows %}
                 <div class="img-wrapper">
-                    {% set b = 1 %}
+                    {% set b = 0 %}
                     {% for ro in row %}
                     {% set feedimg = ro.img %}
                     {% set id = ro.id %}

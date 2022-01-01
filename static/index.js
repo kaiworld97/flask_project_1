@@ -18,8 +18,6 @@ function storyclick(data){
     data.classList.replace('story-img', 'clicked-story-img')
 }
 function like(data){
-    console.log(data)
-    console.dir(data)
     // let likey = Number(document.getElementById(`${data.id}likey`).innerText.split('명')[0])
     let feed_id = data.id.split('_')[0]
     let id = 'carrot_vely'

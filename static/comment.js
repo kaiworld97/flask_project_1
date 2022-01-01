@@ -40,11 +40,12 @@ function comment_write(data) {
     });
 }
 
-function comment_delete(feed_id, id, date) {
+function comment_delete(comment_id) {
+
     $.ajax({
         type: "POST",
         url: "/comments/delete",
-        data: {'feed_id': feed_id, 'id': id, 'date': date},
+        data: {'comment_id': comment_id},
         success: function (response) {
             window.location.reload()
         }

@@ -288,14 +288,16 @@ def comment_post():
     feed_id_receive = request.form['feed_id_give']
     id_receive = request.form['id_give']
     date_receive = request.form['date_give']
+    comment_id = feed_id_receive + '_' + id_receive + '_' + date_receive
     # comment_list = list(db.comment.find({}, {'_id': False}))
     # count = len(comment_list) + 1
-    print(feed_id_receive)
+
     doc = {
         'comment': comment_receive,
         'feed_id': feed_id_receive,
         'id': id_receive,
-        'date': date_receive
+        'date': date_receive,
+        'comment_id': comment_id
     }
     db.comment.insert_one(doc)
     return jsonify({'msg': '댓글 작성!'})
@@ -309,8 +311,7 @@ def comment_get():
 
 @app.route("/comments/delete", methods=["POST"])
 def comment_delete_post():
-    comment_id_receive = int(request.form['comment_id'])
-    print(comment_id_receive)
+    comment_id_receive = request.form['comment_id']
     db.comment.delete_one({'comment_id': comment_id_receive})
     return jsonify({'msg': '댓글 삭제!'})
 

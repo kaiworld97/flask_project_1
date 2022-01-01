@@ -35,7 +35,9 @@ body{
 .flex{
     display: flex;
 }
-
+.lighter{
+    font-weight: lighter
+}
 
 #all-container{
     max-width: 720px;

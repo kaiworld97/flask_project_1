@@ -82,9 +82,15 @@
                                         {% else %}
                                         <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
                                         {% endif %}
-                                        <b>{{ comment.nick }}</b>
-                                        <b style="font-weight: lighter">{{ comment.comment }}</b>
-                                        <button onclick="comment_delete(`{{ comment.feed_id }}`, `{{ comment.id }}`, `{{ comment.date }}`)">삭제</button>
+                                        <div>
+                                            <b>{{ comment.nick }}</b>
+                                            <b class="lighter">{{ comment.comment }}</b>
+                                        </div>
+                                            <button>수정</button>
+                                            <button onclick="comment_delete(`{{ comment.comment_id }}`)">
+                                                삭제
+                                            </button>
+
                                     </div>
                                     {% endfor %}
                                 </div>
