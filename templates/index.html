@@ -5,29 +5,36 @@
         <div id="story-container"></div>
         <div id="feed-container">
             {% for row in rows %}
-            {% set feedimg = row.img %}
-            {% set profileimg = row.img %}
-            {% set id = row.feed_id %}
-            {% set feedid = row.feed_id %}
-            {% set nickname = row.id %}
+            {% set feed_img = row.img %}
+            {% set profile_img = row.write_user.img %}
+            {% set like_profile_img = row.like_user.img %}
+            {% set id = row.id %}
+            {% set feed_id = row._id %}
+            {% set nickname = row.write_user.nick %}
             {% set content = row.content %}
             {% set comments = row.comments %}
-            {% set likeid = row.id %}
-            {% set like = 9999 %}
+            {% set comment_profile_img = row.comments.img %}
+            {% set like_list = row.like_user.nick %}
+            {% set like = row.like_count %}
             <div class="feed-wrapper">
                 <div class="feed-head-container">
                     <div class="feed-head-wrapper">
-                        <img class="feed-head-img" src="data:image/png;base64, {{ profileimg }}" alt="">
+                        {% if profile_img == 'x' %}
+                        <img class="feed-head-img" src="/static/img/12344.gif" alt="">
+                        {% else %}
+                        <img class="feed-head-img" src="data:image/png;base64, {{ profile_img }}" alt="">
+                        {% endif %}
+
                         <div>{{ nickname }}</div>
                     </div>
                     <img class="more-icon" style="" src="/static/img/more@3x.png" alt="" onclick="opendia()">
                 </div>
-                <img class="feed-img" src="data:image/png;base64, {{ feedimg }}" alt="">
+                <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
                 <div>
                     <div class="feed-icons-container">
                         <div class="feed-icons-wrapper">
                             <img class="feed-icon" onclick="like(this)" src="/static/img/like@3x.png"
-                                 id="{{ feedid }}{{ id }}">
+                                 id="{{ feed_id }}_{{ id }}">
                             <img class="feed-icon" src="/static/img/comment@3x.png">
                             <img class="feed-icon" src="/static/img/dm@3x.png">
                         </div>
@@ -38,13 +45,27 @@
                     </div>
                     <div class="feed-feed-container">
                         <div class="feed-like-wrapper">
-                            <img class="feed-like-img" src="data:image/png;base64, {{ profileimg }}" alt="">
-                            <div class="flex">
-                                <div class="strong">{{ likeid }}</div>
-                                님 외에
-                                <div id="{{ feedid }}{{ id }}likey" class="strong">{{ like }}명</div>
-                                이 좋아합니다
-                            </div>
+                            {% if like != 0 %}
+                                {% if like_profile_img == 'x' or like_profile_img == None %}
+                                <img class="feed-head-img" src="/static/img/12344.gif" alt="">
+                                {% else %}
+                                <img class="feed-head-img" src="data:image/png;base64, {{ profile_img }}" alt="">
+                                {% endif %}
+
+                                <div class="flex">
+                                    <div class="strong">{{ like_list }}</div>
+                                    님 외에
+                                    <div id="{{ feed_id }}_{{ id }}likey" class="strong">{{ like }}명</div>
+                                    이 좋아합니다
+                                </div>
+                            {% else %}
+                                <div class="flex">
+                                    <div class="strong"></div>
+
+
+                                </div>
+                            {% endif %}
+
                         </div>
                         <div class="feed-feed-wrapper">
                             <div class="feed-msg flex">
@@ -56,9 +77,14 @@
                                     <!--여기에 댓글 추가-->
                                     {% for comment in comments %}
                                     <div class="comment_wrapper">
-                                        <b>{{ comment.id }}</b>
+                                        {% if comment.img == 'x' or like_profile_img == None %}
+                                        <img class="comment_img" src="/static/img/12344.gif" alt="">
+                                        {% else %}
+                                        <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
+                                        {% endif %}
+                                        <b>{{ comment.nick }}</b>
                                         <b style="font-weight: lighter">{{ comment.comment }}</b>
-                                        <button onclick="comment_delete({{ comment.comment_id }})">삭제</button>
+                                        <button onclick="comment_delete(`{{ comment.feed_id }}`, `{{ comment.id }}`, `{{ comment.date }}`)">삭제</button>
                                     </div>
                                     {% endfor %}
                                 </div>
@@ -66,8 +92,8 @@
                                     <div class="wf_user_profile">
                                         <img src="/static/img/carrot.jpg">
                                     </div>
-                                    <input type="text" id="{{ feedid }}comment" placeholder="댓글 달기...">
-                                    <button onclick="comment_write(`{{ feedid }}`)" id="comment-button">작성</button>
+                                    <input type="text" id="{{ feed_id }}comment" placeholder="댓글 달기...">
+                                    <button onclick="comment_write(`{{ feed_id }}`)" id="comment-button">작성</button>
                                 </div>
                             </div>
                             <div class="feed-time">12시간 전</div>

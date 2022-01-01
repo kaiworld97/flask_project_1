@@ -8,6 +8,7 @@ import certifi
 import gridfs
 import codecs
 import io
+from bson.objectid import ObjectId
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.mr6mv.mongodb.net/Cluster0?retryWrites=true&w=majority',
                      tlsCAFile=certifi.where())
@@ -38,20 +39,43 @@ def home():
     #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
     rows = []
     info = db.feed
+    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
     for x in info.find():
         img_binary = fs.get(x['img'])
         base64_data = codecs.encode(img_binary.read(), 'base64')
         image = base64_data.decode('utf-8')
         x['img'] = image
-        comments = list(db.comment.find({'feed_id': x['feed_id']}, {'_id': False}))
-        if comments != None:
-            x['comments'] = comments
+
+        x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+        # img_binary = fs.get(x_user['img'])
+        # base64_data = codecs.encode(img_binary.read(), 'base64')
+        # image = base64_data.decode('utf-8')
+        # x_user['img'] = image
+        x['write_user'] = x_user
+        # for a in db.comment.find():
+        #     print(a)
+        comments = list(db.comment.find({'feed_id': str(x['_id'])}))
+        comment = []
+        if len(comments) != 0:
+            for b in comments:
+                comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+                b['nick'] = comments_user['nick']
+                b['img'] = comments_user['img']
+                comment.append(b)
+            x['comments'] = comment
         else:
             x['comments'] = []
-        
-        rows.append(x)
+            comments_user = {'img': 'x'}
+            x['comments_user'] = comments_user
 
-    return render_template('index.html', html='index', rows=rows)
+        if x['like_count'] != 0:
+            like_user = db.user.find_one({'id': x['like_list'][0]}, {'_id': False, 'pw': False, 'like_feed': False})
+            x['like_user'] = like_user
+        else:
+            like_user = {'img': 'x'}
+            x['like_user'] = like_user
+        rows.append(x)
+    return render_template('index.html', html='index', rows=rows, user=user)
 
 
 @app.route('/recipe')
@@ -73,31 +97,41 @@ def file_upload():
     file = request.files['file_give']
     # gridfs 활용해서 이미지 분할 저장
     fs_image_id = fs.put(file)
-    feed_list = list(db.feed.find({}, {'_id': False}))
-    count = len(feed_list) + 1
+    # feed_list = list(db.feed.find({}))
+    # count = len(feed_list) + 1
     # db 추가
     feed_doc = {
-        'feed_id': count,
         'id': id_receive,
         'content': content_receive,
         'date': date_receive,
-        'img': fs_image_id
+        'img': fs_image_id,
+        'like_count': 0,
+        'like_list': []
     }
-    like_doc = {
-        'like_id': count,
-        'feed_id': count,
-        'like_list': [],
-        'like_count': 0
-    }
-    # comment_doc = {
-    #     'comment_id': count,
-    #     'feed_id': count,
-    #     'comment_list': []
-    # }
     db.feed.insert_one(feed_doc)
-    db.like.insert_one(like_doc)
-    # db.comment.insert_one(comment_doc)
 
+    return jsonify({'msg': 'saved!!!!'})
+
+
+@app.route('/feed_like', methods=['POST'])
+def feed_like():
+    feed_id_receive = request.form['feed_id']
+    id_receive = request.form['id']
+    type_receive = request.form['type']
+    if type_receive == 'up':
+        feed_info = db.feed.find_one({'_id': ObjectId(feed_id_receive)})
+        like_count = feed_info['like_count'] + 1
+        like_list = feed_info['like_list']
+        like_list.append(id_receive)
+        db.feed.update_one({'_id': ObjectId(feed_id_receive)},
+                           {"$set": {"like_count": like_count, 'like_list': like_list}})
+    else:
+        feed_info = db.feed.find_one({'_id': ObjectId(feed_id_receive)})
+        like_count = feed_info['like_count'] - 1
+        like_list = feed_info['like_list']
+        like_list.pop(id_receive)
+        db.feed.update_one({'_id': ObjectId(feed_id_receive)},
+                           {"$set": {"like_count": like_count, 'like_list': like_list}})
     return jsonify({'msg': 'saved!!!!'})
 
 
@@ -161,6 +195,7 @@ def mypage():
 def camera():
     return render_template('camera.html', html='camera')
 
+
 @app.route('/test')
 def test():
     return render_template('test.html')
@@ -171,11 +206,10 @@ def api_register():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
     nickname_receive = request.form['nickname_give']
-
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-
-    db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
-
+    db.user.insert_one(
+        {'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive, 'img': 'x',
+         'like_feed': []})
     return jsonify({'result': 'success'})
 
 
@@ -232,6 +266,7 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
     # return jsonify({'result': 'success'})
 
+
 @app.route('/api/nick', methods=['GET'])
 def api_valid():
     token_receive = request.cookies.get('mytoken')
@@ -250,18 +285,18 @@ def api_valid():
 @app.route("/comments", methods=["POST"])
 def comment_post():
     comment_receive = request.form['comment_give']
-    feed_id_receive = int(request.form['feed_id_give'])
+    feed_id_receive = request.form['feed_id_give']
     id_receive = request.form['id_give']
     date_receive = request.form['date_give']
-    comment_list = list(db.comment.find({}, {'_id': False}))
-    count = len(comment_list) + 1
+    # comment_list = list(db.comment.find({}, {'_id': False}))
+    # count = len(comment_list) + 1
+    print(feed_id_receive)
     doc = {
-           'comment': comment_receive,
-           'feed_id': feed_id_receive,
-           'id': id_receive,
-           'date': date_receive,
-           'comment_id': count
-           }
+        'comment': comment_receive,
+        'feed_id': feed_id_receive,
+        'id': id_receive,
+        'date': date_receive
+    }
     db.comment.insert_one(doc)
     return jsonify({'msg': '댓글 작성!'})
 
@@ -274,8 +309,8 @@ def comment_get():
 
 @app.route("/comments/delete", methods=["POST"])
 def comment_delete_post():
-    comment_id_receive = request.form['comment_id']
-
+    comment_id_receive = int(request.form['comment_id'])
+    print(comment_id_receive)
     db.comment.delete_one({'comment_id': comment_id_receive})
     return jsonify({'msg': '댓글 삭제!'})
 
@@ -298,7 +333,6 @@ def camerafeedupload():
 
 @app.route('/fileshow/<title>')
 def file_show(title):
-
     img_info = db.users.find_one({'title': title})
     img_binary = fs.get(img_info['img'])
 
@@ -307,9 +341,11 @@ def file_show(title):
 
     return render_template('showimg.html', img=image)
 
+
 @app.route('/register')
 def register():
     return render_template('register.html')
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

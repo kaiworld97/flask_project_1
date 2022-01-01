@@ -18,14 +18,31 @@ function storyclick(data){
     data.classList.replace('story-img', 'clicked-story-img')
 }
 function like(data){
-    let likey = Number(document.getElementById(`${data.id}likey`).innerText.split('명')[0])
-
-    if (data.attributes[3].value === '/static/img/like@3x.png'){
+    console.log(data)
+    console.dir(data)
+    // let likey = Number(document.getElementById(`${data.id}likey`).innerText.split('명')[0])
+    let feed_id = data.id.split('_')[0]
+    let id = 'carrot_vely'
+    if (data.attributes[2].value === '/static/img/like@3x.png'){
         data.setAttribute('src', '/static/img/like@4x.png')
-        document.getElementById(`${data.id}likey`).innerText = `${String(likey + 1)}명`
-    }else {
+            $.ajax({
+                type: 'POST',
+                url: '/feed_like',
+                data: {'feed_id': feed_id, 'id': id, 'type': 'up'},
+                success: function (response) {
+                    window.location.reload()
+                }
+            });
+    } else {
         data.setAttribute('src', '/static/img/like@3x.png')
-        document.getElementById(`${data.id}likey`).innerText = `${String(likey - 1)}명`
+            $.ajax({
+                type: 'POST',
+                url: '/feed_like',
+                data: {'feed_id': feed_id, 'id': id, 'type': 'down'},
+                success: function (response) {
+                    window.location.reload()
+                }
+            });
     }
 }
 function favorite(data){

@@ -1,6 +1,6 @@
-$(document).ready(function(){
-    show_feed()
-    });
+// $(document).ready(function(){
+//     show_feed()
+//     });
 
 function back_home(){
     // console.log('홈으로 돌아가기')
@@ -79,15 +79,15 @@ function loadFile(input){
   }
 
   // 사진 불러올페이지에 해당하는 js파일에 함수 추가
-  function show_feed(){
-    $.ajax({
-        type: "GET",
-        url: "/feed_read",
-        data: {},
-        success: function (response) {
-        }
-  })
-}
+//   function show_feed(){
+//     $.ajax({
+//         type: "GET",
+//         url: "/feed_read",
+//         data: {},
+//         success: function (response) {
+//         }
+//   })
+// }
 
 
 
