@@ -46,7 +46,6 @@ function like(data){
 function favorite(data){
     if (data.attributes[3].value === '/static/img/favorite@3x.png'){
         data.setAttribute('src', '/static/img/favorite@4x.png')
-        $('.feed-icon').off('hover');
 
 
     }else {

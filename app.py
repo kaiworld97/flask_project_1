@@ -40,12 +40,12 @@ def home():
     rows = []
     info = db.feed
     user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+    # print(user[])
     for x in info.find():
         img_binary = fs.get(x['img'])
         base64_data = codecs.encode(img_binary.read(), 'base64')
         image = base64_data.decode('utf-8')
         x['img'] = image
-
         x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
         # img_binary = fs.get(x_user['img'])
         # base64_data = codecs.encode(img_binary.read(), 'base64')
@@ -74,6 +74,7 @@ def home():
                         time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
                     #
                     # time = t.split(' ')[0]
+
                 b['time'] = time
                 comment.append(b)
             x['comments'] = comment
@@ -105,7 +106,10 @@ def home():
             #
             # time = t.split(' ')[0]
         x['time'] = time
-
+        if str(x['_id']) in user['like_feed']:
+            x['like_this'] = True
+        else:
+            x['like_this'] = False
         rows.append(x)
 
     return render_template('index.html', html='index', rows=rows, user=user)
@@ -158,13 +162,23 @@ def feed_like():
         like_list.append(id_receive)
         db.feed.update_one({'_id': ObjectId(feed_id_receive)},
                            {"$set": {"like_count": like_count, 'like_list': like_list}})
+        user_info = db.user.find_one({'id': id_receive})
+        user_like_list = user_info['like_feed']
+        user_like_list.append(feed_id_receive)
+        db.user.update_one({'id': id_receive},
+                           {"$set": {"like_feed": user_like_list}})
     else:
         feed_info = db.feed.find_one({'_id': ObjectId(feed_id_receive)})
         like_count = feed_info['like_count'] - 1
         like_list = feed_info['like_list']
-        like_list.pop(id_receive)
+        like_list.remove(id_receive)
         db.feed.update_one({'_id': ObjectId(feed_id_receive)},
                            {"$set": {"like_count": like_count, 'like_list': like_list}})
+        user_info = db.user.find_one({'id': id_receive})
+        user_like_list = user_info['like_feed']
+        user_like_list.remove(feed_id_receive)
+        db.user.update_one({'id': id_receive},
+                           {"$set": {"like_feed": user_like_list}})
     return jsonify({'msg': 'saved!!!!'})
 
 

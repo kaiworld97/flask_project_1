@@ -14,7 +14,13 @@
             {% set content = row.content %}
             {% set comments = row.comments %}
             {% set comment_profile_img = row.comments.img %}
-            {% set like_list = row.like_user.nick %}
+            {% set i_like_feed = user.like_feed %}
+            {% set i_img = user.img %}
+            {% set i_id = user.id %}
+            {% set i_nick = user.nick %}
+            {% set like_this = row.like_this %}
+            {% set like_list = row.like_list %}
+            {% set like_user = row.like_user.nick %}
             {% set like = row.like_count %}
             {% set time = row.time %}
             <div class="feed-wrapper">
@@ -34,8 +40,16 @@
                 <div>
                     <div class="feed-icons-container">
                         <div class="feed-icons-wrapper">
-                            <img class="feed-icon" onclick="like(this)" src="/static/img/like@3x.png"
+
+                            {% if like_this == True %}
+                               <img class="feed-icon" onclick="like(this)" src="/static/img/like@4x.png"
                                  id="{{ feed_id }}_{{ id }}">
+                            {% else %}
+                                <img class="feed-icon" onclick="like(this)" src="/static/img/like@3x.png"
+                                 id="{{ feed_id }}_{{ id }}">
+                            {% endif %}
+
+
                             <img class="feed-icon" src="/static/img/comment@3x.png">
                             <img class="feed-icon" src="/static/img/dm@3x.png">
                         </div>
@@ -54,7 +68,7 @@
                                 {% endif %}
 
                                 <div class="flex">
-                                    <div class="strong">{{ like_list }}</div>
+                                    <div class="strong">{{ like_user }}</div>
                                     님 외에
                                     <div id="{{ feed_id }}_{{ id }}likey" class="strong">{{ like }}명</div>
                                     이 좋아합니다
@@ -75,7 +89,7 @@
                                     <!--여기에 댓글 추가-->
                                     {% for comment in comments %}
                                     <div class="comment_wrapper">
-                                        {% if comment.img == 'x' or like_profile_img == None %}
+                                        {% if comment.img == 'x' or comment.img == None %}
                                         <img class="comment_img" src="/static/img/12344.gif" alt="">
                                         {% else %}
                                         <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
@@ -106,7 +120,11 @@
                                 </div>
                                 <div class="comment-write-wrapper">
                                     <div class="wf_user_profile">
-                                        <img src="/static/img/carrot.jpg">
+                                        {% if i_img == 'x' or i_img == None %}
+                                        <img class="comment_img" src="/static/img/12344.gif" alt="">
+                                        {% else %}
+                                        <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
+                                        {% endif %}
                                     </div>
                                     <input type="text" id="{{ feed_id }}comment" placeholder="댓글 달기...">
                                     <button onclick="comment_write(`{{ feed_id }}`)" id="comment-button">작성</button>

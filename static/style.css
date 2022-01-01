@@ -38,6 +38,9 @@ body{
 .lighter{
     font-weight: lighter
 }
+.column{
+    flex-direction: column;
+}
 
 #all-container{
     max-width: 720px;
