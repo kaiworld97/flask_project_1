@@ -7,9 +7,9 @@ function opendia() {
     alert("The <dialog> API is not supported by this browser");
   }
 }
-dialog.addEventListener('cancel', function onClose() {
-    window.location.reload()
-});
+// dialog.addEventListener('cancel', function onClose() {
+//     window.location.reload()
+// });
 
 
 let story_list = [{'src': '/static/img/12344.gif', 'name': '제리','msg':'여러분 안녕하세요!'},{'src': '/static/img/595454.PNG', 'name': '제리','msg':'토요일에 한살 더 먹는다 ㅜㅜ'},

@@ -48,15 +48,8 @@
                                 <img class="feed-icon" onclick="like(this)" src="/static/img/like@3x.png"
                                  id="{{ feed_id }}_{{ id }}">
                             {% endif %}
-
-
                             <img class="feed-icon" src="/static/img/comment@3x.png">
-                            <img class="feed-icon" src="/static/img/dm@3x.png">
                         </div>
-
-                        <img class="feed-icon feed-right-icon" style="" onclick="favorite(this)"
-                             src="/static/img/favorite@3x.png">
-
                     </div>
                     <div class="feed-feed-container">
                         <div class="feed-like-wrapper">
@@ -204,17 +197,17 @@
 </div>
 <dialog id="dialog">
     <form method="dialog">
-        <p style="color: red"><strong>신고</strong></p>
+        <button class="font_red strong">신고</button>
         <hr>
-        <p style="color: red"><strong>팔로우 취소</strong></p>
+        <button class="font_red strong">팔로우 취소</button>
         <hr>
         <p>게시물로 이동</p>
         <hr>
         <p>공유 대상...</p>
         <hr>
-        <p>링크 복사</p>
+        <button value="update">수정 하기</button>
         <hr>
-        <p>퍼가기</p>
+        <button value="delete">삭제 하기</button>
         <hr>
         <button value="cancel">취소</button>
 

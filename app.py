@@ -53,7 +53,8 @@ def home():
         # x_user['img'] = image
         x['write_user'] = x_user
         # for a in db.comment.find():
-        #     print(a)
+        #     print(a)w
+
         comments = list(db.comment.find({'feed_id': str(x['_id'])}))
         comment = []
         if len(comments) != 0:
@@ -117,7 +118,8 @@ def home():
 
 @app.route('/recipe')
 def recipe():
-    return render_template('recipe.html', html='recipe')
+    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+    return render_template('recipe.html', html='recipe', user=user)
 
 
 @app.route('/write_feed')
@@ -207,6 +209,22 @@ def feed_load():
     #
     # return send_file(io.BytesIO(data), mimetype='image.png')
 
+@app.route("/feed_delete", methods=["POST"])
+def feed_delete():
+    comment_id_receive = request.form['comment_id']
+    db.comment.delete_one({'comment_id': comment_id_receive})
+    return jsonify({'msg': '댓글 삭제!'})
+
+
+@app.route("/feed_update", methods=["POST"])
+def feed_update():
+    comment_id_receive = request.form['comment_id']
+    comment_receive = request.form['update_comment']
+    db.comment.update_one({'comment_id': comment_id_receive}, {"$set": {"comment": comment_receive}})
+    return jsonify({'msg': '댓글 수정!'})
+
+
+
 
 @app.route('/write_recipe')
 def write_recipe():
@@ -215,7 +233,8 @@ def write_recipe():
 
 @app.route('/auction')
 def auction():
-    return render_template('auction.html', html='auction')
+    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+    return render_template('auction.html', html='auction', user=user)
 
 
 @app.route('/mypage')
@@ -224,6 +243,7 @@ def mypage():
     feedrow = []
     info = db.feed
     # info = db.feed.find({'id': 'carrot_vely'})
+    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
     for x in info.find():
         img_binary = fs.get(x['img'])
         base64_data = codecs.encode(img_binary.read(), 'base64')
@@ -235,7 +255,7 @@ def mypage():
             feedrow = []
     if len(feedrow) == 2 or len(feedrow) == 1:
         feedrows.append(feedrow)
-    return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows)
+    return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows, user=user)
 
 
 @app.route('/camera')

@@ -31,28 +31,31 @@
             </div>
             <div id="head-icons">
                 <img class="icon" src="/static/img/home@3x.png" onclick="go_main()"/>
-                <img class="icon" src="/static/img/dm@3x.png"/>
                 <img class="icon" src="/static/img/trending@3x.png" onclick="write_feed()"/>
                 <img class="icon" src="/static/img/like@3x.png" onclick="go_auction()"/>
-                <img class="icon" style="padding-bottom: 4%" src="/static/img/more@3x.png" alt="">
+                {% if user.img == 'x' or user.img == None %}
+                <img class="profile" src="/static/img/12344.gif" alt="" onclick="go_mypage()">
+                {% else %}
+                <img class="profile" src="data:image/png;base64, {{ user.img }}" onclick="go_mypage()"/>
+                {% endif %}
             </div>
         </div>
     </div>
     <div id="all-container">
         <div id="head-container">
                 <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
-
                 <img class="left-head-icon side-head-icon" src="/static/img/camera@3x.png" onclick="go_camera()"/>
-                <img class="right-head-icon side-head-icon" src="/static/img/dm@3x.png"/>
-
-
         </div>
         <div id="foot-container">
                 <img class="foot-icon" src="/static/img/home@3x.png" onclick="go_main()"/>
                 <img class="foot-icon" src="/static/img/search@3x.png" onclick="go_recipe()"/>
                 <img class="foot-icon" src="/static/img/trending@3x.png" onclick="write_feed()"/>
                 <img class="foot-icon" src="/static/img/like@3x.png" onclick="go_auction()"/>
-                <img class="foot-icon" src="/static/img/home@3x.png" onclick="go_mypage()"/>
+                {% if user.img == 'x' or user.img == None %}
+                <img class="profile" src="/static/img/12344.gif" alt="" onclick="go_mypage()">
+                {% else %}
+                <img class="profile" src="data:image/png;base64, {{ user.img }}" onclick="go_mypage()"/>
+                {% endif %}
         </div>
 
         <div id="main-container">

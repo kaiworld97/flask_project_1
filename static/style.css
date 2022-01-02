@@ -41,7 +41,9 @@ body{
 .column{
     flex-direction: column;
 }
-
+.font_red{
+    color: red;
+}
 #all-container{
     max-width: 720px;
     margin: auto;
@@ -181,6 +183,7 @@ border-radius: 10px;
 .hidden{
     display: none;
 }
+
 .feed-right-icon{
     padding-right: 2%
 }
@@ -292,12 +295,8 @@ left: 47%;
         width: 5%;
     }
 
-    .right-head-icon {
-        padding-right: 7%;
-    }
-
     .left-head-icon {
-        padding-left: 50%;
+        margin-right: 10%;
     }
 
     #foot-container {
@@ -311,12 +310,24 @@ left: 47%;
         max-width: 720px;
         z-index: 3;
         max-height: 80px;
+        align-items: center;
+    }
+    .profile {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
     }
 
     .foot-icon {
         width: 5%;
         margin: 3% 0;
     }
+}
+@media (max-width: 600px) {
+    .profile{
+    width: 3rem;
+    height: 3rem;
+}
 }
 @media (min-width: 1000px){
     #all-container{
@@ -354,7 +365,6 @@ left: 47%;
         height: 50px;
     }
     #desk-head-container .icon{
-        margin: 0 2%;
         width: 10%;
     }
     #desk-search{
@@ -382,7 +392,10 @@ left: 47%;
     #head-icons{
         width: 250px;
         position: relative;
-        right: -250px;
+        right: -210px;
+        display: flex;
+        text-align: center;
+        justify-content: space-evenly;
     }
 
     #story-container{
@@ -406,6 +419,11 @@ left: 47%;
     }
     .feed-icon:hover{
     opacity: 0.5;
+    }
+    .profile {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
     }
     #follow-container{
         position: absolute;
