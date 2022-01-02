@@ -12,7 +12,10 @@
     border-bottom: 0.1px solid #8d8c8c45;
     padding-bottom: 1%;
 }
-
+.dialog_form{
+    padding-top: 4%;
+    padding-bottom: 1%;
+}
 
 @media (min-width: 1000px) {
     #all-container{

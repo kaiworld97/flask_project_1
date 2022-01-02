@@ -213,11 +213,9 @@ def feed_load():
 def feed_delete():
     feed_id_receive = request.form['feed_id']
     img_id = db.feed.find_one({'_id': ObjectId(feed_id_receive)})
-    for a in img_id['like_list']:
-        ids = db.user.find_one({'id': a}, {'_id': False, 'pw': False})['like_feed']
-        ids.remove('feed_id_receive')
-        db.user.update_one({'id': a}, {"$set": {"like_feed": id}})
     fs.delete(img_id['img'])
+    db.comment.delete_many({'feed_id': feed_id_receive})
+    db.like.delete_many({'feed_id': feed_id_receive})
     db.feed.delete_one({'_id': ObjectId(feed_id_receive)})
     return jsonify({'msg': '피드 삭제!'})
 

@@ -31,7 +31,7 @@
 
                         <div>{{ nickname }}</div>
                     </div>
-                    <img id="{{ feed_id }}_{{ id }}menu" class="more-icon" style="" src="/static/img/more@3x.png" alt="" onclick="opendia()">
+                    <img id="{{ feed_id }}_{{ id }}menu" class="more-icon" style="" src="/static/img/more@3x.png" alt="" onclick="dialog_open(this)">
                 </div>
                 <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
                 <div>
@@ -114,6 +114,17 @@
                         </div>
                     </div>
                 </div>
+                <dialog id="{{ feed_id }}dialog" class="dialog">
+                    <form class="dialog_form" method="dialog">
+                        <button class="strong" onclick="feed_delete(`{{ feed_id }}`)">삭제 하기</button>
+                        <hr>
+                        <button class="strong" onclick="feed_update(`{{ feed_id }}`)">수정 하기</button>
+                        <hr>
+                        <button class="strong">게시물로 이동</button>
+                        <hr>
+                        <button class="strong">취소</button>
+                    </form>
+                </dialog>
             </div>
             {% endfor %}
 
@@ -180,7 +191,7 @@
         </div>
     </div>
 </div>
-<dialog id="dialog">
+<dialog id="dialog" class="dialog">
     <form method="dialog">
         <button class="font_red strong">신고</button>
         <hr>

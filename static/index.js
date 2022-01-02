@@ -10,8 +10,29 @@ function opendia() {
 // dialog.addEventListener('cancel', function onClose() {
 //     window.location.reload()
 // });
-
-
+function dialog_open(data) {
+    document.getElementById(`${data.id.split('_')[0]}dialog`).showModal()
+}
+function feed_delete(data){
+    $.ajax({
+        type: "POST",
+        url: "/feed_delete",
+        data: {'feed_id': data},
+        success: function (response) {
+            window.location.reload()
+        }
+    });
+}
+function feed_update(data){
+    // $.ajax({
+    //     type: "POST",
+    //     url: "/feed_update",
+    //     data: {'feed_id': data, 'content': content},
+    //     success: function (response) {
+    //         window.location.reload()
+    //     }
+    // });
+}
 let story_list = [{'src': '/static/img/12344.gif', 'name': '제리','msg':'여러분 안녕하세요!'},{'src': '/static/img/595454.PNG', 'name': '제리','msg':'토요일에 한살 더 먹는다 ㅜㅜ'},
                     {'src': '/static/img/12344.jpg', 'name': '제리','msg':'발표 너무 떨려'},{'src': '/static/img/13444.jpg', 'name': '제리','msg':'같이 롤 하실 분...ㅎ'},{'src': '/static/img/15202.PNG', 'name': '제리','msg':'쒸익 쒸익!'}]
 function storyclick(data){
@@ -119,34 +140,34 @@ function like_list(data){
     data.id
 }
 
-function open_menu(data){
-    let feed_id = data.id.split('_')[0]
-    let feed_writer = data.id.split('_')[1]
-    if (user.id == feed_writer){
-        let temp =
-    `<dialog id="dialog">
-        <form method="dialog">
-            <button class="strong">삭제 하기</button>
-            <hr>
-            <button value="update">수정 하기</button>
-            <hr>
-            <p>게시물로 이동</p>
-            <hr>
-            <button value="cancel">취소</button>
-        </form>
-    </dialog>`
-    }else{
-        let temp =
-    `<dialog id="dialog">
-        <form method="dialog">
-            <button class="font_red strong">신고</button>
-            <hr>
-            <button class="font_red strong">팔로우 취소</button>
-            <hr>
-            <p>게시물로 이동</p>
-            <hr>
-            <button value="cancel">취소</button>
-        </form>
-    </dialog>`
-    }
-}
+// function open_menu(data){
+//     let feed_id = data.id.split('_')[0]
+//     let feed_writer = data.id.split('_')[1]
+//     if (user.id == feed_writer){
+//         let temp =
+//     `<dialog id="dialog">
+//         <form method="dialog">
+//             <button class="strong">삭제 하기</button>
+//             <hr>
+//             <button value="update">수정 하기</button>
+//             <hr>
+//             <p>게시물로 이동</p>
+//             <hr>
+//             <button value="cancel">취소</button>
+//         </form>
+//     </dialog>`
+//     }else{
+//         let temp =
+//     `<dialog id="dialog">
+//         <form method="dialog">
+//             <button class="font_red strong">신고</button>
+//             <hr>
+//             <button class="font_red strong">팔로우 취소</button>
+//             <hr>
+//             <p>게시물로 이동</p>
+//             <hr>
+//             <button value="cancel">취소</button>
+//         </form>
+//     </dialog>`
+//     }
+// }
