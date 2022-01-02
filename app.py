@@ -124,7 +124,8 @@ def recipe():
 
 @app.route('/write_feed')
 def write_feed():
-    return render_template('write_feed.html', html='write_feed')
+    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+    return render_template('write_feed.html', html='write_feed', user=user)
 
 
 @app.route('/feed_upload', methods=['POST'])
