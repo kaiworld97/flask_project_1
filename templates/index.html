@@ -7,7 +7,6 @@
             {% for row in rows %}
             {% set feed_img = row.img %}
             {% set profile_img = row.write_user.img %}
-            {% set like_profile_img = row.like_user.img %}
             {% set id = row.id %}
             {% set feed_id = row._id %}
             {% set nickname = row.write_user.nick %}
@@ -19,8 +18,6 @@
             {% set i_id = user.id %}
             {% set i_nick = user.nick %}
             {% set like_this = row.like_this %}
-            {% set like_list = row.like_list %}
-            {% set like_user = row.like_user.nick %}
             {% set like = row.like_count %}
             {% set time = row.time %}
             <div class="feed-wrapper">
@@ -34,7 +31,7 @@
 
                         <div>{{ nickname }}</div>
                     </div>
-                    <img class="more-icon" style="" src="/static/img/more@3x.png" alt="" onclick="opendia()">
+                    <img id="{{ feed_id }}_{{ id }}menu" class="more-icon" style="" src="/static/img/more@3x.png" alt="" onclick="opendia()">
                 </div>
                 <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
                 <div>
@@ -52,23 +49,14 @@
                         </div>
                     </div>
                     <div class="feed-feed-container">
-                        <div class="feed-like-wrapper">
+                        <div id="{{ feed_id }}_{{ id }}like_wrapper" class="feed-like-wrapper width">
                             {% if like != 0 %}
-                                {% if like_profile_img == 'x' or like_profile_img == None %}
-                                <img class="feed-head-img" src="/static/img/12344.gif" alt="">
-                                {% else %}
-                                <img class="feed-head-img" src="data:image/png;base64, {{ profile_img }}" alt="">
-                                {% endif %}
-
-                                <div class="flex">
-                                    <div class="strong">{{ like_user }}</div>
-                                    님 외에
-                                    <div id="{{ feed_id }}_{{ id }}likey" class="strong">{{ like }}명</div>
-                                    이 좋아합니다
+                                <div id="{{ feed_id }}_{{ id }}someone_like" class="flex" onclick="like_list(this)">
+                                    <div id="{{ feed_id }}_{{ id }}likey" class="strong flex">좋아요 <div id="{{ feed_id }}_{{ id }}like_count">{{ like }}</div>개</div>
                                 </div>
                             {% else %}
-                                <div class="flex">
-                                    <div class="strong"></div>
+                                <div id="{{ feed_id }}_{{ id }}no_like" class="flex width">
+                                    가장 먼저 <div id="{{ feed_id }}_{{ id }}like_count" class="strong margin_left" >좋아요</div>를 눌러보세요
                                 </div>
                             {% endif %}
                         </div>
@@ -98,12 +86,9 @@
                                             </button>
                                             <input id="{{ comment.comment_id }}input" class="hidden">
                                             <button id="{{ comment.comment_id }}ok"
-                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">확인
-                                            </button>
+                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">확인</button>
                                             <button id="{{ comment.comment_id }}cance"
-                                                    onclick="comment_update_cance(`{{ comment.comment_id }}`)" class="hidden">
-                                                취소
-                                            </button>
+                                                    onclick="comment_update_cance(`{{ comment.comment_id }}`)" class="hidden">취소</button>
                                         </div>
                                         <div class="feed-time">
                                             {{ comment.time }}
@@ -204,10 +189,6 @@
         <p>게시물로 이동</p>
         <hr>
         <p>공유 대상...</p>
-        <hr>
-        <button value="update">수정 하기</button>
-        <hr>
-        <button value="delete">삭제 하기</button>
         <hr>
         <button value="cancel">취소</button>
 

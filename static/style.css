@@ -29,6 +29,9 @@ body{
 .max-width{
     max-width: 720px;
 }
+.width{
+    width: 100%;
+}
 .strong{
     font-weight: bold;
 }
@@ -43,6 +46,12 @@ body{
 }
 .font_red{
     color: red;
+}
+.margin_left{
+    margin-left: 1%;
+}
+.padding_left{
+    padding-left: 1%;
 }
 #all-container{
     max-width: 720px;
@@ -219,7 +228,7 @@ video{
     font-size: 2rem;
     font-weight: bold;
 }
-#dialog{
+.dialog{
     width: 30rem;
     font-size: 1.2rem;
     text-align: center;
@@ -227,14 +236,14 @@ video{
     border-radius: 25px;
     padding: 0;
 }
-#dialog button{
+.dialog button{
     border: 0;
     background-color: white;
     font-size: 1.2rem;
     padding-top: 2%;
     padding-bottom: 4%;
 }
-#dialog button:focus-visible{
+.dialog button:focus-visible{
     outline: 0;
 }
 dialog::backdrop{

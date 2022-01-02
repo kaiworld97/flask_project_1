@@ -28,99 +28,115 @@ SECRET_KEY = 'SPARTA'
 
 @app.route('/')
 def home():
-    # token_receive = request.cookies.get('mytoken')
-    # try:
-    #     payload = jwt.decode(token_receive, ECRET_KEY, algorithms=['HS256'])
-    #
-    #     return render_template('index.html')
-    # except jwt.ExpiredSignatureError:
-    #     return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    # except jwt.exceptions.DecodeError:
-    #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-    rows = []
-    info = db.feed
-    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-    # print(user[])
-    for x in info.find():
-        img_binary = fs.get(x['img'])
-        base64_data = codecs.encode(img_binary.read(), 'base64')
-        image = base64_data.decode('utf-8')
-        x['img'] = image
-        x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
-        # img_binary = fs.get(x_user['img'])
-        # base64_data = codecs.encode(img_binary.read(), 'base64')
-        # image = base64_data.decode('utf-8')
-        # x_user['img'] = image
-        x['write_user'] = x_user
-        # for a in db.comment.find():
-        #     print(a)w
-
-        comments = list(db.comment.find({'feed_id': str(x['_id'])}))
-        comment = []
-        if len(comments) != 0:
-            for b in comments:
-                comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
-                b['nick'] = comments_user['nick']
-                b['img'] = comments_user['img']
-                t = str(datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
-                        int(b['date']) / 1000.0))
-                if 'days' in t.split(','):
-                    time = t.split(' ')[0] + '일 전'
-                else:
-                    if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
-                        time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
-                    elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
-                        time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        rows = []
+        info = db.feed
+        user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+        # print(user[])
+        for x in info.find():
+            img_binary = fs.get(x['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            x['img'] = image
+            x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+            # img_binary = fs.get(x_user['img'])
+            # base64_data = codecs.encode(img_binary.read(), 'base64')
+            # image = base64_data.decode('utf-8')
+            # x_user['img'] = image
+            x['write_user'] = x_user
+            # for a in db.comment.find():
+            #     print(a)w
+            comments = list(db.comment.find({'feed_id': str(x['_id'])}))
+            comment = []
+            if len(comments) != 0:
+                for b in comments:
+                    comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+                    b['nick'] = comments_user['nick']
+                    b['img'] = comments_user['img']
+                    t = str(
+                        datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
+                            int(b['date']) / 1000.0))
+                    if 'day,' in t.split(' '):
+                        time = t.split(' ')[0] + '일 전'
                     else:
-                        time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
-                    #
-                    # time = t.split(' ')[0]
+                        if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
+                            time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
+                        elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
+                            time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
+                        else:
+                            time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
+                        #
+                        # time = t.split(' ')[0]
 
-                b['time'] = time
-                comment.append(b)
-            x['comments'] = comment
+                    b['time'] = time
+                    comment.append(b)
+                x['comments'] = comment
 
-        else:
-            x['comments'] = []
-            comments_user = {'img': 'x'}
-            x['comments_user'] = comments_user
-
-        if x['like_count'] != 0:
-            like_user = db.user.find_one({'id': x['like_list'][0]}, {'_id': False, 'pw': False, 'like_feed': False})
-            x['like_user'] = like_user
-        else:
-            like_user = {'img': 'x'}
-            x['like_user'] = like_user
-
-        t = str(datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
-            int(x['date']) / 1000.0))
-
-        if 'days' in t.split(','):
-            time = t.split(' ')[0] + '일 전'
-        else:
-            if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
-                time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
-            elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
-                time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
             else:
-                time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
-            #
-            # time = t.split(' ')[0]
-        x['time'] = time
-        if str(x['_id']) in user['like_feed']:
-            x['like_this'] = True
-        else:
-            x['like_this'] = False
-        rows.append(x)
+                x['comments'] = []
+                comments_user = {'img': 'x'}
+                x['comments_user'] = comments_user
 
-    return render_template('index.html', html='index', rows=rows, user=user)
+            t = str(datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
+                int(x['date']) / 1000.0))
+            if 'day,' in t.split(' '):
+                time = t.split(' ')[0] + '일 전'
+            else:
+                if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
+                    time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
+                elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
+                    time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
+                else:
+                    time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
+                #
+                # time = t.split(' ')[0]
+            x['time'] = time
 
+            try:
+                like = list(db.like.find({'feed_id': str(x['_id'])}))
+                like_count = len(like)
+                x['like_count'] = like_count
+            except:
+                x['like_count'] = 0
+
+            if db.like.find_one({'id': user['id'], 'feed_id': str(x['_id'])}) is None:
+                x['like_this'] = False
+            else:
+                x['like_this'] = True
+            # if str(x['_id']) in user['like_feed']:
+            #     x['like_this'] = True
+            # else:
+            #     x['like_this'] = False
+            rows.append(x)
+
+        return render_template('index.html', html='index', rows=rows, user=user)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/recipe')
 def recipe():
     user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
     return render_template('recipe.html', html='recipe', user=user)
 
+@app.route('/follow', methods=['POST'])
+def follow():
+    followed_id_receive = request.form['followed_id']
+    id_receive = request.form['id']
+    type_receive = request.form['type']
+    if type_receive == 'up':
+        doc = {
+            'follow_id': id_receive,
+            'followed_id': followed_id_receive
+        }
+        db.follow.insert_one(doc)
+    else:
+        db.follow.delete_one({'followed_id': followed_id_receive, 'follow_id': id_receive})
+    return jsonify({'msg': 'saved!!!!'})
 
 @app.route('/write_feed')
 def write_feed():
@@ -144,9 +160,7 @@ def file_upload():
         'id': id_receive,
         'content': content_receive,
         'date': date_receive,
-        'img': fs_image_id,
-        'like_count': 0,
-        'like_list': []
+        'img': fs_image_id
     }
     db.feed.insert_one(feed_doc)
 
@@ -159,29 +173,13 @@ def feed_like():
     id_receive = request.form['id']
     type_receive = request.form['type']
     if type_receive == 'up':
-        feed_info = db.feed.find_one({'_id': ObjectId(feed_id_receive)})
-        like_count = feed_info['like_count'] + 1
-        like_list = feed_info['like_list']
-        like_list.append(id_receive)
-        db.feed.update_one({'_id': ObjectId(feed_id_receive)},
-                           {"$set": {"like_count": like_count, 'like_list': like_list}})
-        user_info = db.user.find_one({'id': id_receive})
-        user_like_list = user_info['like_feed']
-        user_like_list.append(feed_id_receive)
-        db.user.update_one({'id': id_receive},
-                           {"$set": {"like_feed": user_like_list}})
+        doc = {
+            'id': id_receive,
+            'feed_id': feed_id_receive
+        }
+        db.like.insert_one(doc)
     else:
-        feed_info = db.feed.find_one({'_id': ObjectId(feed_id_receive)})
-        like_count = feed_info['like_count'] - 1
-        like_list = feed_info['like_list']
-        like_list.remove(id_receive)
-        db.feed.update_one({'_id': ObjectId(feed_id_receive)},
-                           {"$set": {"like_count": like_count, 'like_list': like_list}})
-        user_info = db.user.find_one({'id': id_receive})
-        user_like_list = user_info['like_feed']
-        user_like_list.remove(feed_id_receive)
-        db.user.update_one({'id': id_receive},
-                           {"$set": {"like_feed": user_like_list}})
+        db.like.delete_one({'_id': ObjectId(feed_id_receive), 'id': id_receive})
     return jsonify({'msg': 'saved!!!!'})
 
 
@@ -210,21 +208,28 @@ def feed_load():
     #
     # return send_file(io.BytesIO(data), mimetype='image.png')
 
+
 @app.route("/feed_delete", methods=["POST"])
 def feed_delete():
-    comment_id_receive = request.form['comment_id']
-    db.comment.delete_one({'comment_id': comment_id_receive})
-    return jsonify({'msg': '댓글 삭제!'})
+    feed_id_receive = request.form['feed_id']
+    img_id = db.feed.find_one({'_id': ObjectId(feed_id_receive)})
+    for a in img_id['like_list']:
+        ids = db.user.find_one({'id': a}, {'_id': False, 'pw': False})['like_feed']
+        ids.remove('feed_id_receive')
+        db.user.update_one({'id': a}, {"$set": {"like_feed": id}})
+    fs.delete(img_id['img'])
+    db.feed.delete_one({'_id': ObjectId(feed_id_receive)})
+    return jsonify({'msg': '피드 삭제!'})
 
 
 @app.route("/feed_update", methods=["POST"])
 def feed_update():
-    comment_id_receive = request.form['comment_id']
-    comment_receive = request.form['update_comment']
-    db.comment.update_one({'comment_id': comment_id_receive}, {"$set": {"comment": comment_receive}})
-    return jsonify({'msg': '댓글 수정!'})
-
-
+    feed_id_receive = request.form['feed_id']
+    feed_update_receive = request.form['feed_update']
+    img_id = db.feed.find_one({'_id': ObjectId(feed_id_receive)})['img']
+    fs.delete(img_id)
+    db.feed.update_one({'_id': ObjectId(feed_id_receive)}, {"$set": {"content": feed_update_receive}})
+    return jsonify({'msg': '피드 수정!'})
 
 
 @app.route('/write_recipe')
@@ -256,12 +261,14 @@ def mypage():
             feedrow = []
     if len(feedrow) == 2 or len(feedrow) == 1:
         feedrows.append(feedrow)
-    return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows, user=user)
+    return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows,
+                           user=user)
 
 
 @app.route('/camera')
 def camera():
-    return render_template('camera.html', html='camera')
+    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+    return render_template('camera.html', html='camera', user=user)
 
 
 @app.route('/test')
@@ -356,7 +363,7 @@ def comment_post():
     feed_id_receive = request.form['feed_id_give']
     id_receive = request.form['id_give']
     date_receive = request.form['date_give']
-    comment_id = feed_id_receive + '_' + id_receive + '_' + date_receive
+    # comment_id = feed_id_receive + '_' + id_receive + '_' + date_receive
     # comment_list = list(db.comment.find({}, {'_id': False}))
     # count = len(comment_list) + 1
 
@@ -364,8 +371,7 @@ def comment_post():
         'comment': comment_receive,
         'feed_id': feed_id_receive,
         'id': id_receive,
-        'date': date_receive,
-        'comment_id': comment_id
+        'date': date_receive
     }
     db.comment.insert_one(doc)
     return jsonify({'msg': '댓글 작성!'})

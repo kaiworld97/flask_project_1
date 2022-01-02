@@ -81,7 +81,8 @@ function writeText(){
  function posting() {
     // let title = $('#chooseFile')[0].files[0].name
     let file = $('#select_file')[0].files[0]
-    let content = $('#textarea').val()
+    let content = $('#_textarea').val()
+     console.log(content)
     // 지금은 유저id 직접 타이핑한거라 .text로했지만 db에서 불러올경우 수정필요
     let user_id = document.querySelector("#user_name").textContent
     const date = new Date();

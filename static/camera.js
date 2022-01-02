@@ -1,13 +1,10 @@
 (function() {
-
   var height = 0;
   var streaming = false;
-
   var video = null;
   var canvas = null;
   var photo = null;
   var startbutton = null;
-
 
   function startup() {
     video = document.getElementById('video');
@@ -76,7 +73,7 @@
     document.getElementById('startbutton').classList.add('hidden')
     document.getElementById('restart').classList.remove('hidden')
     document.getElementById('output').classList.remove('hidden')
-    document.getElementById('camerafeed').classList.remove('hidden')
+    document.getElementById('camera_feed').classList.remove('hidden')
     var context = canvas.getContext('2d');
     if (width && height) {
       canvas.width = width;
@@ -94,28 +91,36 @@
 })();
 
 function posting() {
-    let camerafeed = $('#camerafeed').val()
+    let camera_feed = $('#camera_feed').val()
     let img = $('#photo').attr('src')
     fetch(img)
     .then(res => res.blob())
     .then(blob => {
-        const file = new File([blob], 'photo.png', blob)
-        let form_data = new FormData()
 
-        form_data.append("camerafeed_give", camerafeed)
-        form_data.append("file_give", file)
+    const file = new File([blob], 'photo.png', blob)
+    const date = new Date();
+    let time = String(date.getTime())
+    let form_data = new FormData()
+    let user_id = 'carrot_vely'
+     // console.log(file, content, user_id, date, time, form_data)
 
-        $.ajax({
-            type: "POST",
-            url: "/camerafeedupload",
-            data: form_data,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                alert(response["result"])
-                window.location.reload()
-            }
-        });
-    })
-}
+    // form_data.append("title_give", title)
+    form_data.append("file_give", file)
+    form_data.append("content_give", camera_feed)
+    form_data.append("id_give", user_id)
+    form_data.append("date_give", time)
+
+    $.ajax({
+        type: "POST",
+        url: '/feed_upload',
+        data: form_data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            alert(response["msg"])
+            location.href = '/'
+        }
+    });
+     })
+    }

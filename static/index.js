@@ -21,26 +21,47 @@ function like(data){
     // let likey = Number(document.getElementById(`${data.id}likey`).innerText.split('명')[0])
     let feed_id = data.id.split('_')[0]
     let id = 'carrot_vely'
+
     if (data.attributes[2].value === '/static/img/like@3x.png'){
         data.setAttribute('src', '/static/img/like@4x.png')
-            $.ajax({
-                type: 'POST',
-                url: '/feed_like',
-                data: {'feed_id': feed_id, 'id': id, 'type': 'up'},
-                success: function (response) {
-                    window.location.reload()
-                }
-            });
+        if (document.getElementById(`${data.id}like_count`).innerText.length == 3 ){
+            let temp = `
+            <div id="${data.id}someone_like" class="flex">
+            <div id="${data.id}likey" class="strong flex">좋아요 <div id="${data.id}like_count">1</div>개</div>
+            </div>
+            `
+            document.getElementById(`${data.id}like_wrapper`).innerHTML = temp
+        } else{
+            let c = Number(document.getElementById(`${data.id}like_count`).innerText)
+            document.getElementById(`${data.id}like_count`).innerText = String(c + 1)
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/feed_like',
+            data: {'feed_id': feed_id, 'id': id, 'type': 'up'},
+            success: function (response) {
+            }
+        });
     } else {
         data.setAttribute('src', '/static/img/like@3x.png')
-            $.ajax({
-                type: 'POST',
-                url: '/feed_like',
-                data: {'feed_id': feed_id, 'id': id, 'type': 'down'},
-                success: function (response) {
-                    window.location.reload()
-                }
-            });
+        if (document.getElementById(`${data.id}like_count`).innerText == '1'){
+            let temp = `
+            <div id="${data.id}no_like" class="flex width">
+            가장 먼저 <div id="${data.id}like_count" class="strong margin_left"> 좋아요</div>를 눌러보세요
+            </div>
+            `
+            document.getElementById(`${data.id}like_wrapper`).innerHTML = temp
+        } else{
+            let c = Number(document.getElementById(`${data.id}like_count`).innerText)
+            document.getElementById(`${data.id}like_count`).innerText = String(c - 1)
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/feed_like',
+            data: {'feed_id': feed_id, 'id': id, 'type': 'down'},
+            success: function (response) {
+            }
+        });
     }
 }
 function favorite(data){
@@ -90,5 +111,42 @@ function followme(data){
                     </div>`
         $('#follow-people').append(temp)
         b++
+    }
+}
+
+
+function like_list(data){
+    data.id
+}
+
+function open_menu(data){
+    let feed_id = data.id.split('_')[0]
+    let feed_writer = data.id.split('_')[1]
+    if (user.id == feed_writer){
+        let temp =
+    `<dialog id="dialog">
+        <form method="dialog">
+            <button class="strong">삭제 하기</button>
+            <hr>
+            <button value="update">수정 하기</button>
+            <hr>
+            <p>게시물로 이동</p>
+            <hr>
+            <button value="cancel">취소</button>
+        </form>
+    </dialog>`
+    }else{
+        let temp =
+    `<dialog id="dialog">
+        <form method="dialog">
+            <button class="font_red strong">신고</button>
+            <hr>
+            <button class="font_red strong">팔로우 취소</button>
+            <hr>
+            <p>게시물로 이동</p>
+            <hr>
+            <button value="cancel">취소</button>
+        </form>
+    </dialog>`
     }
 }
