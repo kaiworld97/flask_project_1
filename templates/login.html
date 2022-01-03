@@ -25,9 +25,6 @@
 
 
     <script>
-        {% if msg %}
-            alert("{{ msg }}")
-        {% endif %}
         function login() {
             $.ajax({
                 type: "POST",
@@ -48,15 +45,11 @@
                 }
             })
         }
-
-        
     </script>
-
 </head>
 <div class="login_container">
     <div class="login_main">
         <div class="login-form">
-            <form>
                 <div class="section has-text-centered">
                     <p class="title">CROBGRAM</p>
                     <div class="container" style="width:70%">
@@ -86,12 +79,10 @@
                             </div>
                         </div>
                         <button class="button is-primary" onclick="login()">로그인</button>
-
                         <button class="button is-primary" onclick="location.href='register' ">회원가입</button>
-
                     </div>
                 </div>
-            </form>
+
             <div id="corn_box">
                 <img id="corn" class="login_image" src=../static/img/12344.gif>
             </div>

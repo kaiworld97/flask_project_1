@@ -1,30 +1,3 @@
-// $(document).ready(function () {
-//     show_comment();
-// });
-
-// function show_comment() {
-//     $.ajax({
-//         type: 'GET',
-//         url: '/comments',
-//         data: {},
-//         success: function (response) {
-//             let rows = response['comments']
-//             for (let i = 0; i < rows.length; i++) {
-//                 let comment = rows[i]['comment']
-//                 let num = rows[i]['num']
-//
-//                 let temp_html = `<div class="comment_wrapper" >
-//                                             <b>carrot_vely</b>
-//                                             <b style="font-weight: lighter">${comment}</b>
-//                                             <button onclick="comment_delete(${num})">삭제</button>
-//                                         </div>`
-//                 $('.comment-box').append(temp_html)
-//             }
-//
-//         }
-//     });
-// }
-
 function comment_write(data, id) {
     let comment = $(`#${data}comment`).val()
     const date = new Date();
@@ -52,13 +25,45 @@ function comment_delete(comment_id) {
 }
 
 function comment_update_btn(comment_id){
-    document.getElementById(`${comment_id}comment`).classList.add('hidden')
-    document.getElementById(`${comment_id}update`).classList.add('hidden')
-    document.getElementById(`${comment_id}delete`).classList.add('hidden')
-    document.getElementById(`${comment_id}input`).classList.remove('hidden')
-    document.getElementById(`${comment_id}ok`).classList.remove('hidden')
-    document.getElementById(`${comment_id}cancel`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_comment`).classList.add('hidden')
+    document.getElementById(`${comment_id}_update`).classList.add('hidden')
+    document.getElementById(`${comment_id}_delete`).classList.add('hidden')
+    document.getElementById(`${comment_id}_input`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_ok`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_cancel`).classList.remove('hidden')
 }
+
+function comment_update_cancel(comment_id){
+    document.getElementById(`${comment_id}_comment`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_update`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_delete`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_input`).classList.add('hidden')
+    document.getElementById(`${comment_id}_ok`).classList.add('hidden')
+    document.getElementById(`${comment_id}_cancel`).classList.add('hidden')
+}
+
+function comment_update_btn1(comment_id){
+    document.getElementById(`${comment_id}_comment1`).classList.add('hidden')
+    document.getElementById(`${comment_id}_update1`).classList.add('hidden')
+    document.getElementById(`${comment_id}_delete1`).classList.add('hidden')
+    document.getElementById(`${comment_id}_input1`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_ok1`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_cancel1`).classList.remove('hidden')
+}
+
+function comment_update_cancel1(comment_id){
+    document.getElementById(`${comment_id}_comment1`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_update1`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_delete1`).classList.remove('hidden')
+    document.getElementById(`${comment_id}_input1`).classList.add('hidden')
+    document.getElementById(`${comment_id}_ok1`).classList.add('hidden')
+    document.getElementById(`${comment_id}_cancel1`).classList.add('hidden')
+}
+
+
+
+
+
 
 function comment_update(comment_id) {
     let comment = $(`#${comment_id}input`).val()
@@ -71,16 +76,12 @@ function comment_update(comment_id) {
         }
     });
 }
-function comment_update_cance(comment_id){
-    document.getElementById(`${comment_id}comment`).classList.remove('hidden')
-    document.getElementById(`${comment_id}update`).classList.remove('hidden')
-    document.getElementById(`${comment_id}delete`).classList.remove('hidden')
-    document.getElementById(`${comment_id}input`).classList.add('hidden')
-    document.getElementById(`${comment_id}ok`).classList.add('hidden')
-    document.getElementById(`${comment_id}cancel`).classList.add('hidden')
+
+function comment_dialog_open(data){
+    document.getElementById(`${data}_comment-dialog`).showModal()
 }
-function comment_dialog_open(){
-    document.getElementById('comment-dialog').showModal()
+function comment_dialog_open1(data){
+    document.getElementById(`${data}_comment-dialog1`).showModal()
 }
 
 function button_event(comment_id){
