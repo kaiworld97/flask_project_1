@@ -271,6 +271,165 @@ left: 47%;
 }
 
 
+.this-dialog{
+    width: 70%;
+    height: 80%;
+    border:none;
+    border-radius: 2%;
+
+}
+
+@media (max-width:720px){
+    .this-dialog{
+        width: auto;
+    }
+    dialog .container_wrap{
+        display: block;
+    }
+    dialog .feed_pic{
+
+        width: 50%;
+    }
+    dialog .write_part{
+
+        width: 50%;
+    }
+}
+
+
+
+dialog p, span, label, textarea{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+dialog .comment_wrap{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    flex: 0;
+}
+
+dialog .feed_pic {
+    width: 70%;
+    overflow: hidden;
+}
+
+
+dialog .header_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 2%;
+}
+
+.pic_icon {
+    text-align: center;
+}
+
+img.upload_icon {
+    width: 70%;
+}
+
+dialog .write_part{
+    width:30%;
+    display: flex;
+    flex-direction: column;
+}
+
+dialog .feed_list{
+    padding-left: 0;
+}
+
+dialog .feed_content{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+
+dialog .ex_text{
+    height: 10%;
+    font-size: 2rem;
+}
+
+dialog .pic_icon {
+    margin-bottom: 4%;
+}
+
+dialog .upload_form {
+    height: 10%;
+    width: 22%;
+}
+
+dialog .content_container{
+    display: flex;
+    flex-direction: row;
+    height: -webkit-fill-available;
+}
+
+dialog .wf_user_info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 5%;
+    flex: 0 0 auto;
+}
+
+dialog .wf_user_profile {
+    padding-right: 3%;
+}
+
+dialog img.user_img {
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    border: lightgray 1px solid;
+    margin: 1%
+}
+dialog span.user_name {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+dialog .etc_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+dialog .side {
+    padding-left: 1%;
+    width: 25%;
+}
+
+dialog .share{
+    cursor: pointer;
+}
+
+
+dialog .comment{
+    border: none;
+}
+dialog .comment:focus{
+    outline: none;
+}
+
+
+dialog .comment_part{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 10%;
+    flex: 1;
+
+}
+
+dialog .footer{
+    display: flex;
+    flex-direction: column;
+    flex: 0;
+}
 
 
 

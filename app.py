@@ -297,6 +297,17 @@ def camera():
 def test():
     return render_template('test.html')
 
+# @app.route('/feedpopup')
+# def feedpopup():
+#     token_receive = request.cookies.get('mytoken')
+#     try:
+#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+#         return render_template('feedpopup.html', html='feedpopup', user=user)
+#     except jwt.ExpiredSignatureError:
+#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+#     except jwt.exceptions.DecodeError:
+#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/api/register', methods=['POST'])
 def api_register():

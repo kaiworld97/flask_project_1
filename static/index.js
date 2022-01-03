@@ -13,6 +13,10 @@ function opendia() {
 function dialog_open(data) {
     document.getElementById(`${data.id.split('_')[0]}dialog`).showModal()
 }
+
+function feed_dialog_open(data){
+    document.getElementById(`${data}_feed_dialog`).showModal()
+}
 function feed_delete(data){
     $.ajax({
         type: "POST",
@@ -41,8 +45,6 @@ function storyclick(data){
 function like(data, id){
     // let likey = Number(document.getElementById(`${data.id}likey`).innerText.split('명')[0])
     let feed_id = data.id.split('_')[0]
-
-
     if (data.attributes[2].value === '/static/img/like@3x.png'){
         document.getElementById(`${feed_id}_heart`).classList.remove('hidden')
         document.getElementById(`${feed_id}_no_heart`).classList.add('hidden')
@@ -58,6 +60,20 @@ function like(data, id){
             let c = Number(document.getElementById(`${feed_id}_like_count`).innerText)
             document.getElementById(`${feed_id}_like_count`).innerText = String(c + 1)
         }
+        document.getElementById(`${feed_id}_heart1`).classList.remove('hidden')
+        document.getElementById(`${feed_id}_no_heart1`).classList.add('hidden')
+        // data.setAttribute('src', '/static/img/like@4x.png')
+        if (document.getElementById(`${feed_id}_like_count1`).innerText.length == 3 ){
+            let temp = `
+            <div id="${data.id}someone_like1" class="flex">
+            <div id="${data.id}likey1" class="strong flex">좋아요 <div id="${feed_id}_like_count1">1</div>개</div>
+            </div>
+            `
+            document.getElementById(`${feed_id}_like_wrapper1`).innerHTML = temp
+        } else{
+            let c = Number(document.getElementById(`${feed_id}_like_count1`).innerText)
+            document.getElementById(`${feed_id}_like_count1`).innerText = String(c + 1)
+        }
         $.ajax({
             type: 'POST',
             url: '/feed_like',
@@ -69,7 +85,6 @@ function like(data, id){
         document.getElementById(`${feed_id}_heart`).classList.add('hidden')
         document.getElementById(`${feed_id}_no_heart`).classList.remove('hidden')
         // data.setAttribute('src', '/static/img/like@3x.png')
-        console.log(data.id)
         if (document.getElementById(`${feed_id}_like_count`).innerText == '1'){
             let temp = `
             <div id="${data.id}no_like" class="flex width">
@@ -81,6 +96,20 @@ function like(data, id){
             let c = Number(document.getElementById(`${feed_id}_like_count`).innerText)
             document.getElementById(`${feed_id}_like_count`).innerText = String(c - 1)
         }
+        document.getElementById(`${feed_id}_heart1`).classList.add('hidden')
+        document.getElementById(`${feed_id}_no_heart1`).classList.remove('hidden')
+        // data.setAttribute('src', '/static/img/like@3x.png')
+        if (document.getElementById(`${feed_id}_like_count1`).innerText == '1'){
+            let temp = `
+            <div id="${data.id}no_like1" class="flex width">
+            가장 먼저 <div id="${feed_id}_like_count1" class="strong margin_left"> 좋아요</div>를 눌러보세요
+            </div>
+            `
+            document.getElementById(`${feed_id}_like_wrapper1`).innerHTML = temp
+        } else{
+            let c = Number(document.getElementById(`${feed_id}_like_count1`).innerText)
+            document.getElementById(`${feed_id}_like_count1`).innerText = String(c - 1)
+        }
         $.ajax({
             type: 'POST',
             url: '/feed_like',
@@ -90,6 +119,9 @@ function like(data, id){
         });
     }
 }
+
+
+
 function favorite(data){
     if (data.attributes[3].value === '/static/img/favorite@3x.png'){
         data.setAttribute('src', '/static/img/favorite@4x.png')

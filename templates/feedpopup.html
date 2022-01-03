@@ -1,5 +1,6 @@
 {% extends "base.html"  %}
 {% block content %}
+<button onclick="opendi()" style="margin-top: 10%">dddd</button>
 <div class="write_feed_container model__background">
 
     <!-- <button onclick="showThisDialog()">Show this Dialog</button> -->
@@ -26,9 +27,6 @@
                 </div>
             </div>
             <div id="feed_content">
-                <div class="wf_user_profile">
-                    <img class="user_img" src="static/img/carrot.jpg">
-                </div>
                 <span>
                     {user_id들어갈 곳} {comment 들어갈 곳}사실 저는 당근을 싫어합니다. 오이도 싫어해요. 당근 많이 사랑해 주세요~ 당근케이크 만든 사람 얼굴 보고 시다^^ 당근케이크에 진짜로 당근이 들어갈 줄은 상상도 못했어요
                 </span>
@@ -40,7 +38,7 @@
                 <div id="comment_part">
                 <ul id="feed_list">    
         <!-- 유저피드내용 -->
-                    <div id="feed_content">
+                    <div class="feed_content">
                         <div class="wf_user_profile">
                             <img class="user_img" src="static/img/carrot.jpg">
                         </div>
@@ -48,7 +46,7 @@
                             {user_id들어갈 곳} {comment 들어갈 곳}사실 저는 당근을 싫어합니다. 오이도 싫어해요. 당근 많이 사랑해 주세요~ 당근케이크 만든 사람 얼굴 보고 시다^^ 당근케이크에 진짜로 당근이 들어갈 줄은 상상도 못했어요
                         </span>
                     </div>
-                    <div id="feed_content">
+                    <div class="feed_content">
                         <div class="wf_user_profile">
                             <img class="user_img" src="static/img/carrot.jpg">
                         </div>
@@ -56,7 +54,7 @@
                             {user_id들어갈 곳} {comment 들어갈 곳}사실 저는 당근을 싫어합니다. 오이도 싫어해요. 당근 많이 사랑해 주세요~ 당근케이크 만든 사람 얼굴 보고 시다^^ 당근케이크에 진짜로 당근이 들어갈 줄은 상상도 못했어요
                         </span>
                     </div>
-                    <div id="feed_content">
+                    <div class="feed_content">
                         <div class="wf_user_profile">
                             <img class="user_img" src="static/img/carrot.jpg">
                         </div>

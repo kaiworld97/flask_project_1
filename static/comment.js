@@ -25,9 +25,8 @@
 //     });
 // }
 
-function comment_write(data) {
+function comment_write(data, id) {
     let comment = $(`#${data}comment`).val()
-    let id = 'carrot_vely'
     const date = new Date();
     let time = String(date.getTime())
     $.ajax({
