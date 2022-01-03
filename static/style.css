@@ -152,7 +152,9 @@ border-radius: 10px;
 .feed-icon{
     width: 2.5rem;
     height: 2.5rem;
-    margin: 1.5%;
+    /*margin: 1.5%;*/
+    margin-left: 2%;
+    margin-top: 1%;
 }
 
 .feed-icons-wrapper{
@@ -267,6 +269,13 @@ position: fixed;
 top: 45%;
 left: 47%;
 }
+
+
+
+
+
+
+
 @media (max-width: 1000px) {
     html::-webkit-scrollbar {
     width: 0.8rem;

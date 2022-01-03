@@ -44,17 +44,19 @@ function like(data){
     let id = 'carrot_vely'
 
     if (data.attributes[2].value === '/static/img/like@3x.png'){
-        data.setAttribute('src', '/static/img/like@4x.png')
-        if (document.getElementById(`${data.id}like_count`).innerText.length == 3 ){
+        document.getElementById(`${feed_id}_heart`).classList.remove('hidden')
+        document.getElementById(`${feed_id}_no_heart`).classList.add('hidden')
+        // data.setAttribute('src', '/static/img/like@4x.png')
+        if (document.getElementById(`${feed_id}_like_count`).innerText.length == 3 ){
             let temp = `
             <div id="${data.id}someone_like" class="flex">
-            <div id="${data.id}likey" class="strong flex">좋아요 <div id="${data.id}like_count">1</div>개</div>
+            <div id="${data.id}likey" class="strong flex">좋아요 <div id="${feed_id}_like_count">1</div>개</div>
             </div>
             `
-            document.getElementById(`${data.id}like_wrapper`).innerHTML = temp
+            document.getElementById(`${feed_id}_like_wrapper`).innerHTML = temp
         } else{
-            let c = Number(document.getElementById(`${data.id}like_count`).innerText)
-            document.getElementById(`${data.id}like_count`).innerText = String(c + 1)
+            let c = Number(document.getElementById(`${feed_id}_like_count`).innerText)
+            document.getElementById(`${feed_id}_like_count`).innerText = String(c + 1)
         }
         $.ajax({
             type: 'POST',
@@ -64,17 +66,20 @@ function like(data){
             }
         });
     } else {
-        data.setAttribute('src', '/static/img/like@3x.png')
-        if (document.getElementById(`${data.id}like_count`).innerText == '1'){
+        document.getElementById(`${feed_id}_heart`).classList.add('hidden')
+        document.getElementById(`${feed_id}_no_heart`).classList.remove('hidden')
+        // data.setAttribute('src', '/static/img/like@3x.png')
+        console.log(data.id)
+        if (document.getElementById(`${feed_id}_like_count`).innerText == '1'){
             let temp = `
             <div id="${data.id}no_like" class="flex width">
-            가장 먼저 <div id="${data.id}like_count" class="strong margin_left"> 좋아요</div>를 눌러보세요
+            가장 먼저 <div id="${feed_id}_like_count" class="strong margin_left"> 좋아요</div>를 눌러보세요
             </div>
             `
-            document.getElementById(`${data.id}like_wrapper`).innerHTML = temp
+            document.getElementById(`${feed_id}_like_wrapper`).innerHTML = temp
         } else{
-            let c = Number(document.getElementById(`${data.id}like_count`).innerText)
-            document.getElementById(`${data.id}like_count`).innerText = String(c - 1)
+            let c = Number(document.getElementById(`${feed_id}_like_count`).innerText)
+            document.getElementById(`${feed_id}_like_count`).innerText = String(c - 1)
         }
         $.ajax({
             type: 'POST',

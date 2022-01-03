@@ -179,7 +179,7 @@ def feed_like():
         }
         db.like.insert_one(doc)
     else:
-        db.like.delete_one({'_id': ObjectId(feed_id_receive), 'id': id_receive})
+        db.like.delete_one({'feed_id': feed_id_receive, 'id': id_receive})
     return jsonify({'msg': 'saved!!!!'})
 
 

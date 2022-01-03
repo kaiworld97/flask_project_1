@@ -36,27 +36,36 @@
                 <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
                 <div>
                     <div class="feed-icons-container">
-                        <div class="feed-icons-wrapper">
+                        <div class="feed-icons-wrapper flex">
 
                             {% if like_this == True %}
-                               <img class="feed-icon" onclick="like(this)" src="/static/img/like@4x.png"
-                                 id="{{ feed_id }}_{{ id }}">
+                              <div class="heart_container" id="{{ feed_id }}_heart" onclick="like(this)">
+                                <div class="heart-icon"></div>
+                                </div>
+<!--                               <img class="feed-icon" onclick="like(this)" src="/static/img/like@4x.png"-->
+<!--                                 id="{{ feed_id }}_{{ id }}">-->
+                            <img class="feed-icon1 hidden" onclick="like(this)" src="/static/img/like@3x.png"
+                                 id="{{ feed_id }}_no_heart">
                             {% else %}
-                                <img class="feed-icon" onclick="like(this)" src="/static/img/like@3x.png"
-                                 id="{{ feed_id }}_{{ id }}">
+                              <div class="heart_container hidden" id="{{ feed_id }}_heart" onclick="like(this)">
+                                <div class="heart-icon"></div>
+                                </div>
+                                <img class="feed-icon1" onclick="like(this)" src="/static/img/like@3x.png"
+                                 id="{{ feed_id }}_no_heart">
                             {% endif %}
                             <img class="feed-icon" src="/static/img/comment@3x.png">
                         </div>
                     </div>
                     <div class="feed-feed-container">
-                        <div id="{{ feed_id }}_{{ id }}like_wrapper" class="feed-like-wrapper width">
+                        <div id="{{ feed_id }}_like_wrapper" class="feed-like-wrapper width">
                             {% if like != 0 %}
+
                                 <div id="{{ feed_id }}_{{ id }}someone_like" class="flex" onclick="like_list(this)">
-                                    <div id="{{ feed_id }}_{{ id }}likey" class="strong flex">좋아요 <div id="{{ feed_id }}_{{ id }}like_count">{{ like }}</div>개</div>
+                                    <div id="{{ feed_id }}_{{ id }}likey" class="strong flex">좋아요 <div id="{{ feed_id }}_like_count">{{ like }}</div>개</div>
                                 </div>
                             {% else %}
                                 <div id="{{ feed_id }}_{{ id }}no_like" class="flex width">
-                                    가장 먼저 <div id="{{ feed_id }}_{{ id }}like_count" class="strong margin_left" >좋아요</div>를 눌러보세요
+                                    가장 먼저 <div id="{{ feed_id }}_like_count" class="strong margin_left" >좋아요</div>를 눌러보세요
                                 </div>
                             {% endif %}
                         </div>
