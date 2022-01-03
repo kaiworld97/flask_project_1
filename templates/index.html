@@ -95,26 +95,40 @@
                                         {% endif %}
                                         <div>
                                             <b>{{ comment.nick }}</b>
-                                            <b id="{{ comment.comment_id }}comment" class="lighter">{{ comment.comment
-                                                }}</b>
+                                            <b id="{{ comment.comment_id }}comment" class="lighter" onclick="comment_dialog_open()">{{ comment.comment }}</b>
                                         </div>
                                         <div>
-                                            <button id="{{ comment.comment_id }}update"
-                                                    onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정
-                                            </button>
-                                            <button id="{{ comment.comment_id }}delete"
-                                                    onclick="comment_delete(`{{ comment.comment_id }}`)">
-                                                삭제
-                                            </button>
+{#                                            <button id="{{ comment.comment_id }}update"#}
+{#                                                    onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정#}
+{#                                            </button>#}
+{#                                            <button id="{{ comment.comment_id }}delete"#}
+{#                                                    onclick="comment_delete(`{{ comment.comment_id }}`)">#}
+{#                                                삭제#}
+{#                                            </button>#}
+{#                                            <input id="{{ comment.comment_id }}input" class="hidden">#}
+{#                                            <button id="{{ comment.comment_id }}ok"#}
+{#                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">#}
+{#                                                확인#}
+{#                                            </button>#}
+{#                                            <button id="{{ comment.comment_id }}cance"#}
+{#                                                    onclick="comment_update_cance(`{{ comment.comment_id }}`)"#}
+{#                                                    class="hidden">취소#}
+{#                                            </button>#}
                                             <input id="{{ comment.comment_id }}input" class="hidden">
                                             <button id="{{ comment.comment_id }}ok"
-                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">
-                                                확인
-                                            </button>
-                                            <button id="{{ comment.comment_id }}cance"
-                                                    onclick="comment_update_cance(`{{ comment.comment_id }}`)"
-                                                    class="hidden">취소
-                                            </button>
+                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">확인</button>
+                                            <button id="{{ comment.comment_id }}cancel"
+                                                    onclick="comment_update_cancel(`{{ comment.comment_id }}`)" class="hidden">취소</button>
+                                            <dialog id="comment-dialog" class="dialog">
+                                                <form method="dialog">
+                                                    <button id="{{ comment.comment_id }}update" onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정</button>
+                                                    <hr>
+                                                    <button id="{{ comment.comment_id }}delete" onclick="button_event(`{{ comment.comment_id }}`);">삭제</button>
+                                                    <hr>
+                                                    <button value="cancel">취소</button>
+                                                </form>
+                                            </dialog>
+
                                         </div>
 
                                         <div class="feed-time">
@@ -131,7 +145,7 @@
                                         <img class="i_img" src="data:image/png;base64, {{ i_img}}">
                                         {% endif %}
                                     </div>
-                                    <input type="text" id="{{ feed_id }}comment" placeholder="댓글 달기...">
+                                    <input type="text" id="{{ feed_id }}comment" placeholder="댓글 달기..." class="comment_write_space">
                                     <button onclick="comment_write(`{{ feed_id }}`,`{{ i_id }}`)" id="comment-button">
                                         작성
                                     </button>
