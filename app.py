@@ -106,10 +106,8 @@ def home():
                     time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
                 else:
                     time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
-                #
-                # time = t.split(' ')[0]
-            x['time'] = time
 
+            x['time'] = time
             try:
                 like = list(db.like.find({'feed_id': str(x['_id'])}))
                 like_count = len(like)
@@ -121,13 +119,7 @@ def home():
                 x['like_this'] = False
             else:
                 x['like_this'] = True
-            # if str(x['_id']) in user['like_feed']:
-            #     x['like_this'] = True
-            # else:
-            #     x['like_this'] = False
-
             rows.append(x)
-        print(rows)
         return render_template('index.html', html='index', rows=rows, user=user)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
@@ -296,6 +288,8 @@ def mypage(keyword):
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         token_user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
         user = db.user.find_one({"id": keyword}, {'_id': False, 'pw': False})
+        feed_list = len(list(db.feed.find({'id': user['id']})))
+        user['feed_count'] = feed_list
         if user['img'] == 'x':
             pass
         else:
@@ -314,6 +308,81 @@ def mypage(keyword):
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             x['img'] = image
+            x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+            if x_user['img'] == 'x':
+                pass
+            else:
+                img_binary = fs.get(x_user['img'])
+                base64_data = codecs.encode(img_binary.read(), 'base64')
+                image = base64_data.decode('utf-8')
+                x_user['img'] = image
+            x['write_user'] = x_user
+
+            # for a in db.comment.find():
+            #     print(a)w
+            comments = list(db.comment.find({'feed_id': str(x['_id'])}))
+            comment = []
+            if len(comments) != 0:
+                for b in comments:
+                    comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+                    b['nick'] = comments_user['nick']
+                    if comments_user['img'] == 'x':
+                        b['img'] = comments_user['img']
+                    else:
+                        img_binary = fs.get(comments_user['img'])
+                        base64_data = codecs.encode(img_binary.read(), 'base64')
+                        image = base64_data.decode('utf-8')
+                        b['img'] = image
+                    t = str(
+                        datetime.fromtimestamp(
+                            round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
+                            int(b['date']) / 1000.0))
+                    if 'day,' in t.split(' '):
+                        time = t.split(' ')[0] + '일 전'
+                    else:
+                        if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
+                            time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
+                        elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
+                            time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
+                        else:
+                            time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
+
+                    b['time'] = time
+                    comment.append(b)
+                x['comments'] = comment
+
+            else:
+                x['comments'] = []
+                comments_user = {'img': 'x'}
+                x['comments_user'] = comments_user
+
+            t = str(datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
+                int(x['date']) / 1000.0))
+            if 'day,' in t.split(' '):
+                time = t.split(' ')[0] + '일 전'
+            else:
+                if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
+                    time = str(int(t.split('.')[0].split(':')[2])) + '초 전'
+                elif t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] != '00':
+                    time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
+                else:
+                    time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
+                #
+                # time = t.split(' ')[0]
+            x['time'] = time
+
+            try:
+                like = list(db.like.find({'feed_id': str(x['_id'])}))
+                like_count = len(like)
+                x['like_count'] = like_count
+            except:
+                x['like_count'] = 0
+
+            if db.like.find_one({'id': user['id'], 'feed_id': str(x['_id'])}) is None:
+                x['like_this'] = False
+            else:
+                x['like_this'] = True
+
             feedrow.append(x)
             if len(feedrow) == 3:
                 feedrows.append(feedrow)

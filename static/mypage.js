@@ -1,6 +1,16 @@
 function update_user_dialog() {
     document.getElementById('update_user_dialog').show()
 }
+function cance_update(){
+    document.getElementById('update_user_dialog').close()
+
+}
+function mypageimgopen(data){
+    document.getElementById(`${data}_feed_dialog`).show()
+}
+function mypageimgclose(data){
+    document.getElementById(`${data}_feed_dialog`).close()
+}
 
 function eventHandler(e) {
     var $eTarget = $(e.currentTarget);

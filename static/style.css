@@ -175,6 +175,12 @@ border-radius: 10px;
 }
 .feed-like-wrapper{
     display: flex;
+    font-size: 1.5rem;
+    align-items: center;
+    padding: 0 4%;
+}
+dialog .feed-like-wrapper{
+    display: flex;
     font-size: 1.1rem;
     align-items: center;
     padding: 0 4%;
@@ -883,10 +889,14 @@ dialog .feed-time {
     width: 30%;
 
 }
+dialog .feed-icon{
+    margin-left: 1%;
+    margin-top: 0.5%;
+}
 
 dialog .feed-icons-wrapper > img {
-    width: 1.3vw;
-    height: 1.3vw;
+    width: 1.2vw;
+    height: 1.2vw;
 }
 
 dialog .feed-icons-wrapper.flex {

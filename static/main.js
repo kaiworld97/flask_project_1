@@ -268,7 +268,7 @@ function posting() {
         processData: false,
         success: function (response) {
             alert(response["msg"])
-            location.href = '/'
+            window.location.reload()
         }
     });
 }

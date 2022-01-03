@@ -59,6 +59,7 @@
     margin-right: 5%;
     display: flex;
     float: left;
+    width: 20%;
 }
 
 #Mypage-section-bottom {
@@ -150,6 +151,9 @@
     border-radius: 3%;
 
 }
+.mypagespan{
+    margin-left: 10%;
+}
 .update_user_img{
     width: 300px;
     height: 300px;
@@ -167,6 +171,106 @@
 }
 #dialog_btn{
     margin-top: 5%;
+}
+
+.this-dialog {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    border: none;
+    border-radius: 2%;
+    overflow: hidden;
+}
+.comment_img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 3%;
+}
+dialog .feed-icon {
+    margin-left: 3%;
+    margin-top: 0.1%;
+}
+/* heart icon
+/* define variables used for the color of the heart-icon and its size */
+.heart_container {
+    margin: 2%;
+}
+
+:root {
+    --heart-icon-color: #ff6058;
+    --heart-icon-size: 19px;
+}
+
+/** {*/
+/*  box-sizing: border-box;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+/*body {*/
+/*  min-height: 100vh;*/
+/*  width: 100%;*/
+/*}*/
+/* center content in the page */
+/*.container {*/
+/*  display: flex;*/
+/*  height: 100vh;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*!*   include an arbitrary background *!*/
+/*  background: linear-gradient(to top, #f6fbff, #d0ebff);*/
+/*}*/
+/* animate the hearbeat increasing its horizontal size more than its vertical */
+@keyframes heartbeat {
+    to {
+        /*     rotate is included to maintain the rotation introduced briefly after */
+        transform: scaleX(1.4) scaleY(1.3) rotate(-45deg);
+    }
+}
+
+.heart-icon:hover {
+    animation-duration: 0.2s;
+}
+
+/* to create the heart you can use a square div and absolute position two circles through pseudo elements
+
+position these pseudo elements at either end of the square with top/right/bottom/left properties
+*/
+.heart-icon {
+    background-color: var(--heart-icon-color);
+    height: var(--heart-icon-size);
+    width: var(--heart-icon-size);
+    /* rotate the square as to create the core of the heart icon */
+    transform: rotate(-45deg);
+    /*   call the animation on the element, which will affect the pseudo-elements as well */
+    /* animation: heartbeat 1s alternate infinite; */
+    animation: heartbeat 1s alternate;
+    animation-iteration-count: 2;
+}
+
+/* on hover fasten the animation as to give the impression of a faster heartbeat */
+
+.heart-icon:after {
+    /*   by setting the color to inherit the pseudo element takes the color of the connected element */
+    background-color: inherit;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    /* the pseudo elements ought to be positioned halfway through the square; therefore they are offset by half of the chosen width/height */
+    width: var(--heart-icon-size);
+    height: var(--heart-icon-size);
+    top: 0;
+    left: calc(var(--heart-icon-size) / 2);
+}
+
+.heart-icon:before {
+    content: "";
+    background-color: inherit;
+    border-radius: 50%;
+    position: absolute;
+    width: var(--heart-icon-size);
+    height: var(--heart-icon-size);
+    top: calc(var(--heart-icon-size) / -2);
+    left: 0;
 }
 @media (max-width: 800px) {
     .mypageimg {
