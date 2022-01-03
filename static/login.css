@@ -1,16 +1,37 @@
 * {
-  box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
-  border-radius: 5px;
-  text-align: center;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    border-radius: 5px;
+    text-align: center;
 }
 
 body {
-  margin: 0;
-  background-color: white;
+    margin: 0;
+    background-color: white;
+}
+
+.login_container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.login_main {
+    margin: auto;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-flow: row;
+    width: 120rem;
 }
 
 .login-form {
+    position: relative;
     width: 500px;
     background-color: #EEEFF1;
     margin-right: auto;
@@ -19,6 +40,8 @@ body {
     padding: 20px;
     text-align: center;
     border: none;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -32,12 +55,109 @@ body {
 }
 
 .button {
-  font-size: 14px;
-  border: none;
-  padding: 10px;
-  width: 290px;
-  background-color: #1BBC9B;
-  margin-bottom: 30px;
-  color: white;
+    font-size: 14px;
+    border: none;
+    padding: 10px;
+    width: 290px;
+    background-color: #1BBC9B;
+    margin-bottom: 30px;
+    color: white;
 }
+
+#fluate_box {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.fluate > img {
+    max-width: 20px;
+    margin: 10%;
+    height: auto !important;
+
+}
+
+#corn_box {
+    top: 160px;
+    left: -100px;
+
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+}
+
+#blueberry_box {
+    top: 10px;
+    left: -120px;
+
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+}
+
+#durian_box {
+    top: 21px;
+    right: -150px;
+
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+
+}
+
+#potato_box {
+    top: 200px;
+    right: -100px;
+
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+}
+
+#OE_box {
+    bottom: -100px;
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+    right: 50%;
+}
+
+.login_image {
+
+    display: block;
+    margin: auto;
+    border-radius: 20%;
+    overflow: hidden;
+    width: 90px;
+    height: 90px;
+}
+
+/*#blue_berry{*/
+
+/*        position: absolute;*/
+/*        top: 270px;*/
+/*        right: 300px;*/
+/*        width: 200px;*/
+/*        height: 200px;*/
+/*        border: 1px solid #8d8c8c45;*/
+/*}*/
+
+/*#durian {*/
+/*    bottom: 30px;*/
+/*    left: 100px;*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*    border: 1px solid #8d8c8c45;*/
+
+/*}*/
+/*width: 100%;*/
+/*        position: absolute;*/
+/*        top: 500px;*/
+/*        right: -300px;*/
+/*        width: 300px;*/
+/*        border: 1px solid #8d8c8c45;*/
 
