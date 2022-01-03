@@ -57,7 +57,7 @@ function comment_update_btn(comment_id){
     document.getElementById(`${comment_id}delete`).classList.add('hidden')
     document.getElementById(`${comment_id}input`).classList.remove('hidden')
     document.getElementById(`${comment_id}ok`).classList.remove('hidden')
-    document.getElementById(`${comment_id}cance`).classList.remove('hidden')
+    document.getElementById(`${comment_id}cancel`).classList.remove('hidden')
 }
 
 function comment_update(comment_id) {
@@ -77,5 +77,18 @@ function comment_update_cance(comment_id){
     document.getElementById(`${comment_id}delete`).classList.remove('hidden')
     document.getElementById(`${comment_id}input`).classList.add('hidden')
     document.getElementById(`${comment_id}ok`).classList.add('hidden')
-    document.getElementById(`${comment_id}cance`).classList.add('hidden')
+    document.getElementById(`${comment_id}cancel`).classList.add('hidden')
 }
+function comment_dialog_open(){
+    document.getElementById('comment-dialog').showModal()
+}
+
+function button_event(comment_id){
+    if(confirm("정말 삭제하시겠습니까?")==true){
+        comment_delete(comment_id)
+    }else {
+        return
+    }
+}
+
+

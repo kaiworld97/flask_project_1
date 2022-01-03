@@ -886,3 +886,18 @@ dialog .wf_comment_info{
 dialog {
     --heart-icon-size:13px;
 }
+
+
+.comment_write_space{
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    margin-left: 2px;
+
+}
+#comment-button {
+    border: none;
+    background-color: transparent;
+    color: cornflowerblue;
+    width: 10vw;
+}
