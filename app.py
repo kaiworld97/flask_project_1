@@ -32,10 +32,13 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
-        img_binary = fs.get(user['img'])
-        base64_data = codecs.encode(img_binary.read(), 'base64')
-        user_image = base64_data.decode('utf-8')
-        user['img'] = user_image
+        if user['img'] == 'x':
+            pass
+        else:
+            img_binary = fs.get(user['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            user['img'] = image
         rows = []
         info = db.feed
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
