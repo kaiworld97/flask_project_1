@@ -112,9 +112,7 @@
                                                     <button value="cancel">취소</button>
                                                 </form>
                                             </dialog>
-
                                         </div>
-
                                         <div class="feed-time">
                                             {{ comment.time }}
                                         </div>
@@ -141,8 +139,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <!--                게시물 닷 dialog-->
                 <dialog id="{{ feed_id }}dialog" class="dialog">
                     <form class="dialog_form" method="dialog">
@@ -164,7 +160,6 @@
                                 <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
                             </div>
                         </div>
-
                         <!-- 피드내용 -->
                         <div id="dl_write_part" class="side">
                             <!-- 헤더부분 -->
@@ -182,16 +177,14 @@
                                             <span class="user_name">{{ nickname }}</span>
                                         </div>
                                     </a>
-
                                 </div>
                             </div>
-
                         <div class="dl_comment_box">
                             <div class="feed_content">
                                     <span>
                                         {{ content }}
                                     </span>
-                                                </div>
+                            </div>
                             <div class="comment-box">
                                 <!--여기에 댓글 추가-->
                                 {% for comment in comments %}
@@ -208,7 +201,7 @@
                                         <div>
                                             <input id="{{ comment.comment_id }}_input1" class="hidden">
                                             <button id="{{ comment.comment_id }}_ok1"
-                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">확인</button>
+                                                    onclick="comment_update1(`{{ comment.comment_id }}`)" class="hidden">확인</button>
                                             <button id="{{ comment.comment_id }}_cancel1"
                                                     onclick="comment_update_cancel1(`{{ comment.comment_id }}`)" class="hidden">취소</button>
                                             <dialog id="{{ comment.comment_id }}_comment-dialog1" class="dialog">

@@ -85,8 +85,6 @@ def home():
                             time = str(int(t.split('.')[0].split(':')[1])) + '분 전'
                         else:
                             time = str(int(t.split('.')[0].split(':')[0])) + '시간 전'
-                        #
-                        # time = t.split(' ')[0]
 
                     b['time'] = time
                     comment.append(b)

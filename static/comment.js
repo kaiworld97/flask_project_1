@@ -66,7 +66,20 @@ function comment_update_cancel1(comment_id){
 
 
 function comment_update(comment_id) {
-    let comment = $(`#${comment_id}input`).val()
+    let comment = $(`#${comment_id}_input`).val()
+    console.log(comment)
+    $.ajax({
+        type: "POST",
+        url: "/comments/update",
+        data: {'comment_id': comment_id, 'update_comment': comment},
+        success: function (response) {
+            window.location.reload()
+        }
+    });
+}
+function comment_update1(comment_id) {
+    let comment = $(`#${comment_id}_input1`).val()
+    console.log(comment)
     $.ajax({
         type: "POST",
         url: "/comments/update",
