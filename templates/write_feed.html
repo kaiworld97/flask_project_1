@@ -45,7 +45,11 @@
         <div id="filter_part" class="filter">
     <div class="wf_user_info">
         <div class="wf_user_profile">
-            <img class="user_img" src="static/img/carrot.jpg">
+            {% if user.img == 'x' or user.img == None %}
+            <img class="user_img" src="/static/img/12344.gif">
+            {% else %}
+            <img class="user_img" src="data:image/png;base64, {{ user.img }}">
+            {% endif %}
         </div>
         <div class="user_id">
             <span id="user_name">{{ i_nick }}</span>
@@ -74,7 +78,11 @@
         <div id="write_part" class="side">
             <div class="wf_user_info">
                 <div class="wf_user_profile">
-                    <img class="user_img" src="static/img/carrot.jpg">
+                    {% if user.img == 'x' or user.img == None %}
+                    <img class="user_img" src="/static/img/12344.gif">
+                    {% else %}
+                    <img class="user_img" src="data:image/png;base64, {{ user.img }}">
+                    {% endif %}
                 </div>
                 <div class="user_id">
                     <span id="user_name">{{ i_nick }}</span>
@@ -106,7 +114,7 @@
 
 
 
-<dialog>
+</dialog>
 </div>
 
 {% endblock %}

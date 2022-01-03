@@ -38,10 +38,10 @@ let story_list = [{'src': '/static/img/12344.gif', 'name': '제리','msg':'여�
 function storyclick(data){
     data.classList.replace('story-img', 'clicked-story-img')
 }
-function like(data){
+function like(data, id){
     // let likey = Number(document.getElementById(`${data.id}likey`).innerText.split('명')[0])
     let feed_id = data.id.split('_')[0]
-    let id = 'carrot_vely'
+
 
     if (data.attributes[2].value === '/static/img/like@3x.png'){
         document.getElementById(`${feed_id}_heart`).classList.remove('hidden')

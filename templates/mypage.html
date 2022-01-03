@@ -79,10 +79,11 @@
                     {% for ro in row %}
                         {% set feedimg = ro.img %}
                         {% set id = ro.id %}
-                        {% set feedid = ro.id %}
+                        {% set feedid = ro._id %}
+                        {% set date = ro.date %}
                         {% if count|length % 3 == 0 %}
                             <div>
-                                <a href="/feed/{{ id }}{{ feedid }}">
+                                <a href="/feed/{{ id }}_{{ date }}">
                                     <div>
                                         <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
                                     </div>
@@ -90,7 +91,7 @@
                             </div>
                         {% else %}
                             <div class="margin-right-div">
-                                <a href="/feed/{{ id }}{{ feedid }}">
+                                <a href="/feed/{{ id }}_{{ date }}">
                                     <div>
                                         <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
                                     </div>
@@ -131,10 +132,11 @@
                     {% for ro in row %}
                         {% set feedimg = ro.img %}
                         {% set id = ro.id %}
-                        {% set feedid = ro.id %}
+                        {% set feedid = ro._id %}
+                        {% set date = ro.date %}
                         {% if count|length % 3 == 0 %}
                             <div>
-                                <a href="/feed/{{ id }}{{ feedid }}">
+                                <a href="/feed/{{ id }}_{{ date }}">
                                     <div>
                                         <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
                                     </div>
@@ -142,7 +144,7 @@
                             </div>
                         {% else %}
                             <div class="margin-right-div">
-                                <a href="/feed/{{ id }}{{ feedid }}">
+                                <a href="/feed/{{ id }}_{{ date }}">
                                     <div>
                                         <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
                                     </div>
@@ -183,10 +185,11 @@
                     {% for ro in row %}
                         {% set feedimg = ro.img %}
                         {% set id = ro.id %}
-                        {% set feedid = ro.id %}
+                        {% set feedid = ro._id %}
+                        {% set date = ro.date %}
                         {% if count|length % 3 == 0 %}
                             <div>
-                                <a href="/feed/{{ id }}{{ feedid }}">
+                                <a href="/feed/{{ id }}_{{ date }}">
                                     <div>
                                         <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
                                     </div>
@@ -194,7 +197,7 @@
                             </div>
                         {% else %}
                             <div class="margin-right-div">
-                                <a href="/feed/{{ id }}{{ feedid }}">
+                                <a href="/feed/{{ id }}_{{ date }}">
                                     <div>
                                         <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
                                     </div>

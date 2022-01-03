@@ -39,18 +39,18 @@
                         <div class="feed-icons-wrapper flex">
 
                             {% if like_this == True %}
-                              <div class="heart_container" id="{{ feed_id }}_heart" onclick="like(this)">
+                              <div class="heart_container" id="{{ feed_id }}_heart" onclick="like(this, '{{ i_id }}')">
                                 <div class="heart-icon"></div>
                                 </div>
 <!--                               <img class="feed-icon" onclick="like(this)" src="/static/img/like@4x.png"-->
 <!--                                 id="{{ feed_id }}_{{ id }}">-->
-                            <img class="feed-icon1 hidden" onclick="like(this)" src="/static/img/like@3x.png"
+                            <img class="feed-icon1 hidden" onclick="like(this, '{{ i_id }}')" src="/static/img/like@3x.png"
                                  id="{{ feed_id }}_no_heart">
                             {% else %}
-                              <div class="heart_container hidden" id="{{ feed_id }}_heart" onclick="like(this)">
+                              <div class="heart_container hidden" id="{{ feed_id }}_heart" onclick="like(this, '{{ i_id }}')">
                                 <div class="heart-icon"></div>
                                 </div>
-                                <img class="feed-icon1" onclick="like(this)" src="/static/img/like@3x.png"
+                                <img class="feed-icon1" onclick="like(this, '{{ i_id }}')" src="/static/img/like@3x.png"
                                  id="{{ feed_id }}_no_heart">
                             {% endif %}
                             <img class="feed-icon" src="/static/img/comment@3x.png">

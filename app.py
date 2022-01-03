@@ -262,7 +262,7 @@ def mypage():
         info = db.feed
         # info = db.feed.find({'id': 'carrot_vely'})
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-        for x in info.find():
+        for x in info.find({"id": user['id']}):
             img_binary = fs.get(x['img'])
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
