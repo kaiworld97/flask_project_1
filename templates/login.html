@@ -3,7 +3,7 @@
     <head>
 
         <!-- Webpage Title -->
-        <title>Hello, world!</title>
+        <title>로그인</title>
 
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -11,6 +11,13 @@
 
         <!-- Bulma CSS 링크 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -47,7 +54,7 @@
     </head>
     <body>
         <div class="section has-text-centered">
-            <h1 class="title">로그인 페이지</h1>
+            <p class="title">CROBGRAM</p>
             <div class="container" style="width:60%">
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
@@ -57,7 +64,7 @@
                         <div class="field">
                             <div class="control">
                                 <input type="text" class="input" id="userid" aria-describedby="emailHelp"
-                                       placeholder="My ID">
+                                       placeholder="ID">
                             </div>
                         </div>
                     </div>
@@ -69,12 +76,13 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input type="password" class="input" id="userpw" placeholder="My Password">
+                                <input type="password" class="input" id="userpw" placeholder="Password">
                             </div>
                         </div>
                     </div>
                 </div>
                 <button class="button is-primary" onclick="login()">로그인</button>
+                <button class="button is-primary" onclick="location.href='register' ">회원가입</button>
             </div>
         </div>
     </body>

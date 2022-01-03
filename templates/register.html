@@ -3,7 +3,7 @@
     <head>
 
         <!-- Webpage Title -->
-        <title>Hello, world!</title>
+        <title>회원가입</title>
 
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -17,8 +17,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
         <script>
-            // 간단한 회원가입 함수입니다.
-            // 아이디, 비밀번호, 닉네임을 받아 DB에 저장합니다.
             function register() {
                 $.ajax({
                     type: "POST",
@@ -53,7 +51,7 @@
                         <div class="field">
                             <div class="control">
                                 <input type="text" class="input" id="userid" aria-describedby="emailHelp"
-                                       placeholder="My ID">
+                                       placeholder="ID">
                             </div>
                         </div>
                     </div>
@@ -65,7 +63,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input type="password" class="input" id="userpw" placeholder="My Password">
+                                <input type="password" class="input" id="userpw" placeholder="Password">
                             </div>
                         </div>
                     </div>

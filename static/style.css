@@ -488,3 +488,9 @@ left: 47%;
     }
 }
 
+p {
+    font-family: 'Oswald', sans-serif;
+}
+.title {
+    font-weight: 400;
+}

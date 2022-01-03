@@ -45,7 +45,7 @@ input {
     text-indent: -9999px;
 }
 body, button, input, select, td, textarea, th {
-    font-size: 13px;
+    font-size: 13rem;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
 }
@@ -146,4 +146,12 @@ fieldset, img {
 }
 .is-hidden {
     display: none;
+}
+
+p {
+    font-family: 'Oswald', sans-serif;
+}
+
+.title {
+    font-weight: 400;
 }
