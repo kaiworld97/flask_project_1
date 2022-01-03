@@ -197,6 +197,7 @@ border-radius: 10px;
     font-size: 1.2rem;
     color: gray;
     margin: 3% 0;
+    width: 10%;
 }
 .feed-msg{
     font-size: 1.5rem;
@@ -848,6 +849,7 @@ p {
     display: flex;
     flex-direction: column;
     flex: 0;
+    padding-bottom: 2%;
 }
 @media (max-width:720px){
     .this-dialog{
@@ -878,6 +880,8 @@ dialog .etc_info {
 
 dialog .feed-time {
     font-size: 1rem;
+    width: 30%;
+
 }
 
 dialog .feed-icons-wrapper > img {
@@ -952,6 +956,7 @@ div#dl_write_part {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-left: 1%;
 }
 
 .dl_comment_box {
