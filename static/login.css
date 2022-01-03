@@ -148,6 +148,14 @@ fieldset, img {
     display: none;
 }
 
+.button_div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 p {
     font-family: 'Oswald', sans-serif;
 }
