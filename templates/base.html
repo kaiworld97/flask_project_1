@@ -12,7 +12,7 @@
     <script src="/static/comment.js"></script>
     <link href="/static/comment.css" rel="stylesheet">
 
-<!--구글폰트(/write_feed)-->
+    <!--구글폰트(/write_feed)-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -20,72 +20,72 @@
 
 </head>
 <body>
-  <div id="waiting">
+<div id="waiting">
     <img src="https://d33wubrfki0l68.cloudfront.net/1d3a7ce32c8fe7b94d7237da407a68f0d3026575/57855/1484.gif">
-  </div>
-    <div id="desk-head-container">
-        <div id="desk-head-wrapper">
-            <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
-            <div id="desk-search">
-                <input placeholder="검색">
+</div>
+<div id="desk-head-container">
+    <div id="desk-head-wrapper">
+        <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
+        <div id="desk-search">
+            <input placeholder="검색">
+        </div>
+        <div id="head-icons">
+            <img class="icon" src="/static/img/home@3x.png" onclick="go_main()"/>
+            <img class="icon" src="/static/img/search@3x.png" onclick="go_recipe()"/>
+            <img class="icon dropdbtn" src="/static/img/trending@3x.png" onclick="dropdownmenu()"/>
+            <div id="dropdown" class="dropdown-content drop">
+                <a href="#" onclick="feed_write_dialog()">피드 작성</a>
+                <hr>
+                <a href="/write_recipe">레시피 작성</a>
             </div>
-            <div id="head-icons">
-                <img class="icon" src="/static/img/home@3x.png" onclick="go_main()"/>
-                <img class="icon" src="/static/img/search@3x.png" onclick="go_recipe()"/>
-                <img class="icon dropdbtn" src="/static/img/trending@3x.png" onclick="dropdownmenu()"/>
-                    <div id="dropdown" class="dropdown-content drop">
-                        <a href="#" onclick="feed_write_dialog()">피드 작성</a>
-                        <hr>
-                        <a href="/write_recipe">레시피 작성</a>
-                    </div>
-                <img class="icon" src="/static/img/like@3x.png" onclick="go_auction()"/>
-                {% if user.img == 'x' or user.img == None %}
-                <img class="profile" src="/static/img/12344.gif" alt="" onclick = "location.href = '/mypage/{{ user.id }}'">
-                {% else %}
-                <img class="profile" src="data:image/png;base64, {{ user.img }}" onclick = "location.href = '/mypage/{{ user.id }}'"/>
-                {% endif %}
-            </div>
+            <img class="icon" src="/static/img/like@3x.png" onclick="go_auction()"/>
+            {% if user.img == 'x' or user.img == None %}
+            <img class="profile" src="/static/img/12344.gif" alt="" onclick="location.href = '/mypage/{{ user.id }}'">
+            {% else %}
+            <img class="profile" src="data:image/png;base64, {{ user.img }}"
+                 onclick="location.href = '/mypage/{{ user.id }}'"/>
+            {% endif %}
         </div>
     </div>
-    <div id="all-container">
-        <div id="head-container">
-                <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
-                <img class="left-head-icon side-head-icon" src="/static/img/camera@3x.png" onclick="go_camera()"/>
+</div>
+<div id="all-container">
+    <div id="head-container">
+        <img class="logo-icon" src="/static/img/insta-logo.png" onclick="load()"/>
+        <img id="camera_icon" class="left-head-icon side-head-icon" src="/static/img/camera@3x.png" onclick="camera_dialog()"/>
+    </div>
+    <div id="foot-container">
+        <img class="foot-icon" src="/static/img/home@3x.png" onclick="go_main()"/>
+        <img class="foot-icon" src="/static/img/search@3x.png" onclick="go_recipe()"/>
+        <img class="foot-icon dropubtn" src="/static/img/trending@3x.png" onclick="dropupmenu()"/>
+        <div id="dropup" class="dropup-content drop">
+            <a href="#" onclick="feed_write_dialog()">피드 작성</a>
+            <hr>
+            <a href="/write_recipe">레시피 작성</a>
         </div>
-        <div id="foot-container">
-                <img class="foot-icon" src="/static/img/home@3x.png" onclick="go_main()"/>
-                <img class="foot-icon" src="/static/img/search@3x.png" onclick="go_recipe()"/>
-                <img class="foot-icon dropubtn" src="/static/img/trending@3x.png" onclick="dropupmenu()"/>
-                    <div id="dropup" class="dropup-content drop">
-                        <a href="#" onclick="feed_write_dialog()">피드 작성</a>
-                        <hr>
-                        <a href="/write_recipe">레시피 작성</a>
-                    </div>
-                <img class="foot-icon" src="/static/img/like@3x.png" onclick="go_auction()"/>
-                {% if user.img == 'x' or user.img == None %}
-                <img class="profile" src="/static/img/12344.gif" alt="" onclick = "location.href = '/mypage/{{ user.id }}'">
-                {% else %}
-                <img class="profile" src="data:image/png;base64, {{ user.img }}" onclick = "location.href = '/mypage/{{ user.id }}'"/>
-                {% endif %}
-        </div>
+        <img class="foot-icon" src="/static/img/like@3x.png" onclick="go_auction()"/>
+        {% if user.img == 'x' or user.img == None %}
+        <img class="profile" src="/static/img/12344.gif" alt="" onclick="location.href = '/mypage/{{ user.id }}'">
+        {% else %}
+        <img class="profile" src="data:image/png;base64, {{ user.img }}"
+             onclick="location.href = '/mypage/{{ user.id }}'"/>
+        {% endif %}
+    </div>
 
-        <div id="main-container">
-            {% block content %}{% endblock %}
-        </div>
+    <div id="main-container">
+        {% block content %}{% endblock %}
+    </div>
 
 
-
-<!--        피드 쓰기-->
-
+    <!--        피드 쓰기-->
 
 
     <dialog id="feed_write_dialog">
-    <div id="modal_header" class="header_box">
-        <div id="_back" class="arrow" onclick="back_home()"> ← </div>
-        <span id="header_title" class="title"> 새 게시물 만들기</span>
-        <span id="_next" class="next" onclick="writeText()"> 다음 </span>
-        <span id="_share" class="share" onclick="posting()"> 공유하기 </span>
-    </div>
+        <div id="modal_header" class="header_box">
+            <div id="_back" class="arrow" onclick="back_home()"> ←</div>
+            <span id="header_title" class="title"> 새 게시물 만들기</span>
+            <span id="_next" class="next" onclick="writeText()"> 다음 </span>
+            <span id="_share" class="share" onclick="posting()"> 공유하기 </span>
+        </div>
         <div class="conten_container">
             <!-- 첫번째화면 -->
             <div id="upload_box" class="upload_wrap">
@@ -146,12 +146,35 @@
     </dialog>
 
 
+    <!--        레시피 쓰기-->
 
-        <!--        레시피 쓰기-->
-    </div>
-    <script src="/static/main.js"></script>
-    <script src="/static/{{ html }}.js"></script>
-    <script></script>
+    <!--        카메라-->
+    <dialog id="camera_dialog">
+        <div class="camera">
+            <video id="video"></video>
+        </div>
+        <canvas id="canvas" class="hidden">
+        </canvas>
+        <div id="output-wrapper">
+            <div id="btns">
+                <button id="startbutton">사진찍기</button>
+                <button id="restart" class="hidden">다시찍기</button>
+                <button onclick="camera_posting('{{ user.id }}')">업로드</button>
+                <button onclick="close_camera_dialog()">카메라 끄기</button>
+            </div>
+            <div id="output" class="hidden">
+                <img id="photo">
+            </div>
+            <textarea id="camera_feed" class="hidden"></textarea>
+
+        </div>
+    </dialog>
+
+
+</div>
+<script src="/static/main.js"></script>
+<script src="/static/{{ html }}.js"></script>
+<script></script>
 
 </body>
 </html>

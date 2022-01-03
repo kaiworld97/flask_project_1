@@ -57,7 +57,8 @@ def home():
                     b['nick'] = comments_user['nick']
                     b['img'] = comments_user['img']
                     t = str(
-                        datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
+                        datetime.fromtimestamp(
+                            round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
                             int(b['date']) / 1000.0))
                     if 'day,' in t.split(' '):
                         time = t.split(' ')[0] + '일 전'
@@ -118,10 +119,12 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+
 @app.route('/recipe')
 def recipe():
     user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
     return render_template('recipe.html', html='recipe', user=user)
+
 
 @app.route('/follow', methods=['POST'])
 def follow():
@@ -137,6 +140,7 @@ def follow():
     else:
         db.follow.delete_one({'followed_id': followed_id_receive, 'follow_id': id_receive})
     return jsonify({'msg': 'saved!!!!'})
+
 
 # @app.route('/write_feed')
 # def write_feed():
@@ -275,34 +279,6 @@ def mypage(keyword):
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
-@app.route('/camera')
-def camera():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
-        # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-        return render_template('camera.html', html='camera', user=user)
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
-# @app.route('/feedpopup')
-# def feedpopup():
-#     token_receive = request.cookies.get('mytoken')
-#     try:
-#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-#         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
-#         return render_template('feedpopup.html', html='feedpopup', user=user)
-#     except jwt.ExpiredSignatureError:
-#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-#     except jwt.exceptions.DecodeError:
-#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/api/register', methods=['POST'])
 def api_register():
@@ -370,21 +346,6 @@ def check_dup():
     # return jsonify({'result': 'success'})
 
 
-@app.route('/api/nick', methods=['GET'])
-def api_valid():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        print(payload)
-        userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-
-        return jsonify({'result': 'success', 'nickname': userinfo['nick']})
-    except jwt.ExpiredSignatureError:
-        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    except jwt.exceptions.DecodeError:
-        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-
-
 @app.route("/comments", methods=["POST"])
 def comment_post():
     comment_receive = request.form['comment_give']
@@ -408,7 +369,6 @@ def comment_post():
         return jsonify({'msg': '중복 댓글 입니다!'})
 
 
-
 @app.route("/comments", methods=["GET"])
 def comment_get():
     comment_list = list(db.comment.find({}, {'_id': False}))
@@ -428,33 +388,6 @@ def comment_update_post():
     comment_receive = request.form['update_comment']
     db.comment.update_one({'comment_id': comment_id_receive}, {"$set": {"comment": comment_receive}})
     return jsonify({'msg': '댓글 수정!'})
-
-
-@app.route('/camerafeedupload', methods=['POST'])
-def camerafeedupload():
-    camerafeed_receive = request.form['camerafeed_give']
-    file = request.files['file_give']
-
-    fs_image_id = fs.put(file)
-
-    doc = {
-        'camerafeed': camerafeed_receive,
-        'img': fs_image_id
-    }
-    db.camp2.insert_one(doc)
-
-    return jsonify({'result': 'success'})
-
-
-@app.route('/fileshow/<title>')
-def file_show(title):
-    img_info = db.users.find_one({'title': title})
-    img_binary = fs.get(img_info['img'])
-
-    base64_data = codecs.encode(img_binary.read(), 'base64')
-    image = base64_data.decode('utf-8')
-
-    return render_template('showimg.html', img=image)
 
 
 @app.route('/register')
