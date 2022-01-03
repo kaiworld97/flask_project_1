@@ -138,18 +138,18 @@ def follow():
         db.follow.delete_one({'followed_id': followed_id_receive, 'follow_id': id_receive})
     return jsonify({'msg': 'saved!!!!'})
 
-@app.route('/write_feed')
-def write_feed():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
-        # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-        return render_template('write_feed.html', html='write_feed', user=user)
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+# @app.route('/write_feed')
+# def write_feed():
+#     token_receive = request.cookies.get('mytoken')
+#     try:
+#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+#         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+#         return render_template('', html='write_feed', user=user)
+#     except jwt.ExpiredSignatureError:
+#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+#     except jwt.exceptions.DecodeError:
+#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/feed_upload', methods=['POST'])
 def file_upload():
@@ -240,19 +240,14 @@ def feed_update():
     return jsonify({'msg': '피드 수정!'})
 
 
-@app.route('/write_recipe')
-def write_recipe():
-    return render_template('write_recipe.html', html='write_recipe')
-
-
 @app.route('/auction')
 def auction():
     user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
     return render_template('auction.html', html='auction', user=user)
 
 
-@app.route('/mypage')
-def mypage():
+@app.route('/mypage/<keyword>')
+def mypage(keyword):
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])

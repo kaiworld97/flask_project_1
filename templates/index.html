@@ -123,6 +123,10 @@
                         </div>
                     </div>
                 </div>
+
+
+
+<!--                게시물 닷 dialog-->
                 <dialog id="{{ feed_id }}dialog" class="dialog">
                     <form class="dialog_form" method="dialog">
                         <button class="strong" onclick="feed_delete(`{{ feed_id }}`)">삭제 하기</button>
@@ -134,7 +138,7 @@
                         <button class="strong">취소</button>
                     </form>
                 </dialog>
-            </div>
+                <!--            게시물 피드 dialog-->
             <dialog id="{{ feed_id }}_feed_dialog" class="this-dialog">
                 <div id="container_wrap" class="content_container">
                     <!-- 피드사진 -->
@@ -169,43 +173,6 @@
                     {{ content }}
                 </span>
                         </div>
-
-
-                        <!-- 코멘트부분 -->
-<!--                        <div class="comment_wrap">-->
-<!--                            <div class="comment_part">-->
-<!--                                <ul class="feed_list">-->
-<!--                                    &lt;!&ndash; 유저피드내용 &ndash;&gt;-->
-<!--                                    <div class="feed_content">-->
-<!--                                        <div class="wf_user_profile">-->
-<!--                                            <img class="user_img" src="static/img/carrot.jpg">-->
-<!--                                        </div>-->
-<!--                                        <span>-->
-<!--                            {user_id들어갈 곳} {comment 들어갈 곳}사실 저는 당근을 싫어합니다. 오이도 싫어해요. 당근 많이 사랑해 주세요~ 당근케이크 만든 사람 얼굴 보고 시다^^ 당근케이크에 진짜로 당근이 들어갈 줄은 상상도 못했어요-->
-<!--                        </span>-->
-<!--                                    </div>-->
-<!--                                    <div class="feed_content">-->
-<!--                                        <div class="wf_user_profile">-->
-<!--                                            <img class="user_img" src="static/img/carrot.jpg">-->
-<!--                                        </div>-->
-<!--                                        <span>-->
-<!--                            {user_id들어갈 곳} {comment 들어갈 곳}사실 저는 당근을 싫어합니다. 오이도 싫어해요. 당근 많이 사랑해 주세요~ 당근케이크 만든 사람 얼굴 보고 시다^^ 당근케이크에 진짜로 당근이 들어갈 줄은 상상도 못했어요-->
-<!--                        </span>-->
-<!--                                    </div>-->
-<!--                                    <div class="feed_content">-->
-<!--                                        <div class="wf_user_profile">-->
-<!--                                            <img class="user_img" src="static/img/carrot.jpg">-->
-<!--                                        </div>-->
-<!--                                        <span>-->
-<!--                            {user_id들어갈 곳} {comment 들어갈 곳}사실 저는 당근을 싫어합니다. 오이도 싫어해요. 당근 많이 사랑해 주세요~ 당근케이크 만든 사람 얼굴 보고 시다^^ 당근케이크에 진짜로 당근이 들어갈 줄은 상상도 못했어요-->
-<!--                        </span>-->
-<!--                                    </div>-->
-
-<!--                                </ul>-->
-
-<!--                            </div>-->
-
-<!--                        </div>-->
                         <div class="comment-box">
                                     <!--여기에 댓글 추가-->
                                     {% for comment in comments %}
@@ -292,10 +259,17 @@
 
                 </div>
 
-                <dialog>
+                </dialog>
+
+            </div>
             {% endfor %}
+<!--        피드 반복문 끝-->
+
 
         </div>
+
+<!--        피드 컨테이너 끝-->
+
     </div>
     <div id="follow-container">
         <div id="follow-wrapper">
