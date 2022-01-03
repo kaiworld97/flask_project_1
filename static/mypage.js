@@ -27,6 +27,7 @@ $('[role="tab"]').on('click', eventHandler);
 
 
 function loadFile1(input) {
+    console.log(input)
     // let file_name = input.files[0]['name']
     let file = input.files[0];
     let file_img = document.createElement("img");
@@ -47,7 +48,7 @@ function loadFile1(input) {
 }
 
 function updating(data) {
-    let file = $('#file')[0].files[0]
+    let file = $('#file1')[0].files[0]
 
     let nick = $('#update_user_nick').val()
     let form_data = new FormData()

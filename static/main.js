@@ -228,7 +228,6 @@ function loadFile(input) {
     document.getElementById('uf_two').classList.add('hidden')
     document.getElementById('uf_three').classList.add('hidden')
 
-
     let container = document.getElementById("upload_box");
     container.style.width = "100%";
     container.appendChild(file_img);
@@ -237,11 +236,8 @@ function loadFile(input) {
 function writeText() {
     document.getElementById('_next').classList.add('hidden')
     document.querySelector('#_share').style.visibility = "visible";
-
     document.getElementById('_share').classList.remove('hidden')
     document.getElementById('second_part').classList.remove('hidden')
-
-
 }
 
 

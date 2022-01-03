@@ -232,10 +232,6 @@
                 {% endfor %}
             </div>
         </div>
-
-
-
-
           <dialog id="update_user_dialog">
               <div id="update_user_dialog_container">
               <div>
@@ -246,7 +242,7 @@
                 <img id="update_user_img" class="update_user_img" src="data:image/png;base64, {{ user.img }}">
                 {% endif %}
                       </div>
-              <input type="file" id="file">
+              <input type="file" id="file1" onchange="loadFile1(this)">
                 <input id="update_user_nick" value="{{ i_nick }}">
               </div>
 

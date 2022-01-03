@@ -60,11 +60,6 @@ function comment_update_cancel1(comment_id){
     document.getElementById(`${comment_id}_cancel1`).classList.add('hidden')
 }
 
-
-
-
-
-
 function comment_update(comment_id) {
     let comment = $(`#${comment_id}_input`).val()
     console.log(comment)
