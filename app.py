@@ -136,11 +136,14 @@ def recipe():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user = db.user.find_one({"id": payload['id']})
-        img_binary = fs.get(user['img'])
-        base64_data = codecs.encode(img_binary.read(), 'base64')
-        user_image = base64_data.decode('utf-8')
-        user['img'] = user_image
+        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        if user['img'] == 'x':
+            pass
+        else:
+            img_binary = fs.get(user['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            user['img'] = image
         return render_template('recipe.html', html='recipe', user=user)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
@@ -268,11 +271,14 @@ def auction():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user = db.user.find_one({"id": payload['id']})
-        img_binary = fs.get(user['img'])
-        base64_data = codecs.encode(img_binary.read(), 'base64')
-        user_image = base64_data.decode('utf-8')
-        user['img'] = user_image
+        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        if user['img'] == 'x':
+            pass
+        else:
+            img_binary = fs.get(user['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            user['img'] = image
         return render_template('auction.html', html='auction', user=user)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
@@ -285,10 +291,13 @@ def mypage(keyword):
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
-        img_binary = fs.get(user['img'])
-        base64_data = codecs.encode(img_binary.read(), 'base64')
-        user_image = base64_data.decode('utf-8')
-        user['img'] = user_image
+        if user['img'] == 'x':
+            pass
+        else:
+            img_binary = fs.get(user['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            user['img'] = image
         feedrows = []
         feedrow = []
         info = db.feed
