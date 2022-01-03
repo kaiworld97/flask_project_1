@@ -45,9 +45,7 @@ def home():
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             x['img'] = image
-            print(x)
             x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
-            print(x_user)
             img_binary = fs.get(x_user['img'])
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
@@ -57,12 +55,17 @@ def home():
             #     print(a)w
             comments = list(db.comment.find({'feed_id': str(x['_id'])}))
             comment = []
-            print(comments)
             if len(comments) != 0:
                 for b in comments:
                     comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
                     b['nick'] = comments_user['nick']
-                    b['img'] = comments_user['img']
+                    if comments_user['img'] == 'x':
+                        b['img'] = comments_user['img']
+                    else:
+                        img_binary = fs.get(comments_user['img'])
+                        base64_data = codecs.encode(img_binary.read(), 'base64')
+                        image = base64_data.decode('utf-8')
+                        b['img'] = image
                     t = str(
                         datetime.fromtimestamp(
                             round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
