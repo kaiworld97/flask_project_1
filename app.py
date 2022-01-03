@@ -32,6 +32,10 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        img_binary = fs.get(user['img'])
+        base64_data = codecs.encode(img_binary.read(), 'base64')
+        user_image = base64_data.decode('utf-8')
+        user['img'] = user_image
         rows = []
         info = db.feed
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
@@ -41,16 +45,19 @@ def home():
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             x['img'] = image
+            print(x)
             x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
-            # img_binary = fs.get(x_user['img'])
-            # base64_data = codecs.encode(img_binary.read(), 'base64')
-            # image = base64_data.decode('utf-8')
-            # x_user['img'] = image
+            print(x_user)
+            img_binary = fs.get(x_user['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            x_user['img'] = image
             x['write_user'] = x_user
             # for a in db.comment.find():
             #     print(a)w
             comments = list(db.comment.find({'feed_id': str(x['_id'])}))
             comment = []
+            print(comments)
             if len(comments) != 0:
                 for b in comments:
                     comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
@@ -111,8 +118,9 @@ def home():
             #     x['like_this'] = True
             # else:
             #     x['like_this'] = False
-            rows.append(x)
 
+            rows.append(x)
+        print(rows)
         return render_template('index.html', html='index', rows=rows, user=user)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
@@ -122,8 +130,19 @@ def home():
 
 @app.route('/recipe')
 def recipe():
-    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-    return render_template('recipe.html', html='recipe', user=user)
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user = db.user.find_one({"id": payload['id']})
+        img_binary = fs.get(user['img'])
+        base64_data = codecs.encode(img_binary.read(), 'base64')
+        user_image = base64_data.decode('utf-8')
+        user['img'] = user_image
+        return render_template('recipe.html', html='recipe', user=user)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
 @app.route('/follow', methods=['POST'])
@@ -160,15 +179,12 @@ def file_upload():
     date_receive = request.form['date_give']
     content_receive = request.form['content_give']
     id_receive = request.form['id_give']
-
+    user_id = db.user.find_one({'nick': id_receive})['id']
     file = request.files['file_give']
     # gridfs 활용해서 이미지 분할 저장
     fs_image_id = fs.put(file)
-    # feed_list = list(db.feed.find({}))
-    # count = len(feed_list) + 1
-    # db 추가
     feed_doc = {
-        'id': id_receive,
+        'id': user_id,
         'content': content_receive,
         'date': date_receive,
         'img': fs_image_id
@@ -246,9 +262,19 @@ def feed_update():
 
 @app.route('/auction')
 def auction():
-    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-    return render_template('auction.html', html='auction', user=user)
-
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user = db.user.find_one({"id": payload['id']})
+        img_binary = fs.get(user['img'])
+        base64_data = codecs.encode(img_binary.read(), 'base64')
+        user_image = base64_data.decode('utf-8')
+        user['img'] = user_image
+        return render_template('auction.html', html='auction', user=user)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/mypage/<keyword>')
 def mypage(keyword):
@@ -256,6 +282,10 @@ def mypage(keyword):
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        img_binary = fs.get(user['img'])
+        base64_data = codecs.encode(img_binary.read(), 'base64')
+        user_image = base64_data.decode('utf-8')
+        user['img'] = user_image
         feedrows = []
         feedrow = []
         info = db.feed
@@ -389,6 +419,20 @@ def comment_update_post():
     db.comment.update_one({'comment_id': comment_id_receive}, {"$set": {"comment": comment_receive}})
     return jsonify({'msg': '댓글 수정!'})
 
+@app.route("/user_update", methods=["POST"])
+def user_update():
+    nick_receive = request.form['nick_give']
+    id_receive = request.form['id_give']
+    file = request.files['file_give']
+    # gridfs 활용해서 이미지 분할 저장
+    fs_image_id = fs.put(file)
+    user_info = db.user.find_one({'id': id_receive})
+    if user_info['img'] == 'x':
+        db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
+    else:
+        fs.delete(user_info['img'])
+        db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
+    return jsonify({'msg': '수정 완료!'})
 
 @app.route('/register')
 def register():

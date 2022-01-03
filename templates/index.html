@@ -126,9 +126,9 @@
                                 <div class="comment-write-wrapper">
                                     <div class="wf_user_profile">
                                         {% if i_img == 'x' or i_img == None %}
-                                        <img class="comment_img" src="/static/img/12344.gif" alt="">
+                                        <img class="i_img" src="/static/img/12344.gif" alt="">
                                         {% else %}
-                                        <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
+                                        <img class="i_img" src="data:image/png;base64, {{ i_img}}">
                                         {% endif %}
                                     </div>
                                     <input type="text" id="{{ feed_id }}comment" placeholder="댓글 달기...">

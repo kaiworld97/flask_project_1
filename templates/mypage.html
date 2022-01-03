@@ -18,7 +18,7 @@
             </div>
             <section id="Mypage-section">
                 <div id="Mypage-section-top">
-                    <div id="Mypage-text">{{ i_id }}</div>
+                    <div id="Mypage-text">{{ i_nick }}</div>
                     <div id="Mypage-profile-edit-box">
                         프로필 편집
                     </div>
@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div id="Mypage-section-bottom">
-                    <span style="font-weight: 600;">{{ i_id }}</span><br>
-                    <span>{{ i_nick }}</span>
+                    <span style="font-weight: 600;">{{ i_nick }}</span><br>
+                    <span>{{ i_id }}</span>
                 </div>
             </section>
         </header>
@@ -237,23 +237,24 @@
 
 
           <dialog id="update_user_dialog">
+              <div id="update_user_dialog_container">
               <div>
+                  <div id="update_box">
                 {% if user.img == 'x' or user.img == None %}
-                <img class="update_user_img" src="/static/img/12344.gif">
+                <img id="update_user_img" class="update_user_img" src="/static/img/12344.gif">
                 {% else %}
-                <img class="update_user_img" src="data:image/png;base64, {{ user.img }}">
+                <img id="update_user_img" class="update_user_img" src="data:image/png;base64, {{ user.img }}">
                 {% endif %}
-              <form id="uf_three" class="upload_form" method="post" enctype="multipart/form-data">
-                  <input type="file" id="select_file" name="chooseFile" accept="image/*" onchange="loadFile(this)">
-              </form>
+                      </div>
+              <input type="file" id="file">
                 <input id="update_user_nick" value="{{ i_nick }}">
               </div>
 
               <div id="dialog_btn">
-                  <button>수정하기</button>
+                  <button onclick="updating(`{{ i_id }}`)">수정하기</button>
                   <button>취소</button>
               </div>
-
+            </div>
 
     </dialog>
     </div>

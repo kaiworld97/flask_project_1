@@ -26,7 +26,46 @@ $('[role="tab"]').on('click', eventHandler);
 
 
 
+function loadFile1(input) {
+    // let file_name = input.files[0]['name']
+    let file = input.files[0];
+    let file_img = document.createElement("img");
+    file_img.setAttribute("class", 'img')
+    file_img.src = URL.createObjectURL(file);
 
-document.getElementById('tab1').addEventListener('click', tab1)
-document.getElementById('tab2').addEventListener('click', tab2)
-document.getElementById('tab3').addEventListener('click', tab3)
+    file_img.style.width = "300px";
+    file_img.style.height = "300px";
+    file_img.style.visibility = "visible";
+    file_img.style.objectFit = "cover";
+    file_img.style.borderRadius = "150px";
+
+    document.getElementById('update_user_img').classList.add('hidden')
+
+
+    let container1 = document.getElementById("update_box");
+    container1.appendChild(file_img);
+}
+
+function updating(data) {
+    let file = $('#file')[0].files[0]
+
+    let nick = $('#update_user_nick').val()
+    let form_data = new FormData()
+
+    form_data.append("file_give", file)
+    form_data.append("nick_give", nick)
+    form_data.append("id_give", data)
+
+    $.ajax({
+        type: "POST",
+        url: '/user_update',
+        data: form_data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            alert(response["msg"])
+            window.location.reload()
+        }
+    });
+}
