@@ -2,6 +2,7 @@
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
   border-radius: 5px;
+  text-align: center;
 }
 
 body {
@@ -30,11 +31,11 @@ body {
 
 }
 
-.submit-btn {
+.button {
   font-size: 14px;
   border: none;
   padding: 10px;
-  width: 260px;
+  width: 290px;
   background-color: #1BBC9B;
   margin-bottom: 30px;
   color: white;

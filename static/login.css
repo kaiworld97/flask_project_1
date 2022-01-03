@@ -2,6 +2,7 @@
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
   border-radius: 5px;
+  text-align: center;
 }
 
 body {
@@ -25,26 +26,18 @@ body {
       font-size: 14px;
       padding: 10px;
       border: none;
-      width: 260px;
+      width: 300px;
       margin-bottom: 10px;
 
 }
 
-.submit-btn {
+.button {
   font-size: 14px;
   border: none;
   padding: 10px;
-  width: 260px;
+  width: 290px;
   background-color: #1BBC9B;
   margin-bottom: 30px;
   color: white;
 }
 
-.links {
-    text-align: center;
-}
-
-.links a {
-  font-size: 12px;
-  color: #9B9B9B;
-}
