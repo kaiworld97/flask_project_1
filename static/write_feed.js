@@ -42,6 +42,7 @@ function loadFile(input){
     document.querySelector('#_back').style.visibility = "visible";
     document.querySelector('#_next').style.visibility = "visible";
     document.getElementById('_share').classList.add('hidden')
+    document.getElementById('header_title').classList.add('hidden')
 
 
     // let file_name = input.files[0]['name']
@@ -68,8 +69,12 @@ function loadFile(input){
 function writeText(){
     document.getElementById('_next').classList.add('hidden')
     document.querySelector('#_share').style.visibility = "visible";
+
+
     document.getElementById('_share').classList.remove('hidden')
     document.getElementById('write_part').classList.remove('hidden')
+
+
 }
 
 
@@ -77,8 +82,7 @@ function writeText(){
  function posting() {
     // let title = $('#chooseFile')[0].files[0].name
     let file = $('#select_file')[0].files[0]
-    let content = $('#_textarea').val()
-     console.log(content)
+    let content = $('#textarea').val()
     // 지금은 유저id 직접 타이핑한거라 .text로했지만 db에서 불러올경우 수정필요
     let user_id = document.querySelector("#user_name").textContent
     const date = new Date();

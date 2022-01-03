@@ -1,8 +1,5 @@
 {% extends "base.html"  %}
 {% block content %}
-{% set i_img = user.img %}
-{% set i_id = user.id %}
-{% set i_nick = user.nick %}
 <div class="write_feed_container model__background">
 
     <!-- <button onclick="showThisDialog()">Show this Dialog</button> -->
@@ -45,14 +42,10 @@
         <div id="filter_part" class="filter">
     <div class="wf_user_info">
         <div class="wf_user_profile">
-            {% if user.img == 'x' or user.img == None %}
-            <img class="user_img" src="/static/img/12344.gif">
-            {% else %}
-            <img class="user_img" src="data:image/png;base64, {{ user.img }}">
-            {% endif %}
+            <img class="user_img" src="static/img/carrot.jpg">
         </div>
         <div class="user_id">
-            <span id="user_name">{{ i_nick }}</span>
+            <span id="user_name">carrot_vely</span>
         </div>
     </div>
 
@@ -78,14 +71,10 @@
         <div id="write_part" class="side">
             <div class="wf_user_info">
                 <div class="wf_user_profile">
-                    {% if user.img == 'x' or user.img == None %}
-                    <img class="user_img" src="/static/img/12344.gif">
-                    {% else %}
-                    <img class="user_img" src="data:image/png;base64, {{ user.img }}">
-                    {% endif %}
+                    <img class="user_img" src="static/img/carrot.jpg">
                 </div>
                 <div class="user_id">
-                    <span id="user_name">{{ i_nick }}</span>
+                    <span id="user_name">carrot_vely</span>
                 </div>
             </div>
 
@@ -114,7 +103,7 @@
 
 
 
-</dialog>
+<dialog>
 </div>
 
 {% endblock %}
