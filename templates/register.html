@@ -11,7 +11,7 @@
 
         <!-- Bulma CSS 링크 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-
+        <link rel="stylesheet" href="static/register.css">
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -40,9 +40,11 @@
         </script>
     </head>
     <body>
+    <div class="login-form">
+    <form>
         <div class="section has-text-centered">
-            <h1 class="title">회원가입 페이지</h1>
-            <div class="container" style="width:60%">
+            <h1 class="title">회원가입</h1>
+            <div class="container" style="width:50%">
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
                         <label class="label" for="userid">ID</label>
@@ -75,12 +77,13 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input type="text" class="input" id="usernick" placeholder="My Nickname">
+                                <input type="text" class="input" id="usernick" placeholder="My Nick">
                             </div>
                         </div>
                     </div>
                 </div>
                 <button class="button is-primary" onclick="register()">회원가입</button>
+                </form>
             </div>
         </div>
     </body>
