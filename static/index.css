@@ -1,3 +1,5 @@
+/*index.css*/
+
 .comment_img {
     width: 3rem;
     height: 3rem;
@@ -14,11 +16,12 @@
 }
 
 .comment_wrapper div:nth-child(2) {
-    flex-basis: 465px;
+    flex-basis: 250px;
+    cursor: pointer;
 }
 
 .comment_wrapper div:nth-child(3) {
-    flex-basis: 83px;
+    flex-basis: 290px;
 }
 
 
@@ -330,4 +333,24 @@ position these pseudo elements at either end of the square with top/right/bottom
 
     }
 
+}
+
+/*코멘트수정인풋수정*/
+
+.comment_wrapper input {
+    background-color: transparent;
+    border-bottom-color: #838383;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+}
+
+.comment_wrapper input:focus {
+    outline: none;
+}
+
+.comment_wrapper button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
 }

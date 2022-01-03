@@ -1,3 +1,6 @@
+/*style.css*/
+
+
 html{
     font-size: 12px;
     background-color: #fafafa;
@@ -193,7 +196,7 @@ dialog .feed-like-wrapper{
 }
 .feed-feed-wrapper{
     display: flex;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     flex-direction: column;
     padding: 0 4%;
     border-bottom: 1px solid #8d8c8c45;
@@ -685,8 +688,8 @@ p {
 #feed_write_dialog .next, .share{
     cursor: pointer;
     font-size: 1.2rem;
-    font-weight: bold;
-    color: blue;
+    font-weight: bolder;
+    color: #3a80ff;
     padding-right: 1%;
 }
 #feed_write_dialog .arrow{
@@ -945,7 +948,8 @@ dialog {
     border: none;
     background-color: transparent;
     color: cornflowerblue;
-    width: 10vw;
+flex-basis: 7%;
+
 }
 
 /*댓글클릭시아웃라인숨김*/
@@ -978,12 +982,12 @@ div#dl_write_part {
 }
 
 
-.comment_wrapper button {
+dialog .comment_wrapper button {
     cursor: pointer;
 }
 
 .comment_wrapper div:nth-child(2) {
-    flex-basis: 350px;
+    flex-basis: 270px;
 }
 
 dialog .comment_wrapper div:nth-child(3) {
@@ -996,4 +1000,10 @@ dialog .comment_wrapper div:nth-child(4) {
 
 dialog .feed_content span {
     font-size: 1.3rem;
+}
+
+/*다이얼로그x버튼*/
+dialog .close_btn {
+    padding-left: 70%;
+    cursor: pointer;
 }
