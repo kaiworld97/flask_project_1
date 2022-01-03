@@ -1,7 +1,7 @@
 .comment-write-wrapper {
     display: flex;
     width: 100%;
-
+    margin-bottom: 3%;
 }
 
 .wf_user_profile img {

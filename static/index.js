@@ -18,6 +18,9 @@ function dialog_open(data) {
 function feed_dialog_open(data) {
     document.getElementById(`${data}_feed_dialog`).showModal()
 }
+function dialog_close_btn(data){
+    document.getElementById(`${data}_feed_dialog`).close()
+}
 
 function feed_delete(data) {
     $.ajax({

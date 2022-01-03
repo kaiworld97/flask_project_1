@@ -167,18 +167,28 @@
     text-align: center;
 }
 #update_user_nick{
-    margin-top: 10%;
 }
 #dialog_btn{
     margin-top: 5%;
 }
 
 .this-dialog {
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    width: 120%;
+    height: 105%;
     border: none;
     border-radius: 2%;
     overflow: hidden;
+}
+dialog .feed-time {
+    font-size: 0.5rem;
+    width: 30%;
+}
+div#dl_write_part {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 2%;
 }
 .comment_img {
     width: 3rem;
@@ -272,6 +282,43 @@ position these pseudo elements at either end of the square with top/right/bottom
     top: calc(var(--heart-icon-size) / -2);
     left: 0;
 }
+dialog .close_btn {
+    padding-left: 61%;
+    cursor: pointer;
+}
+.comment_wrapper div:nth-child(2) {
+    flex-basis: 30px;
+}
+dialog .comment_wrapper div:nth-child(3) {
+    flex-basis: 0;
+}
+dialog .comment_wrapper div:nth-child(4) {
+    flex-basis: 1px;
+}
+#update_user_dialog button{
+    border: none;
+    background-color: transparent;
+    color: gray;
+}
+.input[type="file" i] {
+    border: 1px;
+}
+#update_user_dialog .choice_btn {
+    width: 130px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    background-color: #0094f5;
+    border-radius: 5px;
+    padding: 5px 0 5px 0;
+    margin: auto;
+    margin-top: 8%;
+}
+#file1{
+    visibility: hidden;
+}
+
 @media (max-width: 800px) {
     .mypageimg {
         width: 16rem;

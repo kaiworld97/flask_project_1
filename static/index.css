@@ -16,7 +16,7 @@
 }
 
 .comment_wrapper div:nth-child(2) {
-    flex-basis: 250px;
+    flex-basis: 330px;
     cursor: pointer;
 }
 

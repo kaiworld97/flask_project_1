@@ -36,7 +36,6 @@ function dropupmenu() {
 function feed_write_dialog() {
     document.getElementById("feed_write_dialog").showModal();
 
-    document.querySelector('#_back').style.visibility = "hidden";
     document.querySelector('#_next').style.visibility = "hidden";
     document.querySelector('#_share').style.visibility = "hidden";
 
@@ -271,5 +270,8 @@ function posting() {
             window.location.reload()
         }
     });
+}
+function dialog_close_btn1(){
+    document.getElementById('feed_write_dialog').close()
 }
 

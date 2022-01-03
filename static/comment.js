@@ -11,6 +11,19 @@ function comment_write(data, id) {
         }
     });
 }
+function comment_write1(data, id) {
+    let comment = $(`#${data}comment1`).val()
+    const date = new Date();
+    let time = String(date.getTime())
+    $.ajax({
+        type: 'POST',
+        url: '/comments',
+        data: {'comment_give': comment,'feed_id_give': data, 'id_give': id, 'date_give': time},
+        success: function (response) {
+            window.location.reload()
+        }
+    });
+}
 
 function comment_delete(comment_id) {
 

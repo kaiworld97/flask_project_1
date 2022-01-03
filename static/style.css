@@ -47,7 +47,9 @@ body{
     display: flex;
     width: 50%;
 }
-
+.magin_top1{
+    margin-top: 1%;
+}
 
 .lighter{
     font-weight: lighter
@@ -203,10 +205,18 @@ dialog .feed-like-wrapper{
 }
 
 .feed-time{
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: gray;
     margin: 3% 0;
-    width: 10%;
+    width: 14%;
+    display: flex;
+    justify-content: flex-end;
+}
+.feed-time1{
+    font-size: 1rem;
+    color: gray;
+    margin: 3% 0;
+    width: 14%;
 }
 .feed-msg{
     font-size: 1.5rem;
@@ -697,7 +707,8 @@ p {
     font-size: 1.2rem;
     font-weight: bold;
     color: black;
-        padding-left: 1%;
+    padding-left: 1.5%;
+    padding-top: 0.3%;
 }
 
 #feed_write_dialog .text_content:focus{

@@ -11,6 +11,9 @@ function mypageimgopen(data){
 function mypageimgclose(data){
     document.getElementById(`${data}_feed_dialog`).close()
 }
+function dialog_close_btn(data){
+    document.getElementById(`${data}_feed_dialog`).close()
+}
 
 function eventHandler(e) {
     var $eTarget = $(e.currentTarget);

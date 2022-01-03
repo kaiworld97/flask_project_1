@@ -256,151 +256,148 @@
         {% set like_this = ro.like_this %}
         {% set like = ro.like_count %}
         {% set time = ro.time %}
-        <dialog id="{{ feed_id }}_feed_dialog" class="this-dialog">
-            <div id="container_wrap" class="content_container">
-                <!-- 피드사진 -->
-                <div class="feed_pic">
-                    <div class="width_100">
-                        <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
-                    </div>
-                </div>
-                <!-- 피드내용 -->
-                <div id="dl_write_part" class="side">
-                    <!-- 헤더부분 -->
-                    <div class="wf_user_info">
-                        <div class="wf_user_profile">
-                            {% if user.img == 'x' or user.img == None %}
-                            <img class="user_img" src="/static/img/12344.gif" alt=""">
-                            {% else %}
-                            <img class="user_img" src="data:image/png;base64, {{ user.img }}"/>
-                            {% endif %}
+                        <dialog id="{{ feed_id }}_feed_dialog" class="this-dialog">
+                    <div id="container_wrap" class="content_container">
+                        <!-- 피드사진 -->
+                        <div class="feed_pic">
+                            <div class="width_100">
+                                <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
+                            </div>
                         </div>
-                        <div class="user_id">
-                            <a href="/mypage/{{ id }}">
-                                <div>
-                                    <span class="user_name">{{ nickname }}</span>
+                        <!-- 피드내용 -->
+                        <div id="dl_write_part" class="side">
+                            <!-- 헤더부분 -->
+                            <div class="wf_user_info">
+                                <div class="wf_user_profile">
+                                    {% if user.img == 'x' or user.img == None %}
+                                    <img class="user_img" src="/static/img/12344.gif" alt="">
+                                    {% else %}
+                                    <img class="user_img" src="data:image/png;base64, {{ user.img }}"/>
+                                    {% endif %}
                                 </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="dl_comment_box">
-                        <div class="feed_content">
+                                <div class="user_id">
+                                    <a href="/mypage/{{ id }}">
+                                        <div>
+                                            <span class="user_name">{{ nickname }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="{{ feed_id }}_close_btn" class="close_btn" onclick="dialog_close_btn(`{{ feed_id }}`)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        <div class="dl_comment_box">
+                            <div class="feed_content">
                                     <span>
                                         {{ content }}
                                     </span>
-                        </div>
-                        <div class="comment-box">
-                            <!--여기에 댓글 추가-->
-                            {% for comment in comments %}
-                            <div class="comment_wrapper">
-                                {% if comment.img == 'x' or comment.img == None %}
-                                <img class="comment_img" src="/static/img/12344.gif" alt="">
-                                {% else %}
-                                <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
-                                {% endif %}
-                                <div>
-                                    <b>{{ comment.nick }}</b>
-                                    <b id="{{ comment.comment_id }}_comment1" class="lighter"
-                                       onclick="comment_dialog_open1(`{{ comment.comment_id }}`)">{{ comment.comment
-                                        }}</b>
-                                </div>
-                                <div>
-                                    <input id="{{ comment.comment_id }}_input1" class="hidden">
-                                    <button id="{{ comment.comment_id }}_ok1"
-                                            onclick="comment_update1(`{{ comment.comment_id }}`)" class="hidden">확인
-                                    </button>
-                                    <button id="{{ comment.comment_id }}_cancel1"
-                                            onclick="comment_update_cancel1(`{{ comment.comment_id }}`)" class="hidden">
-                                        취소
-                                    </button>
-                                    <dialog id="{{ comment.comment_id }}_comment-dialog1" class="dialog">
-                                        <form method="dialog">
-                                            <button id="{{ comment.comment_id }}_update1"
-                                                    onclick="comment_update_btn1(`{{ comment.comment_id }}`)">수정
-                                            </button>
-                                            <hr>
-                                            <button id="{{ comment.comment_id }}_delete1"
-                                                    onclick="button_event(`{{ comment.comment_id }}`);">삭제
-                                            </button>
-                                            <hr>
-                                            <button value="cancel">취소</button>
-                                        </form>
-                                    </dialog>
-                                </div>
-
-                                <div class="feed-time">
-                                    {{ comment.time }}
-                                </div>
                             </div>
-                            {% endfor %}
-                        </div>
-                        <!-- 푸터부분 -->
-                        <div class="footer">
-                            <!-- 좋아요아이콘 -->
-                            <div class="feed-icons-wrapper flex">
+                            <div class="comment-box">
+                                <!--여기에 댓글 추가-->
+                                {% for comment in comments %}
+                                <div class="comment_wrapper">
+                                        {% if comment.img == 'x' or comment.img == None %}
+                                        <img class="comment_img" src="/static/img/12344.gif" alt="">
+                                        {% else %}
+                                        <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
+                                        {% endif %}
+                                        <div>
+                                            <b>{{ comment.nick }}</b>
+                                            <b id="{{ comment.comment_id }}_comment1" class="lighter" onclick="comment_dialog_open1(`{{ comment.comment_id }}`)">{{ comment.comment }}</b>
+                                        </div>
+                                        <div>
+                                            <input id="{{ comment.comment_id }}_input1" class="hidden" >
+                                            <button id="{{ comment.comment_id }}_ok1"
+                                                    onclick="comment_update1(`{{ comment.comment_id }}`)" class="hidden">확인</button>
+                                            <button id="{{ comment.comment_id }}_cancel1"
+                                                    onclick="comment_update_cancel1(`{{ comment.comment_id }}`)" class="hidden">취소</button>
+                                            <dialog id="{{ comment.comment_id }}_comment-dialog1" class="dialog">
+                                                <form method="dialog">
+                                                    <button id="{{ comment.comment_id }}_update1" onclick="comment_update_btn1(`{{ comment.comment_id }}`)" style="padding-top: 5%" >수정</button>
+                                                    <hr>
+                                                    <button id="{{ comment.comment_id }}_delete1" onclick="button_event(`{{ comment.comment_id }}`);">삭제</button>
+                                                    <hr>
+                                                    <button value="cancel" style="padding-bottom: 5%">취소</button>
+                                                </form>
+                                            </dialog>
+                                        </div>
 
-                                {% if like_this == True %}
-                                <div class="heart_container" id="{{ feed_id }}_heart1"
-                                     onclick="like(this, '{{ i_id }}')">
-                                    <div class="heart-icon"></div>
-                                </div>
-                                <!--                               <img class="feed-icon" onclick="like(this)" src="/static/img/like@4x.png"-->
-                                <!--                                 id="{{ feed_id }}_{{ id }}">-->
-                                <img class="feed-icon1 hidden" onclick="like(this, '{{ i_id }}')"
-                                     src="/static/img/like@3x.png"
-                                     id="{{ feed_id }}_no_heart1">
-                                {% else %}
-                                <div class="heart_container hidden" id="{{ feed_id }}_heart1"
-                                     onclick="like(this, '{{ i_id }}')">
-                                    <div class="heart-icon"></div>
-                                </div>
-                                <img class="feed-icon1" onclick="like(this, '{{ i_id }}')"
-                                     src="/static/img/like@3x.png"
-                                     id="{{ feed_id }}_no_heart1">
-                                {% endif %}
-                                <img class="feed-icon" src="/static/img/comment@3x.png">
-                            </div>
-                            <!-- 좋아요개수 -->
-                            <div id="{{ feed_id }}_like_wrapper1" class="feed-like-wrapper width">
-                                {% if like != 0 %}
-
-                                <div id="{{ feed_id }}_{{ id }}someone_like1" class="flex"
-                                     onclick="like_list(this)">
-                                    <div id="{{ feed_id }}_{{ id }}likey1" class="strong flex">좋아요
-                                        <div id="{{ feed_id }}_like_count1">{{ like }}</div>
-                                        개
+                                        <div class="feed-time" style="margin-left: -16%;     margin-bottom: 5%;">
+                                            {{ comment.time }}
+                                        </div>
                                     </div>
-                                </div>
-                                {% else %}
-                                <div id="{{ feed_id }}_{{ id }}no_like1" class="flex width">
-                                    가장 먼저
-                                    <div id="{{ feed_id }}_like_count1" class="strong margin_left">좋아요</div>
-                                    를 눌러보세요
-                                </div>
-                                {% endif %}
+                                {% endfor %}
                             </div>
-                            <!-- 피드작성시간 -->
-                            <div class="feed-time">
-                                {{ time }}
-                            </div>
-                            <!-- 댓글부분 -->
-                            <div class="etc_info">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-emoji-smile" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
-                                </svg>
-                                <input id="maxlen" class="comment" placeholder="댓글 달기...">
-                                <span onclick="comment_write(`{{ feed_id }}`)" class="share">게시</span>
+                            <!-- 푸터부분 -->
+                            <div class="footer">
+                                <!-- 좋아요아이콘 -->
+                                <div class="feed-icons-wrapper flex">
+
+                                    {% if like_this == True %}
+                                    <div class="heart_container" id="{{ feed_id }}_heart1"
+                                         onclick="like(this, '{{ i_id }}')">
+                                        <div class="heart-icon"></div>
+                                    </div>
+                                    <!--                               <img class="feed-icon" onclick="like(this)" src="/static/img/like@4x.png"-->
+                                    <!--                                 id="{{ feed_id }}_{{ id }}">-->
+                                    <img class="feed-icon1 hidden" onclick="like(this, '{{ i_id }}')"
+                                         src="/static/img/like@3x.png"
+                                         id="{{ feed_id }}_no_heart1">
+                                    {% else %}
+                                    <div class="heart_container hidden" id="{{ feed_id }}_heart1"
+                                         onclick="like(this, '{{ i_id }}')">
+                                        <div class="heart-icon"></div>
+                                    </div>
+                                    <img class="feed-icon1" onclick="like(this, '{{ i_id }}')"
+                                         src="/static/img/like@3x.png"
+                                         id="{{ feed_id }}_no_heart1">
+                                    {% endif %}
+                                    <img class="feed-icon" src="/static/img/comment@3x.png">
+                                </div>
+                                <!-- 좋아요개수 -->
+                                <div id="{{ feed_id }}_like_wrapper1" class="feed-like-wrapper width">
+                                    {% if like != 0 %}
+
+                                    <div id="{{ feed_id }}_{{ id }}someone_like1" class="flex"
+                                         onclick="like_list(this)">
+                                        <div id="{{ feed_id }}_{{ id }}likey1" class="strong flex">좋아요
+                                            <div id="{{ feed_id }}_like_count1">{{ like }}</div>
+                                            개
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div id="{{ feed_id }}_{{ id }}no_like1" class="flex width_100 magin_top1">
+                                        가장 먼저
+                                        <div id="{{ feed_id }}_like_count1" class="strong margin_left">좋아요</div>
+                                        를 눌러보세요
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <!-- 피드작성시간 -->
+                                <div class="feed-time" style="margin-left: -15%;">
+                                    {{ time }}
+                                </div>
+                                <!-- 댓글부분 -->
+                                <div class="etc_info">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                                    </svg>
+                                    <input id="{{ feed_id }}comment1" class="comment" placeholder="댓글 달기...">
+                                    <span onclick="comment_write1(`{{ feed_id }}`,`{{ i_id }}`)" class="share">게시</span>
+                                </div>
                             </div>
                         </div>
+
+                        </div>
+
                     </div>
 
-                </div>
-
-            </div>
-
-        </dialog>
+                </dialog>
 
         {% endfor %}
         {% endfor %}
@@ -414,7 +411,12 @@
                 <img id="update_user_img" class="update_user_img" src="data:image/png;base64, {{ user.img }}">
                 {% endif %}
                       </div>
-              <input type="file" id="file1" onchange="loadFile1(this)" accept="image/gif,image/jpeg,image/png">
+              <div class="choice_btn">
+                    <label for="file1">
+                        컴퓨터에서 선택
+                    </label>
+                </div>
+                <input type="file" id="file1" name="chooseFile" accept="image/gif,image/jpeg,image/png" onchange="loadFile1(this)">
                 <input id="update_user_nick" value="{{ i_nick }}">
               </div>
 
