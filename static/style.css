@@ -32,12 +32,20 @@ body{
 .width{
     width: 100%;
 }
-.strong{
+
+.strong {
     font-weight: bold;
+    padding-right: 2%;
 }
+
+
+
 .flex{
     display: flex;
+    width: 50%;
 }
+
+
 .lighter{
     font-weight: lighter
 }
@@ -664,6 +672,7 @@ p {
 #feed_write_dialog .side {
     padding-left: 1%;
     padding-top: 1%;
+    padding-right: 1%;
 }
 
 #feed_write_dialog .next, .share{
@@ -912,6 +921,12 @@ dialog {
     margin-left: 2px;
 
 }
+
+.comment_write_space:focus{
+    outline: none;
+}
+
+
 #comment-button {
     border: none;
     background-color: transparent;
@@ -920,23 +935,17 @@ dialog {
 }
 
 /*댓글클릭시아웃라인숨김*/
-.comment-write-wrapper input:focus {
+dialog .comment-write-wrapper input:focus {
     outline: none;
 }
 
-.comment_wrapper button {
+dialog .comment_wrapper button {
     border: none;
     background-color: transparent;
     color: gray;
 }
 
-.comment_wrapper div:nth-child(2) {
-    width: 120px;
-}
 
-.comment_wrapper div:nth-child(3) {
-    width: 90px;
-}
 
 div#dl_write_part {
     width: 30%;
@@ -950,9 +959,26 @@ div#dl_write_part {
     flex-direction: column;
     justify-content: space-between;
     height: 90%;
+    padding-left: 1%;
 }
 
 
 .comment_wrapper button {
     cursor: pointer;
+}
+
+.comment_wrapper div:nth-child(2) {
+    flex-basis: 350px;
+}
+
+dialog .comment_wrapper div:nth-child(3) {
+    flex-basis: 230px;
+}
+
+dialog .comment_wrapper div:nth-child(4) {
+    flex-basis: 140px;
+}
+
+dialog .feed_content span {
+    font-size: 1.3rem;
 }
