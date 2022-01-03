@@ -305,6 +305,7 @@ def mypage(keyword):
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             user['img'] = image
+
         feedrows = []
         feedrow = []
         info = db.feed
