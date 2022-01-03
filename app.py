@@ -31,10 +31,10 @@ def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
+        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
         rows = []
         info = db.feed
-        user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+        # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
         # print(user[])
         for x in info.find():
             img_binary = fs.get(x['img'])
@@ -140,9 +140,16 @@ def follow():
 
 @app.route('/write_feed')
 def write_feed():
-    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-    return render_template('write_feed.html', html='write_feed', user=user)
-
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+        return render_template('write_feed.html', html='write_feed', user=user)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/feed_upload', methods=['POST'])
 def file_upload():
@@ -173,11 +180,14 @@ def feed_like():
     id_receive = request.form['id']
     type_receive = request.form['type']
     if type_receive == 'up':
-        doc = {
-            'id': id_receive,
-            'feed_id': feed_id_receive
-        }
-        db.like.insert_one(doc)
+        if db.like.find_one({'feed_id': feed_id_receive, 'id': id_receive}) is None:
+            doc = {
+                'id': id_receive,
+                'feed_id': feed_id_receive
+            }
+            db.like.insert_one(doc)
+        else:
+            pass
     else:
         db.like.delete_one({'feed_id': feed_id_receive, 'id': id_receive})
     return jsonify({'msg': 'saved!!!!'})
@@ -243,31 +253,45 @@ def auction():
 
 @app.route('/mypage')
 def mypage():
-    feedrows = []
-    feedrow = []
-    info = db.feed
-    # info = db.feed.find({'id': 'carrot_vely'})
-    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-    for x in info.find():
-        img_binary = fs.get(x['img'])
-        base64_data = codecs.encode(img_binary.read(), 'base64')
-        image = base64_data.decode('utf-8')
-        x['img'] = image
-        feedrow.append(x)
-        if len(feedrow) == 3:
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        feedrows = []
+        feedrow = []
+        info = db.feed
+        # info = db.feed.find({'id': 'carrot_vely'})
+        # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+        for x in info.find():
+            img_binary = fs.get(x['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            x['img'] = image
+            feedrow.append(x)
+            if len(feedrow) == 3:
+                feedrows.append(feedrow)
+                feedrow = []
+        if len(feedrow) == 2 or len(feedrow) == 1:
             feedrows.append(feedrow)
-            feedrow = []
-    if len(feedrow) == 2 or len(feedrow) == 1:
-        feedrows.append(feedrow)
-    return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows,
-                           user=user)
-
+        return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows,
+                               user=user)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/camera')
 def camera():
-    user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-    return render_template('camera.html', html='camera', user=user)
-
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
+        return render_template('camera.html', html='camera', user=user)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/test')
 def test():
@@ -361,18 +385,22 @@ def comment_post():
     feed_id_receive = request.form['feed_id_give']
     id_receive = request.form['id_give']
     date_receive = request.form['date_give']
-    # comment_id = feed_id_receive + '_' + id_receive + '_' + date_receive
+    comment_id = feed_id_receive + '_' + id_receive + '_' + date_receive
     # comment_list = list(db.comment.find({}, {'_id': False}))
     # count = len(comment_list) + 1
-
     doc = {
         'comment': comment_receive,
         'feed_id': feed_id_receive,
         'id': id_receive,
-        'date': date_receive
+        'date': date_receive,
+        'comment_id': comment_id
     }
-    db.comment.insert_one(doc)
-    return jsonify({'msg': '댓글 작성!'})
+    if db.comment.find_one({'id': id_receive, 'feed_id': feed_id_receive, 'comment': comment_receive}) is None:
+        db.comment.insert_one(doc)
+        return jsonify({'msg': '댓글 작성!'})
+    else:
+        return jsonify({'msg': '중복 댓글 입니다!'})
+
 
 
 @app.route("/comments", methods=["GET"])

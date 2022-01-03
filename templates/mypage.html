@@ -1,18 +1,24 @@
 {% extends "base.html"  %}
 {% block content %}
-
+{% set i_img = user.img %}
+{% set i_id = user.id %}
+{% set i_nick = user.nick %}
 <div id="Mypage-container">
     <div id="Mypage-main">
         <header id="Mypage-header">
             <div id="Mypage-profile-box">
                 <div id="Mypage-profile">
 <!--                    프로필 이미지 불러올것-->
-                    <img class="Mypage-profile-photo" src="../static/img/12344.gif">
+                    {% if user.img == 'x' or user.img == None %}
+                    <img class="Mypage-profile-photo" src="/static/img/12344.gif">
+                    {% else %}
+                    <img class="Mypage-profile-photo" src="data:image/png;base64, {{ user.img }}">
+                    {% endif %}
                 </div>
             </div>
             <section id="Mypage-section">
                 <div id="Mypage-section-top">
-                    <div id="Mypage-text">bbb6045</div>
+                    <div id="Mypage-text">{{ i_id }}</div>
                     <div id="Mypage-profile-edit-box">
                         프로필 편집
                     </div>
@@ -33,8 +39,8 @@
                         </div>
                     </div>
                 <div id="Mypage-section-bottom">
-                    <span style="font-weight: 600;">이름</span><br>
-                    <span>별명</span>
+                    <span style="font-weight: 600;">{{ i_id }}</span><br>
+                    <span>{{ i_nick }}</span>
                 </div>
             </section>
         </header>

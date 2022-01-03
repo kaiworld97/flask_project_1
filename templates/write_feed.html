@@ -1,5 +1,8 @@
 {% extends "base.html"  %}
 {% block content %}
+{% set i_img = user.img %}
+{% set i_id = user.id %}
+{% set i_nick = user.nick %}
 <div class="write_feed_container model__background">
 
     <!-- <button onclick="showThisDialog()">Show this Dialog</button> -->
@@ -45,7 +48,7 @@
             <img class="user_img" src="static/img/carrot.jpg">
         </div>
         <div class="user_id">
-            <span id="user_name">carrot_vely</span>
+            <span id="user_name">{{ i_nick }}</span>
         </div>
     </div>
 
@@ -74,7 +77,7 @@
                     <img class="user_img" src="static/img/carrot.jpg">
                 </div>
                 <div class="user_id">
-                    <span id="user_name">carrot_vely</span>
+                    <span id="user_name">{{ i_nick }}</span>
                 </div>
             </div>
 
