@@ -182,7 +182,7 @@
                         </div>
 
                         <!-- 피드내용 -->
-                        <div id="write_part" class="side">
+                        <div id="dl_write_part" class="side">
                             <!-- 헤더부분 -->
                             <div class="wf_user_info">
                                 <div class="wf_user_profile">
@@ -201,11 +201,13 @@
 
                                 </div>
                             </div>
+
+                        <div class="dl_comment_box">
                             <div class="feed_content">
-                <span>
-                    {{ content }}
-                </span>
-                            </div>
+                                    <span>
+                                        {{ content }}
+                                    </span>
+                                                </div>
                             <div class="comment-box">
                                 <!--여기에 댓글 추가-->
                                 {% for comment in comments %}
@@ -305,6 +307,8 @@
                                     <span onclick="comment_write(`{{ feed_id }}`)" class="share">게시</span>
                                 </div>
                             </div>
+                        </div>
+
                         </div>
 
                     </div>

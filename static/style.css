@@ -937,3 +937,22 @@ dialog {
 .comment_wrapper div:nth-child(3) {
     width: 90px;
 }
+
+div#dl_write_part {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dl_comment_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+}
+
+
+.comment_wrapper button {
+    cursor: pointer;
+}

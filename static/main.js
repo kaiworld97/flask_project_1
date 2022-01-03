@@ -34,7 +34,7 @@ function dropupmenu() {
 }
 
 function feed_write_dialog() {
-     document.getElementById("feed_write_dialog").showModal();
+    document.getElementById("feed_write_dialog").showModal();
 
     document.querySelector('#_back').style.visibility = "hidden";
     document.querySelector('#_next').style.visibility = "hidden";
@@ -236,7 +236,8 @@ function loadFile(input) {
 
 function writeText() {
     document.getElementById('_next').classList.add('hidden')
-    document.querySelector('#_share').style.visibility = "visible"
+    document.querySelector('#_share').style.visibility = "visible";
+
     document.getElementById('_share').classList.remove('hidden')
     document.getElementById('second_part').classList.remove('hidden')
 
