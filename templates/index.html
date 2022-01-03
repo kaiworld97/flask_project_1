@@ -95,24 +95,42 @@
                                         {% endif %}
                                         <div>
                                             <b>{{ comment.nick }}</b>
-                                            <b id="{{ comment.comment_id }}_comment" class="lighter" onclick="comment_dialog_open(`{{ comment.comment_id }}`)">{{ comment.comment }}</b>
+                                            <b id="{{ comment.comment_id }}comment" class="lighter" onclick="comment_dialog_open()">{{ comment.comment }}</b>
                                         </div>
                                         <div>
-                                            <input id="{{ comment.comment_id }}_input" class="hidden">
-                                            <button id="{{ comment.comment_id }}_ok"
+{#                                            <button id="{{ comment.comment_id }}update"#}
+{#                                                    onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정#}
+{#                                            </button>#}
+{#                                            <button id="{{ comment.comment_id }}delete"#}
+{#                                                    onclick="comment_delete(`{{ comment.comment_id }}`)">#}
+{#                                                삭제#}
+{#                                            </button>#}
+{#                                            <input id="{{ comment.comment_id }}input" class="hidden">#}
+{#                                            <button id="{{ comment.comment_id }}ok"#}
+{#                                                    onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">#}
+{#                                                확인#}
+{#                                            </button>#}
+{#                                            <button id="{{ comment.comment_id }}cance"#}
+{#                                                    onclick="comment_update_cance(`{{ comment.comment_id }}`)"#}
+{#                                                    class="hidden">취소#}
+{#                                            </button>#}
+                                            <input id="{{ comment.comment_id }}input" class="hidden">
+                                            <button id="{{ comment.comment_id }}ok"
                                                     onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">확인</button>
-                                            <button id="{{ comment.comment_id }}_cancel"
+                                            <button id="{{ comment.comment_id }}cancel"
                                                     onclick="comment_update_cancel(`{{ comment.comment_id }}`)" class="hidden">취소</button>
-                                            <dialog id="{{ comment.comment_id }}_comment-dialog" class="dialog">
+                                            <dialog id="comment-dialog" class="dialog">
                                                 <form method="dialog">
-                                                    <button id="{{ comment.comment_id }}_update" onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정</button>
+                                                    <button id="{{ comment.comment_id }}update" onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정</button>
                                                     <hr>
-                                                    <button id="{{ comment.comment_id }}_delete" onclick="button_event(`{{ comment.comment_id }}`);">삭제</button>
+                                                    <button id="{{ comment.comment_id }}delete" onclick="button_event(`{{ comment.comment_id }}`);">삭제</button>
                                                     <hr>
                                                     <button value="cancel">취소</button>
                                                 </form>
                                             </dialog>
+
                                         </div>
+
                                         <div class="feed-time">
                                             {{ comment.time }}
                                         </div>
@@ -139,6 +157,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <!--                게시물 닷 dialog-->
                 <dialog id="{{ feed_id }}dialog" class="dialog">
                     <form class="dialog_form" method="dialog">
@@ -160,6 +180,7 @@
                                 <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
                             </div>
                         </div>
+
                         <!-- 피드내용 -->
                         <div id="dl_write_part" class="side">
                             <!-- 헤더부분 -->
@@ -177,48 +198,51 @@
                                             <span class="user_name">{{ nickname }}</span>
                                         </div>
                                     </a>
+
                                 </div>
                             </div>
+
                         <div class="dl_comment_box">
                             <div class="feed_content">
                                     <span>
                                         {{ content }}
                                     </span>
-                            </div>
+                                                </div>
                             <div class="comment-box">
                                 <!--여기에 댓글 추가-->
                                 {% for comment in comments %}
                                 <div class="comment_wrapper">
-                                        {% if comment.img == 'x' or comment.img == None %}
-                                        <img class="comment_img" src="/static/img/12344.gif" alt="">
-                                        {% else %}
-                                        <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
-                                        {% endif %}
-                                        <div>
-                                            <b>{{ comment.nick }}</b>
-                                            <b id="{{ comment.comment_id }}_comment1" class="lighter" onclick="comment_dialog_open1(`{{ comment.comment_id }}`)">{{ comment.comment }}</b>
-                                        </div>
-                                        <div>
-                                            <input id="{{ comment.comment_id }}_input1" class="hidden">
-                                            <button id="{{ comment.comment_id }}_ok1"
-                                                    onclick="comment_update1(`{{ comment.comment_id }}`)" class="hidden">확인</button>
-                                            <button id="{{ comment.comment_id }}_cancel1"
-                                                    onclick="comment_update_cancel1(`{{ comment.comment_id }}`)" class="hidden">취소</button>
-                                            <dialog id="{{ comment.comment_id }}_comment-dialog1" class="dialog">
-                                                <form method="dialog">
-                                                    <button id="{{ comment.comment_id }}_update1" onclick="comment_update_btn1(`{{ comment.comment_id }}`)">수정</button>
-                                                    <hr>
-                                                    <button id="{{ comment.comment_id }}_delete1" onclick="button_event(`{{ comment.comment_id }}`);">삭제</button>
-                                                    <hr>
-                                                    <button value="cancel">취소</button>
-                                                </form>
-                                            </dialog>
-                                        </div>
-
-                                        <div class="feed-time">
-                                            {{ comment.time }}
-                                        </div>
+                                    {% if comment.img == 'x' or comment.img == None %}
+                                    <img class="comment_img" src="/static/img/12344.gif" alt="">
+                                    {% else %}
+                                    <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
+                                    {% endif %}
+                                    <div>
+                                        <b>{{ comment.nick }}</b>
+                                        <b id="{{ comment.comment_id }}comment" class="lighter">{{ comment.comment
+                                            }}</b>
                                     </div>
+                                    <div>
+                                        <button id="{{ comment.comment_id }}update"
+                                                onclick="comment_update_btn(`{{ comment.comment_id }}`)">수정
+                                        </button>
+                                        <button id="{{ comment.comment_id }}delete"
+                                                onclick="comment_delete(`{{ comment.comment_id }}`)">
+                                            삭제
+                                        </button>
+                                        <input id="{{ comment.comment_id }}input" class="hidden">
+                                        <button id="{{ comment.comment_id }}ok"
+                                                onclick="comment_update(`{{ comment.comment_id }}`)" class="hidden">확인
+                                        </button>
+                                        <button id="{{ comment.comment_id }}cance"
+                                                onclick="comment_update_cance(`{{ comment.comment_id }}`)"
+                                                class="hidden">취소
+                                        </button>
+                                    </div>
+                                    <div class="feed-time">
+                                        {{ comment.time }}
+                                    </div>
+                                </div>
                                 {% endfor %}
                             </div>
                             <!-- 푸터부분 -->

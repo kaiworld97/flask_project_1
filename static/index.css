@@ -13,6 +13,15 @@
     padding-bottom: 1%;
 }
 
+.comment_wrapper div:nth-child(2) {
+    flex-basis: 465px;
+}
+
+.comment_wrapper div:nth-child(3) {
+    flex-basis: 83px;
+}
+
+
 .dialog_form {
     padding-top: 4%;
     padding-bottom: 1%;
