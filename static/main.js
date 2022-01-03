@@ -236,9 +236,7 @@ function loadFile(input) {
 
 function writeText() {
     document.getElementById('_next').classList.add('hidden')
-    document.querySelector('#_share').style.visibility = "visible";
-
-
+    document.querySelector('#_share').style.visibility = "visible"
     document.getElementById('_share').classList.remove('hidden')
     document.getElementById('second_part').classList.remove('hidden')
 

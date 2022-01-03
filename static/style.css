@@ -290,6 +290,8 @@ left: 47%;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+        border-radius: 10%;
+    text-align: center;
 }
 .dropup-content {
   display: none;
@@ -300,6 +302,8 @@ left: 47%;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+        border-radius: 10%;
+    text-align: center;
 }
 
 .dropdown-content a {
@@ -545,6 +549,8 @@ p {
     border:none;
     border-radius: 2%;
     overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #feed_write_dialog p, span, label, textarea{
@@ -555,7 +561,8 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-bottom: 2%;
+    padding-bottom: 1%;
+    border-bottom: 1px solid gray;
 }
 
 #feed_write_dialog .pic_icon {
@@ -656,13 +663,22 @@ p {
 
 #feed_write_dialog .side {
     padding-left: 1%;
+    padding-top: 1%;
 }
 
-#feed_write_dialog .arrow, .next, .share{
+#feed_write_dialog .next, .share{
     cursor: pointer;
     font-size: 1.2rem;
     font-weight: bold;
     color: blue;
+    padding-right: 1%;
+}
+#feed_write_dialog .arrow{
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+        padding-left: 1%;
 }
 
 #feed_write_dialog .text_content:focus{
@@ -723,12 +739,13 @@ p {
     width: 70%;
 }
 
-.this-dialog #write_part{
+.this-dialog #second_part{
     width:30%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-left: 1%;
+
 }
 
 .this-dialog .feed_list{
@@ -900,4 +917,23 @@ dialog {
     background-color: transparent;
     color: cornflowerblue;
     width: 10vw;
+}
+
+/*댓글클릭시아웃라인숨김*/
+.comment-write-wrapper input:focus {
+    outline: none;
+}
+
+.comment_wrapper button {
+    border: none;
+    background-color: transparent;
+    color: gray;
+}
+
+.comment_wrapper div:nth-child(2) {
+    width: 120px;
+}
+
+.comment_wrapper div:nth-child(3) {
+    width: 90px;
 }

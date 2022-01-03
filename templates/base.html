@@ -81,7 +81,11 @@
 
     <dialog id="feed_write_dialog">
         <div id="modal_header" class="header_box">
-            <div id="_back" class="arrow" onclick="back_home()"> ←</div>
+            <div id="_back" class="arrow" onclick="back_home()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </div>
             <span id="header_title" class="title"> 새 게시물 만들기</span>
             <span id="_next" class="next" onclick="writeText()"> 다음 </span>
             <span id="_share" class="share" onclick="posting()"> 공유하기 </span>
@@ -112,7 +116,7 @@
                 </form>
             </div>
 
-            <!-- 세번째화면(게시글영역추가) -->
+            <!-- 게시글영역추가 -->
             <div id="second_part" class="side">
                 <div class="wf_user_info">
                     <div class="wf_user_profile">
