@@ -49,10 +49,13 @@ def home():
             image = base64_data.decode('utf-8')
             x['img'] = image
             x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
-            img_binary = fs.get(x_user['img'])
-            base64_data = codecs.encode(img_binary.read(), 'base64')
-            image = base64_data.decode('utf-8')
-            x_user['img'] = image
+            if x_user['img'] == 'x':
+                pass
+            else:
+                img_binary = fs.get(x_user['img'])
+                base64_data = codecs.encode(img_binary.read(), 'base64')
+                image = base64_data.decode('utf-8')
+                x_user['img'] = image
             x['write_user'] = x_user
             # for a in db.comment.find():
             #     print(a)w
@@ -126,7 +129,6 @@ def home():
             #     x['like_this'] = False
 
             rows.append(x)
-        print(rows)
         return render_template('index.html', html='index', rows=rows, user=user)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
@@ -293,6 +295,11 @@ def mypage(keyword):
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
+        print(list(db.feed.find({'id': keyword})))
+        print(list(db.follow.find({'id': keyword})))
+        print(list(db.follow.find({'id': keyword})))
+
         user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
         if user['img'] == 'x':
             pass
@@ -301,6 +308,7 @@ def mypage(keyword):
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             user['img'] = image
+
         feedrows = []
         feedrow = []
         info = db.feed
