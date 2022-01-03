@@ -40,4 +40,13 @@ body {
   margin-bottom: 30px;
   color: white;
 }
+.navyBtn {
+  font-size: 14px;
+  border: none;
+  padding: 10px;
+  width: 290px;
+  background-color: #1BBC9B;
+  margin-bottom: 30px;
+  color: white;
+}
 

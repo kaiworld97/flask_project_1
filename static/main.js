@@ -34,7 +34,14 @@ function dropupmenu() {
 }
 
 function feed_write_dialog() {
-    document.getElementById("feed_write_dialog").showModal();
+     document.getElementById("feed_write_dialog").showModal();
+
+    document.querySelector('#_back').style.visibility = "hidden";
+    document.querySelector('#_next').style.visibility = "hidden";
+    document.querySelector('#_share').style.visibility = "hidden";
+
+    document.getElementById('second_part').classList.add("hidden")
+
 }
 
 function feed_recipe_dialog() {
@@ -186,12 +193,12 @@ function back_home() {
 // 2200자 넘으면 글자수제한하는부분 추가하기
 function contentLength() {
 
-    let max_length = document.querySelector("textarea#_textarea")
-    document.querySelector('#maxlen').innerHTML = max_length.value.length + '/2,200';
+    let max_length = document.querySelector("#textarea")
+    document.querySelector('#max-len').innerHTML =  max_length.value.length + '/2,200';
 
-    console.log(max_length.value.length)
+    console.log(max_length.value, max_length.value.length)
 
-    if (max_length.value.length >= 2200) {
+    if (max_length.value.length >= 2200){
         // console.log('2200자넘음')
         alert('2,200자 이내로 작성해 주세요')
     }
@@ -233,7 +240,7 @@ function writeText() {
 
 
     document.getElementById('_share').classList.remove('hidden')
-    document.getElementById('write_part').classList.remove('hidden')
+    document.getElementById('second_part').classList.remove('hidden')
 
 
 }
