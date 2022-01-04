@@ -21,7 +21,7 @@
 }
 
 .comment_wrapper div:nth-child(3) {
-    flex-basis: 290px;
+    flex-basis: 330px;
 }
 
 
@@ -34,6 +34,34 @@
     margin: 1%;
     width: 2.5rem;
     height: 2.5rem;
+}
+
+.comment-write-wrapper {
+    display: flex;
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+.wf_user_profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: darkgray 1px solid;
+    margin-right: 5px;
+}
+
+.comment {
+    border: none;
+    width: 100%;
+    background-color: transparent;
+
+}
+#comment-button {
+    border: none;
+    background-color: transparent;
+    color: cornflowerblue;
+    width: 10vw;
+
 }
 /* heart icon
 /* define variables used for the color of the heart-icon and its size */
@@ -125,11 +153,10 @@ position these pseudo elements at either end of the square with top/right/bottom
     }
 
     #Auction-container {
-        width: 100%;
         position: absolute;
         top: 500px;
-        right: -300px;
-        width: 300px;
+        right: -341px;
+        width: 298px;
         border: 1px solid #8d8c8c45;
     }
 

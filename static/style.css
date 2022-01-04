@@ -522,8 +522,8 @@ left: 47%;
     #follow-container{
         position: absolute;
         top: 100px;
-        right: -300px;
-        width: 300px;
+        right: -330px;
+        width: 290px;
     }
     #follow-wrapper{
         display: flex;

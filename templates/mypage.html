@@ -3,7 +3,10 @@
 {% set i_img = user.img %}
 {% set i_id = user.id %}
 {% set i_nick = user.nick %}
-
+{% set mypage_user_nick = mypage_user.nick %}
+{% set mypage_user_id = mypage_user.id %}
+{% set mypage_user_img = mypage_user.img %}
+mypage_user
 <div id="Mypage-container">
     <div id="Mypage-main">
         <header id="Mypage-header">
@@ -13,13 +16,13 @@
                     {% if user.img == 'x' or user.img == None %}
                     <img class="Mypage-profile-photo" src="/static/img/12344.gif">
                     {% else %}
-                    <img class="Mypage-profile-photo" src="data:image/png;base64, {{ user.img }}">
+                    <img class="Mypage-profile-photo" src="data:image/png;base64, {{ mypage_user.img }}">
                     {% endif %}
                 </div>
             </div>
             <section id="Mypage-section">
                 <div id="Mypage-section-top">
-                    <div id="Mypage-text">{{ i_nick }}</div>
+                    <div id="Mypage-text">{{ mypage_user_nick }}</div>
                     <div id="Mypage-profile-edit-box">
                         프로필 편집
                     </div>
@@ -28,20 +31,20 @@
                 <div id="Mypage-section-middle">
                     <div class="Mypage-section-middle-text">
                         <span>게시물</span>
-                        <span class="strong mypagespan">{{ user.feed_count }}</span>
+                        <span class="strong mypagespan">{{ mypage_user.feed_count }}</span>
                     </div>
                     <div class="Mypage-section-middle-text">
                         <span>팔로워</span>
-                        <span class="strong mypagespan">24</span>
+                        <span class="strong mypagespan">2022</span>
                     </div>
                     <div class="Mypage-section-middle-text">
                         <span>팔로잉</span>
-                        <span class="strong mypagespan">24</span>
+                        <span class="strong mypagespan">2022</span>
                     </div>
                 </div>
                 <div id="Mypage-section-bottom">
-                    <span style="font-weight: 600;">{{ i_nick }}</span><br>
-                    <span>{{ i_id }}</span>
+                    <span style="font-weight: 600;">{{ mypage_user_nick }}</span><br>
+                    <span>{{ mypage_user_id }}</span>
                 </div>
             </section>
         </header>
@@ -250,9 +253,6 @@
         {% set comments = ro.comments %}
         {% set comment_profile_img = ro.comments.img %}
         {% set i_like_feed = user.like_feed %}
-        {% set i_img = user.img %}
-        {% set i_id = user.id %}
-        {% set i_nick = user.nick %}
         {% set like_this = ro.like_this %}
         {% set like = ro.like_count %}
         {% set time = ro.time %}
@@ -272,7 +272,7 @@
                                     {% if user.img == 'x' or user.img == None %}
                                     <img class="user_img" src="/static/img/12344.gif" alt="">
                                     {% else %}
-                                    <img class="user_img" src="data:image/png;base64, {{ user.img }}"/>
+                                    <img class="user_img" src="data:image/png;base64, {{ mypage_user_img}}"/>
                                     {% endif %}
                                 </div>
                                 <div class="user_id">

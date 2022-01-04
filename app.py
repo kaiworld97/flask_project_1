@@ -44,11 +44,13 @@ def home():
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
         # print(user[])
         for x in info.find():
+            print(x)
             img_binary = fs.get(x['img'])
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             x['img'] = image
-            x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+            x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False})
+
             if x_user['img'] == 'x':
                 pass
             else:
@@ -63,7 +65,7 @@ def home():
             comment = []
             if len(comments) != 0:
                 for b in comments:
-                    comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+                    comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False})
                     b['nick'] = comments_user['nick']
                     if comments_user['img'] == 'x':
                         b['img'] = comments_user['img']
@@ -286,10 +288,10 @@ def mypage(keyword):
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        token_user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
-        user = db.user.find_one({"id": keyword}, {'_id': False, 'pw': False})
-        feed_list = len(list(db.feed.find({'id': user['id']})))
-        user['feed_count'] = feed_list
+        user = db.user.find_one({"id": payload['id']}, {'_id': False, 'pw': False})
+        mypage_user = db.user.find_one({"id": keyword}, {'_id': False, 'pw': False})
+        feed_list = len(list(db.feed.find({'id': mypage_user['id']})))
+        mypage_user['feed_count'] = feed_list
         if user['img'] == 'x':
             pass
         else:
@@ -297,18 +299,25 @@ def mypage(keyword):
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             user['img'] = image
+        if mypage_user['img'] == 'x':
+            pass
+        else:
+            img_binary = fs.get(mypage_user['img'])
+            base64_data = codecs.encode(img_binary.read(), 'base64')
+            image = base64_data.decode('utf-8')
+            mypage_user['img'] = image
 
         feedrows = []
         feedrow = []
         info = db.feed
         # info = db.feed.find({'id': 'carrot_vely'})
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-        for x in info.find({"id": user['id']}):
+        for x in info.find({"id": mypage_user['id']}):
             img_binary = fs.get(x['img'])
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
             x['img'] = image
-            x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+            x_user = db.user.find_one({'id': x['id']}, {'_id': False, 'pw': False})
             if x_user['img'] == 'x':
                 pass
             else:
@@ -324,7 +333,7 @@ def mypage(keyword):
             comment = []
             if len(comments) != 0:
                 for b in comments:
-                    comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False, 'like_feed': False})
+                    comments_user = db.user.find_one({'id': b['id']}, {'_id': False, 'pw': False})
                     b['nick'] = comments_user['nick']
                     if comments_user['img'] == 'x':
                         b['img'] = comments_user['img']
@@ -390,7 +399,7 @@ def mypage(keyword):
         if len(feedrow) == 2 or len(feedrow) == 1:
             feedrows.append(feedrow)
         return render_template('mypage.html', html='mypage', feedrows=feedrows, reciperows=feedrows, likerows=feedrows,
-                               user=user)
+                               user=user, mypage_user=mypage_user)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -404,8 +413,7 @@ def api_register():
     nickname_receive = request.form['nickname_give']
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
     db.user.insert_one(
-        {'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive, 'img': 'x',
-         'like_feed': []})
+        {'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive, 'img': 'x'})
     return jsonify({'result': 'success'})
 
 
@@ -521,9 +529,6 @@ def user_update():
         db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
     return jsonify({'msg': '수정 완료!'})
 
-@app.route('/register')
-def register():
-    return render_template('register.html')
 
 
 if __name__ == '__main__':
