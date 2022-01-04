@@ -283,6 +283,7 @@ def auction():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+
 @app.route('/mypage/<keyword>')
 def mypage(keyword):
     token_receive = request.cookies.get('mytoken')
@@ -514,22 +515,24 @@ def comment_update_post():
     db.comment.update_one({'comment_id': comment_id_receive}, {"$set": {"comment": comment_receive}})
     return jsonify({'msg': '댓글 수정!'})
 
+
 @app.route("/user_update", methods=["POST"])
 def user_update():
     nick_receive = request.form['nick_give']
     id_receive = request.form['id_give']
-    file = request.files['file_give']
-    # gridfs 활용해서 이미지 분할 저장
-    fs_image_id = fs.put(file)
-    user_info = db.user.find_one({'id': id_receive})
-    if user_info['img'] == 'x':
-        db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
+    if request.form['file_give'] != 'x':
+        file = request.files['file_give']
+        # gridfs 활용해서 이미지 분할 저장
+        fs_image_id = fs.put(file)
+        user_info = db.user.find_one({'id': id_receive})
+        if user_info['img'] == 'x':
+            db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
+        else:
+            fs.delete(user_info['img'])
+            db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
     else:
-        fs.delete(user_info['img'])
-        db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
+        db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive}})
     return jsonify({'msg': '수정 완료!'})
-
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

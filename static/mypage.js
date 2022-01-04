@@ -62,7 +62,9 @@ function loadFile1(input) {
 
 function updating(data) {
     let file = $('#file1')[0].files[0]
-
+    if (file === undefined){
+        file = 'x'
+    }
     let nick = $('#update_user_nick').val()
     let form_data = new FormData()
 

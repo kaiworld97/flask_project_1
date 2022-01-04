@@ -49,6 +49,7 @@ function feed_recipe_dialog() {
 
 function camera_dialog() {
     document.getElementById("camera_dialog").showModal();
+    camera_restart()
 }
 
 function close_camera_dialog() {
@@ -181,7 +182,13 @@ function camera_posting(data) {
             });
         })
 }
-
+function camera_restart(){
+        document.getElementById('video').classList.remove('hidden')
+        document.getElementById('startbutton').classList.remove('hidden')
+        document.getElementById('restart').classList.add('hidden')
+        document.getElementById('output').classList.add('hidden')
+        document.getElementById('camera_feed').classList.add('hidden')
+}
 
 function back_home() {
     // console.log('홈으로 돌아가기')

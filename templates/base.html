@@ -160,7 +160,7 @@
         <div id="output-wrapper">
             <div id="btns">
                 <button id="startbutton">사진찍기</button>
-                <button id="restart" class="hidden">다시찍기</button>
+                <button id="restart" class="hidden" onclick="camera_restart()">다시찍기</button>
                 <button onclick="camera_posting('{{ user.id }}')">업로드</button>
                 <button onclick="close_camera_dialog()">카메라 끄기</button>
             </div>

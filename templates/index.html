@@ -10,6 +10,7 @@
             {% set id = row.id %}
             {% set feed_id = row._id %}
             {% set nickname = row.write_user.nick %}
+            {% set write_user = row.write_user.id %}
             {% set content = row.content %}
             {% set comments = row.comments %}
             {% set comment_profile_img = row.comments.img %}
@@ -29,7 +30,7 @@
                         <img class="feed-head-img" src="data:image/png;base64, {{ profile_img }}" alt="">
                         {% endif %}
 
-                        <div>{{ nickname }}</div>
+                        <div onclick="location.href = '/mypage/{{ write_user }}'" >{{ nickname }}</div>
                     </div>
                     <img id="{{ feed_id }}_{{ id }}menu" class="more-icon" style="" src="/static/img/more@3x.png" alt=""
                          onclick="dialog_open(this)">
