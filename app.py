@@ -180,10 +180,11 @@ def follow():
 
 @app.route('/feed_upload', methods=['POST'])
 def file_upload():
+    print(request.form)
     date_receive = request.form['date_give']
     content_receive = request.form['content_give']
     id_receive = request.form['id_give']
-    user_id = db.user.find_one({'nick': id_receive})['id']
+    user_id = db.user.find_one({'id': id_receive})['id']
     file = request.files['file_give']
     # gridfs 활용해서 이미지 분할 저장
     fs_image_id = fs.put(file)
@@ -518,9 +519,11 @@ def comment_update_post():
 
 @app.route("/user_update", methods=["POST"])
 def user_update():
+    print(request.form)
     nick_receive = request.form['nick_give']
     id_receive = request.form['id_give']
-    if request.form['file_give'] != 'x':
+
+    try:
         file = request.files['file_give']
         # gridfs 활용해서 이미지 분할 저장
         fs_image_id = fs.put(file)
@@ -530,7 +533,7 @@ def user_update():
         else:
             fs.delete(user_info['img'])
             db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive, 'img': fs_image_id}})
-    else:
+    except:
         db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive}})
     return jsonify({'msg': '수정 완료!'})
 
