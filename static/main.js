@@ -146,6 +146,7 @@ function close_camera_dialog() {
             clearphoto();
         }
     }
+
     document.getElementById('camera_icon').addEventListener('click', startup, false);
     // window.addEventListener('load', startup, false);
 })();
@@ -182,12 +183,13 @@ function camera_posting(data) {
             });
         })
 }
-function camera_restart(){
-        document.getElementById('video').classList.remove('hidden')
-        document.getElementById('startbutton').classList.remove('hidden')
-        document.getElementById('restart').classList.add('hidden')
-        document.getElementById('output').classList.add('hidden')
-        document.getElementById('camera_feed').classList.add('hidden')
+
+function camera_restart() {
+    document.getElementById('video').classList.remove('hidden')
+    document.getElementById('startbutton').classList.remove('hidden')
+    document.getElementById('restart').classList.add('hidden')
+    document.getElementById('output').classList.add('hidden')
+    document.getElementById('camera_feed').classList.add('hidden')
 }
 
 function back_home() {
@@ -200,11 +202,11 @@ function back_home() {
 function contentLength() {
 
     let max_length = document.querySelector("#textarea")
-    document.querySelector('#max-len').innerHTML =  max_length.value.length + '/2,200';
+    document.querySelector('#max-len').innerHTML = max_length.value.length + '/2,200';
 
     console.log(max_length.value, max_length.value.length)
 
-    if (max_length.value.length >= 2200){
+    if (max_length.value.length >= 2200) {
         // console.log('2200자넘음')
         alert('2,200자 이내로 작성해 주세요')
     }
@@ -260,6 +262,7 @@ function posting() {
     // console.log(file, content, user_id, date, time, form_data)
 
     // form_data.append("title_give", title)
+
     form_data.append("file_give", file)
     form_data.append("content_give", content)
     form_data.append("id_give", user_id)
@@ -278,7 +281,8 @@ function posting() {
         }
     });
 }
-function dialog_close_btn1(){
+
+function dialog_close_btn1() {
     document.getElementById('feed_write_dialog').close()
 }
 
@@ -289,12 +293,13 @@ function comment_write(data, id) {
     $.ajax({
         type: 'POST',
         url: '/comments',
-        data: {'comment_give': comment,'feed_id_give': data, 'id_give': id, 'date_give': time},
+        data: {'comment_give': comment, 'feed_id_give': data, 'id_give': id, 'date_give': time},
         success: function (response) {
             window.location.reload()
         }
     });
 }
+
 function comment_write1(data, id) {
     let comment = $(`#${data}comment1`).val()
     const date = new Date();
@@ -302,7 +307,7 @@ function comment_write1(data, id) {
     $.ajax({
         type: 'POST',
         url: '/comments',
-        data: {'comment_give': comment,'feed_id_give': data, 'id_give': id, 'date_give': time},
+        data: {'comment_give': comment, 'feed_id_give': data, 'id_give': id, 'date_give': time},
         success: function (response) {
             window.location.reload()
         }
@@ -321,7 +326,7 @@ function comment_delete(comment_id) {
     });
 }
 
-function comment_update_btn(comment_id){
+function comment_update_btn(comment_id) {
     document.getElementById(`${comment_id}_comment`).classList.add('hidden')
     document.getElementById(`${comment_id}_update`).classList.add('hidden')
     document.getElementById(`${comment_id}_delete`).classList.add('hidden')
@@ -330,7 +335,7 @@ function comment_update_btn(comment_id){
     document.getElementById(`${comment_id}_cancel`).classList.remove('hidden')
 }
 
-function comment_update_cancel(comment_id){
+function comment_update_cancel(comment_id) {
     document.getElementById(`${comment_id}_comment`).classList.remove('hidden')
     document.getElementById(`${comment_id}_update`).classList.remove('hidden')
     document.getElementById(`${comment_id}_delete`).classList.remove('hidden')
@@ -339,7 +344,7 @@ function comment_update_cancel(comment_id){
     document.getElementById(`${comment_id}_cancel`).classList.add('hidden')
 }
 
-function comment_update_btn1(comment_id){
+function comment_update_btn1(comment_id) {
     document.getElementById(`${comment_id}_comment1`).classList.add('hidden')
     document.getElementById(`${comment_id}_update1`).classList.add('hidden')
     document.getElementById(`${comment_id}_delete1`).classList.add('hidden')
@@ -348,7 +353,7 @@ function comment_update_btn1(comment_id){
     document.getElementById(`${comment_id}_cancel1`).classList.remove('hidden')
 }
 
-function comment_update_cancel1(comment_id){
+function comment_update_cancel1(comment_id) {
     document.getElementById(`${comment_id}_comment1`).classList.remove('hidden')
     document.getElementById(`${comment_id}_update1`).classList.remove('hidden')
     document.getElementById(`${comment_id}_delete1`).classList.remove('hidden')
@@ -369,6 +374,7 @@ function comment_update(comment_id) {
         }
     });
 }
+
 function comment_update1(comment_id) {
     let comment = $(`#${comment_id}_input1`).val()
     console.log(comment)
@@ -382,17 +388,18 @@ function comment_update1(comment_id) {
     });
 }
 
-function comment_dialog_open(data){
+function comment_dialog_open(data) {
     document.getElementById(`${data}_comment-dialog`).showModal()
 }
-function comment_dialog_open1(data){
+
+function comment_dialog_open1(data) {
     document.getElementById(`${data}_comment-dialog1`).showModal()
 }
 
-function button_event(comment_id){
-    if(confirm("정말 삭제하시겠습니까?")==true){
+function button_event(comment_id) {
+    if (confirm("정말 삭제하시겠습니까?") == true) {
         comment_delete(comment_id)
-    }else {
+    } else {
         return
     }
 }

@@ -78,7 +78,7 @@ def home():
                         datetime.fromtimestamp(
                             round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
                             int(b['date']) / 1000.0))
-                    if 'day,' in t.split(' '):
+                    if 'days,' in t.split(' '):
                         time = t.split(' ')[0] + '일 전'
                     else:
                         if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
@@ -99,7 +99,7 @@ def home():
 
             t = str(datetime.fromtimestamp(round(datetime.now().timestamp() * 1000) / 1000.0) - datetime.fromtimestamp(
                 int(x['date']) / 1000.0))
-            if 'day,' in t.split(' '):
+            if 'days,' in t.split(' '):
                 time = t.split(' ')[0] + '일 전'
             else:
                 if t.split('.')[0].split(':')[0] == '0' and t.split('.')[0].split(':')[1] == '00':
@@ -536,6 +536,7 @@ def user_update():
     except:
         db.user.update_one({'id': id_receive}, {"$set": {"nick": nick_receive}})
     return jsonify({'msg': '수정 완료!'})
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
