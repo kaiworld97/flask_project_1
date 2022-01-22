@@ -1,3 +1,6 @@
+[![flask_project_1](http://img.youtube.com/vi/NrrP-g-bzfE/0.jpg)](https://www.youtube.com/embed/NrrP-g-bzfE) 
+
+
 # flask_project_1
 
 
@@ -21,7 +24,8 @@
 ![as3](https://user-images.githubusercontent.com/85826122/147664606-19ddb737-5b11-4499-bd04-ce61ad4d17ec.jpg)
 
 
-## db 구조
+## db 구조![687474703a2f2f696d672e796f75747562652e636f6d2f76692f4e7272502d672d627a66452f302e6a7067](https://user-images.githubusercontent.com/85826122/150631015-3802ba4f-da53-44c6-9a01-050f52e3e9af.jpg)
+
 
 ![db5](https://user-images.githubusercontent.com/85826122/147847814-4e7687c4-32ea-4e48-8f7d-41b86d488a8a.jpg)
 
