@@ -1,5 +1,8 @@
+ <div align="center">
+  
 [![flask_project_1](http://img.youtube.com/vi/NrrP-g-bzfE/0.jpg)](https://www.youtube.com/embed/NrrP-g-bzfE) 
-
+  
+</div>
 
 # flask_project_1
 
